@@ -3,6 +3,7 @@ import { computed, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import DifficultyDots from '@/components/common/DifficultyDots.vue'
 import EmptyState from '@/components/common/EmptyState.vue'
+import InlineMarkdown from '@/components/common/InlineMarkdown.vue'
 import ErrorState from '@/components/common/ErrorState.vue'
 import LevelBadge from '@/components/common/LevelBadge.vue'
 import LoadingState from '@/components/common/LoadingState.vue'
@@ -61,7 +62,9 @@ usePageTitle(() => project.value?.title)
           <ProjectStatusBadge :status="project.status" />
           <span class="muted tabular-nums">{{ project.earnedXp }} / {{ project.totalXp }} XP</span>
         </div>
-        <p class="mt-3 max-w-3xl text-slate-700 dark:text-slate-300">{{ project.description }}</p>
+        <p class="mt-3 max-w-3xl text-slate-700 dark:text-slate-300">
+          <InlineMarkdown :text="project.description" />
+        </p>
         <div class="mt-4 max-w-md">
           <div class="mb-1 flex justify-between text-xs">
             <span class="font-medium">

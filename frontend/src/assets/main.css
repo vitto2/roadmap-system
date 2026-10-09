@@ -111,3 +111,11 @@
 .markdown-body td {
   @apply border border-slate-300 px-2 py-1 dark:border-slate-700;
 }
+
+/* Código em linha dentro de textos curtos (checklists, descrições, critérios). */
+.inline-md code {
+  @apply rounded bg-slate-100 px-1 py-0.5 font-mono text-[0.85em] text-slate-900 dark:bg-slate-800 dark:text-slate-100;
+}
+.inline-md a {
+  @apply text-indigo-700 underline dark:text-indigo-300;
+}

@@ -28,6 +28,8 @@ const navItems = computed(() =>
 )
 
 const profile = computed(() => profileStore.profile)
+// Antes do login (quando exigido) não há menu nem estatísticas para mostrar.
+const locked = computed(() => auth.required === true && !auth.token)
 </script>
 
 <template>
@@ -41,7 +43,7 @@ const profile = computed(() => profileStore.profile)
       </RouterLink>
 
       <div
-        v-if="profile"
+        v-if="profile && !locked"
         class="order-3 flex w-full flex-wrap items-center gap-x-6 gap-y-2 sm:order-none sm:w-auto sm:flex-1"
       >
         <div class="min-w-40 flex-1 sm:max-w-xs">
@@ -103,7 +105,7 @@ const profile = computed(() => profileStore.profile)
       </div>
     </div>
 
-    <nav aria-label="Principal" class="mx-auto max-w-6xl overflow-x-auto px-4">
+    <nav v-if="!locked" aria-label="Principal" class="mx-auto max-w-6xl overflow-x-auto px-4">
       <ul class="flex gap-1 pb-2">
         <li v-for="item in navItems" :key="item.path">
           <RouterLink

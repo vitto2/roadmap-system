@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { ChecklistEntry } from '@/api/types'
+import InlineMarkdown from '@/components/common/InlineMarkdown.vue'
 import ProgressBar from '@/components/common/ProgressBar.vue'
 
 const props = defineProps<{ items: ChecklistEntry[]; disabled?: boolean }>()
@@ -42,7 +43,7 @@ const percent = computed(() =>
             @change="$emit('toggle', item.key, ($event.target as HTMLInputElement).checked)"
           />
           <span class="text-sm" :class="item.checked ? 'text-slate-600 dark:text-slate-400' : ''">
-            {{ item.text }}
+            <InlineMarkdown :text="item.text" />
           </span>
         </label>
       </li>

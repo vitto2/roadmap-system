@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { MilestoneEntry, MilestoneStatus } from '@/api/types'
+import InlineMarkdown from '@/components/common/InlineMarkdown.vue'
 import { formatInstant, milestoneStatusLabels } from '@/lib/labels'
 
 const props = defineProps<{ milestone: MilestoneEntry; index: number; busy?: boolean }>()
@@ -38,7 +39,9 @@ const segment = (active: boolean) =>
     <div class="mt-3">
       <p class="muted text-xs font-semibold uppercase tracking-wide">Critérios de aceite</p>
       <ul class="mt-1 list-disc space-y-1 pl-5 text-sm">
-        <li v-for="criterion in milestone.acceptanceCriteria" :key="criterion">{{ criterion }}</li>
+        <li v-for="criterion in milestone.acceptanceCriteria" :key="criterion">
+          <InlineMarkdown :text="criterion" />
+        </li>
       </ul>
     </div>
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { renderMarkdown } from '../useMarkdown'
+import { renderInlineMarkdown, renderMarkdown } from '../useMarkdown'
 
 describe('renderMarkdown', () => {
   it('renderiza markdown básico', () => {
@@ -32,5 +32,19 @@ describe('renderMarkdown', () => {
 
   it('devolve string vazia para texto vazio', () => {
     expect(renderMarkdown('')).toBe('')
+  })
+})
+
+describe('renderInlineMarkdown', () => {
+  it('renderiza código em linha e ênfase sem criar parágrafos', () => {
+    expect(renderInlineMarkdown('Uso `declare(strict_types=1);` e **tipos**')).toBe(
+      'Uso <code>declare(strict_types=1);</code> e <strong>tipos</strong>',
+    )
+  })
+
+  it('escapa HTML e descarta tags não permitidas', () => {
+    const html = renderInlineMarkdown('<img src=x onerror=alert(1)> [x](javascript:alert(1))')
+    const dom = new DOMParser().parseFromString(html, 'text/html')
+    expect(dom.querySelector('img, script, [onerror], [href^="javascript"]')).toBeNull()
   })
 })

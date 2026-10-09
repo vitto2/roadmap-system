@@ -23,3 +23,12 @@ export function renderMarkdown(source: string): string {
 export function useMarkdown() {
   return { renderMarkdown }
 }
+
+/** Markdown em linha (código, ênfase e links) para textos curtos vindos do conteúdo (checklists, descrições). */
+export function renderInlineMarkdown(source: string): string {
+  return DOMPurify.sanitize(md.renderInline(source), {
+    ALLOWED_TAGS: ['code', 'em', 'strong', 'a'],
+    ALLOWED_ATTR: ['href', 'target', 'rel'],
+    ALLOWED_URI_REGEXP: /^(?:https?:|mailto:|#|\/)/i,
+  })
+}

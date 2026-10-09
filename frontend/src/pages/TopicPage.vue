@@ -3,6 +3,7 @@ import { computed, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import DifficultyDots from '@/components/common/DifficultyDots.vue'
 import ErrorState from '@/components/common/ErrorState.vue'
+import InlineMarkdown from '@/components/common/InlineMarkdown.vue'
 import EmptyState from '@/components/common/EmptyState.vue'
 import LevelBadge from '@/components/common/LevelBadge.vue'
 import LoadingState from '@/components/common/LoadingState.vue'
@@ -61,7 +62,9 @@ usePageTitle(() => topic.value?.title)
           <span class="muted tabular-nums">{{ topic.xp }} XP</span>
           <StatusBadge :status="topic.status" />
         </div>
-        <p class="mt-3 max-w-3xl text-slate-700 dark:text-slate-300">{{ topic.description }}</p>
+        <p class="mt-3 max-w-3xl text-slate-700 dark:text-slate-300">
+          <InlineMarkdown :text="topic.description" />
+        </p>
       </header>
 
       <aside
