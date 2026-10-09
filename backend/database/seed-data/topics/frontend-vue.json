@@ -1,0 +1,351 @@
+[
+  {
+    "slug": "vue-3-e-sfc",
+    "title": "Vue 3 e SFC",
+    "description": "Primeiro contato com o Vue 3: o que significa ser um framework progressivo, como criar um projeto com o `create-vue` e como um Single-File Component (`.vue`) é organizado em `<script setup>`, `<template>` e `<style scoped>`. Escopo: `createApp` e o componente raiz, Vue DevTools e a diferença entre Options API e Composition API.",
+    "level": "beginner",
+    "difficulty": 2,
+    "prerequisites": [],
+    "resources": [
+      { "name": "Vue.js — Guia: Introdução", "url": "https://vuejs.org/guide/introduction.html" },
+      { "name": "Vue.js — Guia: Quick Start", "url": "https://vuejs.org/guide/quick-start.html" },
+      { "name": "Vue.js — Guia: Single-File Components", "url": "https://vuejs.org/guide/scaling-up/sfc.html" },
+      { "name": "Vue.js — Tutorial interativo", "url": "https://vuejs.org/tutorial/" }
+    ],
+    "checklist": [
+      { "key": "criar-projeto-create-vue", "text": "Já criei um projeto com `npm create vue@latest` e rodei o servidor de desenvolvimento com `npm run dev`." },
+      { "key": "anatomia-sfc", "text": "Consigo descrever o papel de cada bloco de um arquivo `.vue` (`<script setup>`, `<template>` e `<style scoped>`) e o que `scoped` faz com o CSS." },
+      { "key": "createapp-mount", "text": "Entendo o que `createApp(App).mount('#app')` faz no `main.ts` e como o componente raiz é montado no DOM." },
+      { "key": "framework-progressivo", "text": "Sei explicar o que significa o Vue ser um framework progressivo e quando usá-lo em uma página isolada versus como SPA completa." },
+      { "key": "options-vs-composition", "text": "Reconheço a diferença entre Options API e Composition API e sei por que este roadmap adota `<script setup>`." },
+      { "key": "vue-devtools", "text": "Sei usar o Vue DevTools para inspecionar a árvore de componentes e o estado reativo de cada um." }
+    ]
+  },
+  {
+    "slug": "vue-template-e-reatividade",
+    "title": "Template e reatividade",
+    "description": "A sintaxe de template do Vue (interpolação, `v-bind`, `v-on`, `v-if`, `v-for`, `v-model`) e o modelo de reatividade que mantém o DOM sincronizado com o estado. Escopo: renderização condicional e de listas com `:key`, bindings de `class` e `style`, tratamento de eventos e a atualização assíncrona do DOM (`nextTick`).",
+    "level": "beginner",
+    "difficulty": 2,
+    "prerequisites": ["vue-3-e-sfc"],
+    "resources": [
+      { "name": "Vue.js — Guia: Sintaxe de template", "url": "https://vuejs.org/guide/essentials/template-syntax.html" },
+      { "name": "Vue.js — Guia: Fundamentos de reatividade", "url": "https://vuejs.org/guide/essentials/reactivity-fundamentals.html" },
+      { "name": "Vue.js — Guia: Renderização de listas", "url": "https://vuejs.org/guide/essentials/list.html" },
+      { "name": "Vue.js — Guia: Tratamento de eventos", "url": "https://vuejs.org/guide/essentials/event-handling.html" }
+    ],
+    "checklist": [
+      { "key": "interpolar-e-bindar", "text": "Consigo exibir dados com `{{ }}`, ligar atributos com `v-bind` (`:href`, `:class`, `:style`) e tratar eventos com `v-on` (`@click`, `.prevent`)." },
+      { "key": "condicional-v-if-v-show", "text": "Sei quando usar `v-if`/`v-else-if`/`v-else` e quando usar `v-show`, e o custo de cada um." },
+      { "key": "v-for-com-key", "text": "Renderizo listas com `v-for` e uma `:key` estável (um id, não o índice) e sei explicar por que a key importa." },
+      { "key": "v-model-basico", "text": "Uso `v-model` em `<input>`, `<select>` e checkbox para criar ligação de duas vias com o estado." },
+      { "key": "ref-e-value", "text": "Entendo que um `ref` guarda o valor em `.value` no script e é desembrulhado automaticamente no template." },
+      { "key": "atualizacao-assincrona", "text": "Sei que o DOM é atualizado de forma assíncrona e uso `nextTick()` quando preciso ler o DOM depois de mudar o estado." }
+    ]
+  },
+  {
+    "slug": "vue-props-e-emits",
+    "title": "Props e emits",
+    "description": "Como componentes pai e filho se comunicam: dados descem por props e eventos sobem por emits, mantendo o fluxo de dados unidirecional. Escopo: `defineProps` e `defineEmits` com tipos, valores padrão e validação, `v-model` em componentes com `defineModel` e herança de atributos (`$attrs`).",
+    "level": "junior",
+    "difficulty": 2,
+    "prerequisites": ["vue-template-e-reatividade"],
+    "resources": [
+      { "name": "Vue.js — Guia: Props", "url": "https://vuejs.org/guide/components/props.html" },
+      { "name": "Vue.js — Guia: Eventos de componente", "url": "https://vuejs.org/guide/components/events.html" },
+      { "name": "Vue.js — Guia: v-model em componentes", "url": "https://vuejs.org/guide/components/v-model.html" },
+      { "name": "Vue.js — Guia: Atributos herdados (fallthrough)", "url": "https://vuejs.org/guide/components/attrs.html" }
+    ],
+    "checklist": [
+      { "key": "declarar-props", "text": "Consigo declarar props com `defineProps` (tipos, `required` e valores padrão) e passá-las no template do pai." },
+      { "key": "fluxo-unidirecional", "text": "Sei explicar por que não devo alterar uma prop dentro do filho e como o fluxo de dados unidirecional guia o design dos componentes." },
+      { "key": "emitir-eventos", "text": "Já declarei eventos com `defineEmits` e os emiti (`emit('save', payload)`), escutando-os no pai com `@save`." },
+      { "key": "v-model-componente", "text": "Consigo implementar `v-model` em um componente próprio com `defineModel()`, inclusive com nome (`v-model:title`)." },
+      { "key": "attrs-fallthrough", "text": "Entendo como atributos não declarados (`class`, `id`, listeners) caem no elemento raiz e quando usar `defineOptions({ inheritAttrs: false })` com `$attrs`." },
+      { "key": "props-destructure", "text": "Sei que, desde o Vue 3.5, desestruturar `defineProps` mantém a reatividade (inclusive com valores padrão) e que, ao passar o valor a um `watch`, preciso usar um getter." }
+    ]
+  },
+  {
+    "slug": "vue-composition-api-script-setup",
+    "title": "Composition API e <script setup>",
+    "description": "A Composition API organiza a lógica por funcionalidade (em vez de `data`/`methods`/`computed` separados) e o `<script setup>` é a sintaxe recomendada para usá-la em SFCs. Escopo: `ref` versus `reactive`, `toRef`/`toRefs`, hooks de ciclo de vida, template refs com `useTemplateRef` e os macros do compilador (`defineProps`, `defineEmits`, `defineExpose`).",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": ["vue-template-e-reatividade", "vue-props-e-emits"],
+    "resources": [
+      { "name": "Vue.js — Guia: Composition API FAQ", "url": "https://vuejs.org/guide/extras/composition-api-faq.html" },
+      { "name": "Vue.js — API: SFC script setup", "url": "https://vuejs.org/api/sfc-script-setup.html" },
+      { "name": "Vue.js — Guia: Ciclo de vida", "url": "https://vuejs.org/guide/essentials/lifecycle.html" },
+      { "name": "Vue.js — Guia: Template refs", "url": "https://vuejs.org/guide/essentials/template-refs.html" }
+    ],
+    "checklist": [
+      { "key": "ref-vs-reactive", "text": "Consigo explicar a diferença entre `ref` e `reactive` (incluindo a perda de reatividade ao desestruturar um `reactive`) e quando usar cada um." },
+      { "key": "script-setup-macros", "text": "Sei usar os macros `defineProps`, `defineEmits`, `defineExpose` e `defineOptions`, e que não precisam ser importados." },
+      { "key": "toref-torefs", "text": "Extraio propriedades de um objeto reativo com `toRef`/`toRefs` sem perder a reatividade." },
+      { "key": "ciclo-de-vida", "text": "Já usei `onMounted`, `onUpdated` e `onBeforeUnmount` e limpo efeitos colaterais (timers, listeners) ao desmontar o componente." },
+      { "key": "template-refs", "text": "Acesso um elemento do DOM ou uma instância de componente com `useTemplateRef()` (Vue 3.5+) ou com um `ref` ligado no template." },
+      { "key": "bindings-top-level", "text": "Entendo que tudo o que é declarado no topo do `<script setup>` fica disponível no template e que esse código roda uma vez por instância do componente." }
+    ]
+  },
+  {
+    "slug": "vue-computed-e-watch",
+    "title": "Computed e watch",
+    "description": "Estado derivado e reações a mudanças: `computed` calcula valores com cache a partir de dependências reativas, enquanto `watch` e `watchEffect` executam efeitos colaterais (requisições, persistência, sincronização) quando o estado muda. Escopo: computed gravável, `immediate`/`deep`/`flush`, limpeza de efeitos e como evitar watchers desnecessários.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": ["vue-composition-api-script-setup"],
+    "resources": [
+      { "name": "Vue.js — Guia: Computed properties", "url": "https://vuejs.org/guide/essentials/computed.html" },
+      { "name": "Vue.js — Guia: Watchers", "url": "https://vuejs.org/guide/essentials/watchers.html" },
+      { "name": "Vue.js — Guia: Reatividade em profundidade", "url": "https://vuejs.org/guide/extras/reactivity-in-depth.html" }
+    ],
+    "checklist": [
+      { "key": "computed-cache", "text": "Consigo explicar por que `computed` é preferível a um método para valores derivados (cache por dependências) e por que o seu getter deve ser puro." },
+      { "key": "computed-gravavel", "text": "Já criei um `computed` gravável com `get` e `set` (por exemplo, para adaptar um `v-model`)." },
+      { "key": "watch-vs-watcheffect", "text": "Sei escolher entre `watch` (fonte explícita, valor novo e antigo) e `watchEffect` (dependências rastreadas automaticamente)." },
+      { "key": "watch-opcoes", "text": "Entendo as opções `immediate`, `deep`, `once` e `flush: 'post'` e quando cada uma é necessária." },
+      { "key": "cleanup-requisicao", "text": "Cancelo uma requisição obsoleta dentro de um watcher usando `onWatcherCleanup()` (3.5+) ou o `onCleanup` do callback, evitando condições de corrida." },
+      { "key": "evitar-watch-desnecessario", "text": "Prefiro `computed` ou eventos explícitos a um `watch` que apenas copia estado derivado de um ref para outro." }
+    ]
+  },
+  {
+    "slug": "vue-router",
+    "title": "Vue Router",
+    "description": "Roteamento do lado do cliente com o Vue Router 4: mapear URLs para componentes, navegar sem recarregar a página e controlar o acesso às rotas. Escopo: rotas dinâmicas e aninhadas, `useRoute`/`useRouter`, navigation guards e `meta`, lazy loading de rotas e history mode (com o fallback do servidor).",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": ["vue-props-e-emits", "vue-composition-api-script-setup"],
+    "resources": [
+      { "name": "Vue Router — Documentação", "url": "https://router.vuejs.org/" },
+      { "name": "Vue Router — Rotas dinâmicas", "url": "https://router.vuejs.org/guide/essentials/dynamic-matching.html" },
+      { "name": "Vue Router — Navigation guards", "url": "https://router.vuejs.org/guide/advanced/navigation-guards.html" },
+      { "name": "Vue Router — Lazy loading de rotas", "url": "https://router.vuejs.org/guide/advanced/lazy-loading.html" }
+    ],
+    "checklist": [
+      { "key": "configurar-router", "text": "Consigo configurar `createRouter` com `createWebHistory` e uma lista de rotas, e renderizar com `<RouterView>` e `<RouterLink>`." },
+      { "key": "rotas-dinamicas", "text": "Crio rotas dinâmicas (`/topicos/:slug`), leio os params com `useRoute()` e os recebo como props com `props: true`." },
+      { "key": "rotas-aninhadas", "text": "Implemento rotas aninhadas e layouts com `children` e um `<RouterView>` interno." },
+      { "key": "navegacao-programatica", "text": "Navego por código com `router.push`/`router.replace` usando rotas nomeadas, e sei ler e atualizar a query string." },
+      { "key": "guards-e-meta", "text": "Protejo rotas com `router.beforeEach` e `meta` (ex.: `requiresAuth`) e redireciono corretamente, sem criar loops." },
+      { "key": "lazy-e-fallback", "text": "Faço lazy loading de rotas com `() => import()` e configuro o fallback para `index.html` no servidor ao usar `createWebHistory`." }
+    ]
+  },
+  {
+    "slug": "vue-pinia",
+    "title": "Pinia",
+    "description": "Pinia é a biblioteca oficial de gerenciamento de estado global do Vue: stores tipadas, integradas ao DevTools e compatíveis com SSR. Escopo: stores no estilo setup e options, `state`/`getters`/`actions`, `storeToRefs`, composição entre stores, plugins e quando não usar estado global.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": ["vue-composition-api-script-setup", "vue-computed-e-watch"],
+    "resources": [
+      { "name": "Pinia — Documentação", "url": "https://pinia.vuejs.org/" },
+      { "name": "Pinia — Core concepts", "url": "https://pinia.vuejs.org/core-concepts/" },
+      { "name": "Pinia — Plugins", "url": "https://pinia.vuejs.org/core-concepts/plugins.html" },
+      { "name": "Vue.js — Guia: State management", "url": "https://vuejs.org/guide/scaling-up/state-management.html" }
+    ],
+    "checklist": [
+      { "key": "definir-store-setup", "text": "Consigo criar uma store com `defineStore` no estilo setup (usando `ref`, `computed` e funções) e no estilo options." },
+      { "key": "storetorefs", "text": "Uso `storeToRefs` para desestruturar state e getters sem perder a reatividade (e sei que as actions podem ser desestruturadas diretamente)." },
+      { "key": "actions-assincronas", "text": "Implemento actions assíncronas que chamam uma API e controlam os estados de `loading` e `error`." },
+      { "key": "stores-compostas", "text": "Consigo usar uma store dentro de outra evitando dependências circulares." },
+      { "key": "quando-usar-pinia", "text": "Sei decidir entre estado local, composable com estado compartilhado e Pinia." },
+      { "key": "devtools-plugins", "text": "Inspeciono stores no Vue DevTools e sei escrever (ou usar) um plugin do Pinia, como persistência em `localStorage`." }
+    ]
+  },
+  {
+    "slug": "vue-vite-e-build",
+    "title": "Vite e build",
+    "description": "O Vite é o servidor de desenvolvimento (módulos ES nativos e HMR) e a ferramenta de build usada pelo ecossistema Vue. Escopo: `vite.config.ts` e plugins (`@vitejs/plugin-vue`), alias `@`, proxy de API, variáveis de ambiente (`import.meta.env`, prefixo `VITE_`), build de produção com `vite build` e análise do tamanho do bundle.",
+    "level": "junior",
+    "difficulty": 2,
+    "prerequisites": ["vue-3-e-sfc"],
+    "resources": [
+      { "name": "Vite — Guia", "url": "https://vite.dev/guide/" },
+      { "name": "Vite — Build para produção", "url": "https://vite.dev/guide/build.html" },
+      { "name": "Vite — Variáveis de ambiente e modos", "url": "https://vite.dev/guide/env-and-mode.html" },
+      { "name": "Vite — Configuração", "url": "https://vite.dev/config/" }
+    ],
+    "checklist": [
+      { "key": "por-que-vite-e-rapido", "text": "Consigo explicar por que o Vite é rápido em desenvolvimento (módulos ES nativos, pré-bundling de dependências e HMR) e o que muda no build de produção." },
+      { "key": "config-basica", "text": "Sei configurar o `vite.config.ts` com `@vitejs/plugin-vue`, alias `@` apontando para `src` e `server.proxy` para a API." },
+      { "key": "variaveis-ambiente", "text": "Entendo `import.meta.env`, o prefixo `VITE_` e os arquivos `.env`/`.env.production`, e sei que nada embutido no bundle é secreto." },
+      { "key": "build-e-preview", "text": "Gerei o build com `vite build`, testei com `vite preview` e sei o que há em `dist/` (assets com hash no nome)." },
+      { "key": "analisar-bundle", "text": "Consigo analisar o tamanho do bundle (por exemplo, com `rollup-plugin-visualizer`) e identificar dependências pesadas." },
+      { "key": "base-e-deploy", "text": "Configuro a opção `base` e publico o build estático em um servidor ou CDN." }
+    ]
+  },
+  {
+    "slug": "vue-composables",
+    "title": "Composables",
+    "description": "Composables são funções que encapsulam e reutilizam lógica com estado usando a Composition API (convenção `useXxx`), substituindo os mixins. Escopo: extrair lógica de componentes, aceitar argumentos reativos com `toValue`, limpar efeitos no ciclo de vida, compartilhar estado entre componentes e conhecer o VueUse.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": ["vue-composition-api-script-setup", "vue-computed-e-watch"],
+    "resources": [
+      { "name": "Vue.js — Guia: Composables", "url": "https://vuejs.org/guide/reusability/composables.html" },
+      { "name": "VueUse — Coleção de composables", "url": "https://vueuse.org/" },
+      { "name": "Vue.js — API: Reactivity utilities (toValue, toRef)", "url": "https://vuejs.org/api/reactivity-utilities.html" }
+    ],
+    "checklist": [
+      { "key": "extrair-composable", "text": "Já extraí a lógica de um componente para um composable `useXxx` que devolve refs e funções." },
+      { "key": "argumentos-reativos", "text": "Sei aceitar argumentos que podem ser valor, `ref` ou getter usando `toValue()` e reagir às mudanças com `watchEffect`." },
+      { "key": "limpeza-de-efeitos", "text": "Registro e limpo efeitos (listeners, timers, `AbortController`) com `onMounted`/`onUnmounted` ou `onScopeDispose` dentro de um composable." },
+      { "key": "estado-compartilhado", "text": "Entendo a diferença entre estado criado a cada chamada (local) e estado em escopo de módulo (compartilhado), e os riscos do segundo em SSR." },
+      { "key": "composable-assincrono", "text": "Escrevi um composable assíncrono (como um `useFetch` próprio) que expõe `data`, `error` e `isLoading`." },
+      { "key": "usar-vueuse", "text": "Conheço o VueUse (ex.: `useLocalStorage`, `useDebounceFn`, `useEventListener`) e sei quando usá-lo em vez de reescrever a lógica." }
+    ]
+  },
+  {
+    "slug": "vue-formularios-e-validacao",
+    "title": "Formulários e validação",
+    "description": "Formulários reativos com `v-model` e validação no cliente com feedback acessível, integrados aos erros devolvidos pela API. Escopo: modificadores de `v-model`, validação com `computed` ou com schemas (Zod/Valibot) via VeeValidate, estados `touched`/`dirty`/`submitting`, componentes de campo reutilizáveis e acessibilidade (`label`, `aria-invalid`, `aria-describedby`).",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": ["vue-props-e-emits", "vue-computed-e-watch"],
+    "resources": [
+      { "name": "Vue.js — Guia: Form input bindings", "url": "https://vuejs.org/guide/essentials/forms.html" },
+      { "name": "VeeValidate — Documentação", "url": "https://vee-validate.logaretm.com/v4/" },
+      { "name": "Zod — Documentação", "url": "https://zod.dev/" },
+      { "name": "web.dev — Learn Forms", "url": "https://web.dev/learn/forms" }
+    ],
+    "checklist": [
+      { "key": "v-model-campos", "text": "Ligo `v-model` a `text`, `checkbox` (booleano e array), `radio`, `select` e `textarea`, usando `.lazy`, `.number` e `.trim` quando fizer sentido." },
+      { "key": "validacao-cliente", "text": "Valido campos obrigatórios, formato e regras entre campos com `computed` ou com um schema (Zod/Valibot) integrado ao VeeValidate." },
+      { "key": "estados-do-campo", "text": "Controlo `touched`, `dirty` e `submitting` para mostrar erros no momento certo e impedir o envio duplicado." },
+      { "key": "erros-422-da-api", "text": "Exibo os erros de validação do servidor (resposta 422 com `errors` por campo) junto aos campos correspondentes." },
+      { "key": "acessibilidade-formulario", "text": "Aplico `<label for>` (com ids estáveis gerados por `useId()`), `aria-invalid`, `aria-describedby` e foco no primeiro campo inválido para tornar o formulário acessível." },
+      { "key": "campo-reutilizavel", "text": "Criei um componente de campo reutilizável (como `BaseInput`) com `defineModel`, rótulo e mensagem de erro." }
+    ]
+  },
+  {
+    "slug": "vue-slots-e-provide-inject",
+    "title": "Slots e provide/inject",
+    "description": "Padrões de composição de componentes: slots (padrão, nomeados e com escopo) para delegar parte da renderização ao pai, e `provide`/`inject` para compartilhar contexto em uma árvore sem prop drilling. Escopo: componentes headless/renderless, componentes compostos (Tabs, Accordion), `InjectionKey` tipado e critérios para escolher entre props, slots, composables e Pinia.",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": ["vue-props-e-emits", "vue-composition-api-script-setup"],
+    "resources": [
+      { "name": "Vue.js — Guia: Slots", "url": "https://vuejs.org/guide/components/slots.html" },
+      { "name": "Vue.js — Guia: Provide / inject", "url": "https://vuejs.org/guide/components/provide-inject.html" },
+      { "name": "Reka UI — Componentes headless para Vue", "url": "https://reka-ui.com/" }
+    ],
+    "checklist": [
+      { "key": "slots-nomeados-fallback", "text": "Crio componentes com slot padrão, slots nomeados (`#header`) e conteúdo de fallback dentro de `<slot>`." },
+      { "key": "scoped-slots", "text": "Exponho dados do filho para o pai com slots com escopo (props no `<slot>` e `#default` desestruturado no pai)." },
+      { "key": "componente-composto", "text": "Implementei um componente composto (como `Tabs`/`TabPanel` ou `Accordion`) em que os filhos compartilham estado do pai via `provide`/`inject`." },
+      { "key": "injection-key-tipada", "text": "Sei tipar `provide`/`inject` com `InjectionKey` e tratar o valor ausente (valor padrão ou erro explícito)." },
+      { "key": "reatividade-no-provide", "text": "Entendo que valores providos devem ser `ref`/`reactive` (ou getters) para manter a reatividade, e mantenho as mutações no provedor, expondo funções." },
+      { "key": "escolher-estrategia", "text": "Consigo decidir entre props, slots, `provide`/`inject`, composables e Pinia para compartilhar dados e comportamento em uma árvore profunda de componentes." }
+    ]
+  },
+  {
+    "slug": "vue-testes-vitest-test-utils",
+    "title": "Testes com Vitest + Test Utils",
+    "description": "Testes automatizados de componentes e lógica Vue com o Vitest (runner integrado ao Vite) e o Vue Test Utils. Escopo: `mount`/`shallowMount`, props, eventos emitidos, interações assíncronas (`trigger`, `flushPromises`), mocks de API, testes com Pinia (`createTestingPinia`) e Router, e testes de composables, priorizando o comportamento observável pelo usuário.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["vue-vite-e-build", "vue-props-e-emits", "vue-pinia"],
+    "resources": [
+      { "name": "Vitest — Documentação", "url": "https://vitest.dev/" },
+      { "name": "Vue Test Utils — Documentação", "url": "https://test-utils.vuejs.org/" },
+      { "name": "Vue.js — Guia: Testing", "url": "https://vuejs.org/guide/scaling-up/testing.html" },
+      { "name": "Pinia — Testing", "url": "https://pinia.vuejs.org/cookbook/testing.html" }
+    ],
+    "checklist": [
+      { "key": "configurar-vitest", "text": "Sei configurar o Vitest em um projeto Vite (`environment: 'jsdom'` ou `happy-dom`, alias e arquivos de setup) e rodá-lo em modo watch e com cobertura." },
+      { "key": "montar-componente", "text": "Monto um componente com `mount` passando `props`, `slots` e `global.plugins`, e faço asserções no DOM renderizado." },
+      { "key": "eventos-e-async", "text": "Testo interações com `await wrapper.trigger('click')`, verifico `wrapper.emitted()` e aguardo efeitos assíncronos com `flushPromises`." },
+      { "key": "mock-de-api", "text": "Mocko chamadas HTTP (`vi.mock`, `vi.fn` ou MSW) para cobrir os estados de loading, sucesso e erro." },
+      { "key": "pinia-e-router", "text": "Testo componentes que usam Pinia (`createTestingPinia`) e Vue Router (router de teste ou `RouterLinkStub`)." },
+      { "key": "comportamento-e-composables", "text": "Prefiro testar o comportamento visível ao usuário a detalhes de implementação e sei testar um composable isoladamente." }
+    ]
+  },
+  {
+    "slug": "vue-tailwind-e-design-system",
+    "title": "Tailwind e design system",
+    "description": "Estilização utility-first com Tailwind CSS integrada ao Vite e como evoluí-la para um design system consistente. Escopo: tokens de design com `@theme`, layouts responsivos e tema escuro com `dark:`, componentes base com variantes (CVA + `tailwind-merge`), acessibilidade visual e documentação de componentes.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["vue-vite-e-build", "vue-props-e-emits"],
+    "resources": [
+      { "name": "Tailwind CSS — Instalação com Vite", "url": "https://tailwindcss.com/docs/installation/using-vite" },
+      { "name": "Tailwind CSS — Theme variables", "url": "https://tailwindcss.com/docs/theme" },
+      { "name": "Atomic Design — Brad Frost", "url": "https://atomicdesign.bradfrost.com/" },
+      { "name": "Livro: Refactoring UI — Adam Wathan e Steve Schoger", "url": "https://refactoringui.com/" }
+    ],
+    "checklist": [
+      { "key": "instalar-tailwind-vite", "text": "Consigo instalar e configurar o Tailwind em um projeto Vue com Vite (plugin `@tailwindcss/vite` e `@import 'tailwindcss'` no CSS)." },
+      { "key": "responsivo-e-dark", "text": "Construo layouts responsivos mobile-first (`sm:`, `md:`, `lg:`) e implemento tema claro/escuro com `dark:`." },
+      { "key": "tokens-com-theme", "text": "Defino tokens de design (cores, fontes, espaçamentos) com `@theme` em vez de valores soltos nas classes." },
+      { "key": "variantes-cva", "text": "Criei um componente base (como `BaseButton`) com variantes e tamanhos usando CVA e `tailwind-merge` para mesclar classes sem conflito." },
+      { "key": "extrair-componentes", "text": "Sei quando extrair um componente Vue (em vez de abusar de `@apply`) para evitar repetição de classes utilitárias." },
+      { "key": "acessibilidade-visual", "text": "Garanto foco visível (`focus-visible:`), contraste adequado e áreas de toque suficientes nos componentes." }
+    ]
+  },
+  {
+    "slug": "vue-typescript",
+    "title": "TypeScript com Vue",
+    "description": "TypeScript em projetos Vue 3 para tipar props, emits, slots, stores e composables, com checagem estática via `vue-tsc`. Escopo: `<script setup lang=\"ts\">`, `defineProps<T>()` e `defineEmits<T>()`, `ref<T>()`, `InjectionKey`, componentes genéricos (`generic`) e tipagem de Pinia e Vue Router.",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": ["vue-composables", "vue-slots-e-provide-inject"],
+    "resources": [
+      { "name": "Vue.js — Guia: TypeScript com Vue", "url": "https://vuejs.org/guide/typescript/overview.html" },
+      { "name": "Vue.js — Guia: TypeScript com Composition API", "url": "https://vuejs.org/guide/typescript/composition-api.html" },
+      { "name": "TypeScript — Documentação", "url": "https://www.typescriptlang.org/docs/" },
+      { "name": "Vue Language Tools (Volar e vue-tsc)", "url": "https://github.com/vuejs/language-tools" }
+    ],
+    "checklist": [
+      { "key": "props-emits-tipados", "text": "Tipo props e eventos com `defineProps<T>()` e `defineEmits<T>()` (sintaxe baseada em tipos) em um componente `<script setup lang=\"ts\">`." },
+      { "key": "tipar-refs-e-computed", "text": "Tipo `ref<T>()`, `computed<T>()` e template refs (`useTemplateRef<HTMLInputElement>('input')`) sem recorrer a `any`." },
+      { "key": "injection-key-e-slots", "text": "Tipo `provide`/`inject` com `InjectionKey<T>` e slots com `defineSlots`." },
+      { "key": "componentes-genericos", "text": "Crio um componente genérico (`<script setup lang=\"ts\" generic=\"T\">`) para listas ou selects reutilizáveis." },
+      { "key": "vue-tsc-no-ci", "text": "Rodo o `vue-tsc` (por exemplo, no script `type-check`) localmente e no CI, mantendo `strict` habilitado no `tsconfig`." },
+      { "key": "tipar-ecossistema", "text": "Tipo respostas de API (com schema ou interfaces), stores do Pinia e `meta` de rotas do Vue Router para que o editor autocomplete e acuse erros." }
+    ]
+  },
+  {
+    "slug": "vue-performance",
+    "title": "Performance (lazy, virtual list)",
+    "description": "Otimização de apps Vue no carregamento e na renderização, sempre medindo antes de otimizar. Escopo: code splitting (rotas lazy e `defineAsyncComponent`), virtualização de listas longas, `shallowRef`/`v-memo`/`v-once`, estabilidade de props, `KeepAlive` e análise com Vue DevTools e Lighthouse (Core Web Vitals).",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": ["vue-computed-e-watch", "vue-router", "vue-vite-e-build"],
+    "resources": [
+      { "name": "Vue.js — Guia: Performance", "url": "https://vuejs.org/guide/best-practices/performance.html" },
+      { "name": "Vue.js — Guia: Async components", "url": "https://vuejs.org/guide/components/async.html" },
+      { "name": "web.dev — Core Web Vitals", "url": "https://web.dev/articles/vitals" },
+      { "name": "TanStack Virtual — Documentação", "url": "https://tanstack.com/virtual/latest" }
+    ],
+    "checklist": [
+      { "key": "medir-antes", "text": "Meço antes de otimizar, usando a aba de performance do Vue DevTools/Chrome e o Lighthouse para achar o gargalo real e acompanhar LCP, INP e CLS." },
+      { "key": "code-splitting", "text": "Apliquei code splitting com rotas lazy (`() => import()`) e `defineAsyncComponent`, e confirmei a divisão de chunks no build." },
+      { "key": "lista-virtual", "text": "Renderizo uma lista com milhares de itens usando virtualização (por exemplo, TanStack Virtual ou `vue-virtual-scroller`) e sei explicar por que ela reduz o custo do DOM." },
+      { "key": "reatividade-superficial", "text": "Sei quando usar `shallowRef`/`shallowReactive`, `markRaw`, `v-memo`/`v-once` e `KeepAlive` para reduzir o custo de reatividade e de remontagem." },
+      { "key": "props-estaveis", "text": "Entendo como props instáveis (objetos e funções recriados a cada render) e `computed` que devolvem novos objetos causam re-renderizações desnecessárias." },
+      { "key": "bundle-e-assets", "text": "Reduzo o bundle (imports por módulo, tree-shaking, remoção de dependências pesadas) e otimizo imagens e fontes (`loading=\"lazy\"`, formatos modernos)." }
+    ]
+  },
+  {
+    "slug": "vue-ssr-nuxt-e-arquitetura",
+    "title": "SSR/Nuxt e arquitetura de front",
+    "description": "Renderização no servidor (SSR), geração estática (SSG) e hidratação para melhorar SEO e métricas de carregamento, com o Nuxt como framework full-stack para Vue. Escopo: modos de renderização por rota, `useFetch`/`useAsyncData`, rotas de servidor (Nitro), armadilhas de estado e hidratação (incluindo a hidratação lazy do Vue 3.5), e como estruturar um front-end grande (módulos por feature, camada de API, fronteiras entre UI, estado e domínio).",
+    "level": "senior",
+    "difficulty": 5,
+    "prerequisites": ["vue-router", "vue-pinia", "vue-performance"],
+    "resources": [
+      { "name": "Vue.js — Guia: Server-Side Rendering (SSR)", "url": "https://vuejs.org/guide/scaling-up/ssr.html" },
+      { "name": "Nuxt — Documentação", "url": "https://nuxt.com/docs" },
+      { "name": "Nuxt — Modos de renderização", "url": "https://nuxt.com/docs/guide/concepts/rendering" },
+      { "name": "Feature-Sliced Design", "url": "https://feature-sliced.design/" }
+    ],
+    "checklist": [
+      { "key": "comparar-modos", "text": "Consigo comparar SPA, SSR, SSG e renderização híbrida em termos de SEO, TTFB/LCP, custo de servidor e complexidade, e escolher para um caso concreto." },
+      { "key": "hidratacao", "text": "Entendo o que é hidratação e por que ocorrem hydration mismatches (ex.: `Date.now()` ou `window` no render, HTML inválido), e conheço a hidratação lazy (`hydrateOnVisible`, `hydrateOnIdle`) para adiar componentes pesados." },
+      { "key": "nuxt-paginas-e-dados", "text": "Crio páginas e layouts no Nuxt (roteamento por arquivos) e busco dados com `useFetch`/`useAsyncData`, entendendo que rodam no servidor e no cliente." },
+      { "key": "route-rules", "text": "Defino o modo de renderização por rota com `routeRules` (`prerender`, `swr`, `ssr: false`) conforme a necessidade de cada página." },
+      { "key": "estado-no-ssr", "text": "Evito estado compartilhado entre requisições no servidor (singletons de módulo) e uso `useState` ou Pinia com hidratação correta." },
+      { "key": "estrutura-por-feature", "text": "Sei organizar um front-end grande por feature/domínio, com camada de API tipada e fronteiras claras entre UI, estado e serviços, e registrar a decisão em um ADR." }
+    ]
+  }
+]

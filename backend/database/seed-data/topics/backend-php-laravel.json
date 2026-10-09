@@ -1,0 +1,390 @@
+[
+  {
+    "slug": "php-moderno-8x",
+    "title": "PHP moderno (8.x)",
+    "description": "Os recursos que definem o PHP moderno: tipagem estrita, tipos de união, enums, `readonly`, `match`, argumentos nomeados e promoção de propriedades no construtor. Escopo: fundamentos da linguagem (arrays, funções, closures) e as novidades do PHP 8.0 em diante, como property hooks e visibilidade assimétrica no 8.4.",
+    "level": "beginner",
+    "difficulty": 2,
+    "prerequisites": [],
+    "resources": [
+      { "name": "PHP — Manual (pt_BR)", "url": "https://www.php.net/manual/pt_BR/" },
+      { "name": "Laracasts — PHP for Beginners", "url": "https://laracasts.com/series/php-for-beginners-2023-edition" },
+      { "name": "PHP: The Right Way", "url": "https://phptherightway.com/" },
+      { "name": "PHP.net — Novidades do PHP 8.4", "url": "https://www.php.net/releases/8.4/pt_BR.php" }
+    ],
+    "checklist": [
+      { "key": "strict-types-e-tipos", "text": "Uso `declare(strict_types=1);` e declaro tipos de parâmetros, retornos e propriedades (incluindo `?T`, `T|U` e `mixed`), entendendo o que muda no modo estrito." },
+      { "key": "enums-e-readonly", "text": "Modelo um conjunto fixo de valores com `enum` (puro e `backed`) e uma classe de valor imutável com propriedades `readonly`." },
+      { "key": "match-e-named-args", "text": "Sei usar `match` (e a diferença para `switch`), argumentos nomeados e o operador nullsafe `?->`." },
+      { "key": "constructor-promotion", "text": "Escrevo construtores com promoção de propriedades (`public function __construct(private string $name) {}`) e sei quando combinar com `readonly`." },
+      { "key": "arrays-e-closures", "text": "Domino arrays (spread `...`, `array_map`, `array_filter`), closures, arrow functions `fn` e a sintaxe de first-class callable (`strlen(...)`)." },
+      { "key": "novidades-recentes", "text": "Conheço as novidades das versões recentes, como property hooks e visibilidade assimétrica (`public private(set)`) no 8.4 e o operador pipe (`|>`) no 8.5." }
+    ]
+  },
+  {
+    "slug": "php-composer-e-psr",
+    "title": "Composer e PSR",
+    "description": "Composer é o gerenciador de dependências do PHP, e as PSRs do PHP-FIG padronizam autoload, estilo de código e interfaces comuns entre bibliotecas e frameworks. Escopo: `composer.json` e `composer.lock`, versionamento semântico, autoload PSR-4, scripts, `composer audit` e as principais PSRs (4, 3, 7, 11, 15, 18) e o estilo PER/PSR-12.",
+    "level": "beginner",
+    "difficulty": 2,
+    "prerequisites": ["php-moderno-8x"],
+    "resources": [
+      { "name": "Composer — Documentação", "url": "https://getcomposer.org/doc/" },
+      { "name": "Composer — Versões e restrições de versão", "url": "https://getcomposer.org/doc/articles/versions.md" },
+      { "name": "PHP-FIG — PSR-4: Autoloader", "url": "https://www.php-fig.org/psr/psr-4/" },
+      { "name": "PHP-FIG — Lista de PSRs", "url": "https://www.php-fig.org/psr/" }
+    ],
+    "checklist": [
+      { "key": "composer-json-e-lock", "text": "Entendo a diferença entre `composer.json` e `composer.lock` e sei por que o `composer.lock` deve ir para o Git em aplicações." },
+      { "key": "install-vs-update", "text": "Sei quando usar `composer install` versus `composer update` e como funcionam as restrições de versão (`^`, `~`, `*`)." },
+      { "key": "require-e-dev", "text": "Adiciono e removo dependências com `composer require` e `composer remove`, separando as de desenvolvimento com `--dev`." },
+      { "key": "autoload-psr4", "text": "Configuro o autoload PSR-4 (`autoload.psr-4`), mapeando um namespace a um diretório, e regenero com `composer dump-autoload`." },
+      { "key": "psrs-principais", "text": "Sei explicar o propósito das principais PSRs (4, 3, 7, 11, 15 e 18) e que o estilo de código atual é o PER Coding Style, sucessor da PSR-12." },
+      { "key": "audit-e-scripts", "text": "Já usei `composer audit` para achar dependências vulneráveis e `scripts` no `composer.json` (por exemplo, atalhos para testes e lint)." }
+    ]
+  },
+  {
+    "slug": "php-poo",
+    "title": "POO em PHP",
+    "description": "Programação orientada a objetos aplicada ao PHP moderno: classes, interfaces, traits, herança, polimorfismo e composição, base para entender o container, as facades e os models do Laravel. Escopo: namespaces, visibilidade, classes abstratas, `static`, injeção de dependência, exceções e composição sobre herança.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": ["php-moderno-8x", "php-composer-e-psr"],
+    "resources": [
+      { "name": "PHP — Manual: Classes e objetos", "url": "https://www.php.net/manual/pt_BR/language.oop5.php" },
+      { "name": "Refactoring Guru — Padrões de projeto", "url": "https://refactoring.guru/pt-br/design-patterns" },
+      { "name": "Livro: PHP Objects, Patterns, and Practice — Matt Zandstra" }
+    ],
+    "checklist": [
+      { "key": "classes-interfaces-abstratas", "text": "Sei declarar classes, interfaces e classes abstratas e explico quando usar cada uma." },
+      { "key": "heranca-vs-composicao", "text": "Consigo justificar composição sobre herança e refatorar uma hierarquia frágil para composição." },
+      { "key": "traits", "text": "Entendo traits (`use`), a resolução de conflitos de métodos e quando evitá-las." },
+      { "key": "visibilidade-e-static", "text": "Uso `public`/`protected`/`private` e `static` com critério e explico a diferença entre `self` e `static` (late static binding)." },
+      { "key": "injecao-de-dependencia", "text": "Aplico injeção de dependência pelo construtor, dependendo de interfaces e não de classes concretas, e troco a implementação em um teste." },
+      { "key": "excecoes", "text": "Crio exceções de domínio (classes que estendem `Exception`), uso `try`/`catch`/`finally` e distingo `Exception` de `Error` e `Throwable`." }
+    ]
+  },
+  {
+    "slug": "php-rotas-e-controllers",
+    "title": "Rotas e controllers",
+    "description": "Como o Laravel recebe uma requisição e a encaminha ao seu código: rotas, middleware e controllers. Escopo: `routes/web.php` e `routes/api.php`, parâmetros e route model binding, `Route::resource`/`apiResource`, grupos com prefixo e middleware, rotas nomeadas, rate limiting e `php artisan route:list`.",
+    "level": "junior",
+    "difficulty": 2,
+    "prerequisites": ["php-moderno-8x", "php-composer-e-psr"],
+    "resources": [
+      { "name": "Laravel — Documentação: Routing", "url": "https://laravel.com/docs/routing" },
+      { "name": "Laravel — Documentação: Controllers", "url": "https://laravel.com/docs/controllers" },
+      { "name": "Laravel — Documentação: Middleware", "url": "https://laravel.com/docs/middleware" },
+      { "name": "Laracasts — 30 Days to Learn Laravel", "url": "https://laracasts.com/series/30-days-to-learn-laravel-11" }
+    ],
+    "checklist": [
+      { "key": "rotas-e-verbos", "text": "Defino rotas `GET`, `POST`, `PUT`, `PATCH` e `DELETE` e listo todas com `php artisan route:list`." },
+      { "key": "route-model-binding", "text": "Uso parâmetros de rota e route model binding implícito (`/posts/{post}`), inclusive por outra coluna (`{post:slug}`)." },
+      { "key": "resource-controllers", "text": "Criei controllers com `php artisan make:controller --resource` ou `--api` e os registrei com `Route::resource`/`Route::apiResource`." },
+      { "key": "grupos-e-middleware", "text": "Agrupo rotas com `Route::prefix()->middleware()->group()` e aplico middleware como `auth` e `throttle`." },
+      { "key": "rotas-nomeadas", "text": "Nomeio rotas com `->name()` e gero URLs com `route()` em vez de caminhos fixos." },
+      { "key": "install-api", "text": "Sei que, nas versões atuais, as rotas de API (`routes/api.php`, prefixo `/api`) são habilitadas com `php artisan install:api` e que os middlewares globais são configurados em `bootstrap/app.php`." }
+    ]
+  },
+  {
+    "slug": "php-migrations-e-eloquent-basico",
+    "title": "Migrations e Eloquent básico",
+    "description": "Versionamento do schema do banco com migrations e acesso a dados com o Eloquent, o ORM do Laravel baseado no padrão Active Record. Escopo: `Schema::create`, tipos de coluna, índices e chaves estrangeiras, models, CRUD, mass assignment (`fillable`), casts, scopes, soft deletes, factories e seeders.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": ["php-poo", "php-rotas-e-controllers"],
+    "resources": [
+      { "name": "Laravel — Documentação: Migrations", "url": "https://laravel.com/docs/migrations" },
+      { "name": "Laravel — Documentação: Eloquent ORM", "url": "https://laravel.com/docs/eloquent" },
+      { "name": "Laravel — Documentação: Eloquent factories", "url": "https://laravel.com/docs/eloquent-factories" },
+      { "name": "Martin Fowler — Active Record", "url": "https://martinfowler.com/eaaCatalog/activeRecord.html" }
+    ],
+    "checklist": [
+      { "key": "criar-e-rodar-migrations", "text": "Crio e rodo migrations (`make:migration`, `migrate`, `migrate:rollback`, `migrate:fresh --seed`) com `Schema::create`, tipos de coluna e índices." },
+      { "key": "chaves-estrangeiras", "text": "Declaro chaves estrangeiras com `foreignId()->constrained()->cascadeOnDelete()` e entendo o efeito de cada regra de exclusão." },
+      { "key": "crud-eloquent", "text": "Executo CRUD com Eloquent (`create`, `find`, `update`, `delete`, `firstOrCreate`, `updateOrCreate`) e sei o que cada método devolve." },
+      { "key": "mass-assignment", "text": "Entendo mass assignment e configuro `$fillable` ou `$guarded` (ou os atributos `#[Fillable]`/`#[Guarded]` das versões mais novas) corretamente." },
+      { "key": "casts-e-scopes", "text": "Uso casts (datas, `array`, enums, pelo método `casts()`), accessors e mutators com `Attribute` e query scopes locais." },
+      { "key": "soft-deletes-e-factories", "text": "Já usei `SoftDeletes`, factories e seeders para gerar dados de desenvolvimento e de teste." }
+    ]
+  },
+  {
+    "slug": "php-validacao-e-form-requests",
+    "title": "Validação e Form Requests",
+    "description": "Validar a entrada da requisição antes de tocar no domínio, com mensagens e respostas de erro padronizadas. Escopo: `$request->validate()`, regras (`required`, `unique`, `exists`, `Rule::`), Form Requests (`rules()`, `authorize()`, `prepareForValidation()`), mensagens customizadas, `validated()`/`safe()` e a resposta 422 em APIs.",
+    "level": "junior",
+    "difficulty": 2,
+    "prerequisites": ["php-rotas-e-controllers"],
+    "resources": [
+      { "name": "Laravel — Documentação: Validation", "url": "https://laravel.com/docs/validation" },
+      { "name": "Laravel — Documentação: Requests", "url": "https://laravel.com/docs/requests" },
+      { "name": "Laravel — Documentação: Localization", "url": "https://laravel.com/docs/localization" }
+    ],
+    "checklist": [
+      { "key": "validate-inline", "text": "Valido com `$request->validate([...])` e uso `$request->validated()` em vez de `all()` para persistir dados." },
+      { "key": "form-request", "text": "Crio um Form Request (`php artisan make:request`) com `rules()`, `authorize()` e `messages()`/`attributes()` e o injeto no controller." },
+      { "key": "regras-de-banco", "text": "Uso regras que consultam o banco (`unique`, `exists`) e `Rule::unique(...)->ignore($model)` na edição." },
+      { "key": "prepare-e-aninhados", "text": "Normalizo dados antes de validar com `prepareForValidation()` e valido arrays e campos aninhados (`items.*.quantity`)." },
+      { "key": "resposta-422", "text": "Entendo o formato da resposta 422 em APIs (`message` e `errors` por campo) e como o formulário web volta com `$errors` e `old()`." },
+      { "key": "regras-custom-e-i18n", "text": "Já criei uma regra customizada (`make:rule` ou closure) e traduzi as mensagens de validação para pt-BR (`php artisan lang:publish`)." }
+    ]
+  },
+  {
+    "slug": "php-api-resources",
+    "title": "API Resources",
+    "description": "Camada de transformação que controla o JSON devolvido pela API, desacoplando o formato público do schema do banco. Escopo: `JsonResource` e coleções, atributos condicionais (`when`, `whenLoaded`), paginação (`links`/`meta`), envelope `data`, contrato estável e cuidado com N+1 e vazamento de campos; noções dos resources JSON:API do Laravel atual.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": ["php-rotas-e-controllers", "php-migrations-e-eloquent-basico"],
+    "resources": [
+      { "name": "Laravel — Documentação: Eloquent API resources", "url": "https://laravel.com/docs/eloquent-resources" },
+      { "name": "Laravel — Documentação: Paginação", "url": "https://laravel.com/docs/pagination" },
+      { "name": "Livro: Build APIs You Won't Hate — Phil Sturgeon" }
+    ],
+    "checklist": [
+      { "key": "resource-de-model", "text": "Crio um `JsonResource` (`php artisan make:resource`) e devolvo `new PostResource($post)` (ou `$post->toResource()` nas versões atuais) controlando exatamente quais campos são expostos." },
+      { "key": "colecoes-e-paginacao", "text": "Devolvo coleções e páginas com `PostResource::collection($query->paginate())`, explico os blocos `data`, `links` e `meta` e sei desativar ou personalizar o envelope (`withoutWrapping()`, `$wrap`)." },
+      { "key": "campos-condicionais", "text": "Uso `when()`, `whenLoaded()` e `whenCounted()` para incluir campos e relações apenas quando disponíveis, evitando N+1." },
+      { "key": "contrato-estavel", "text": "Sei por que não devo devolver o model direto (vazamento de colunas e acoplamento ao schema) e como manter um contrato estável da API." },
+      { "key": "status-http", "text": "Devolvo os códigos HTTP corretos (`201` ao criar, `204` ao remover com `response()->noContent()`, `404` e `422` nos erros)." },
+      { "key": "json-api", "text": "Conheço os resources JSON:API do Laravel atual (`JsonApiResource`, sparse fieldsets e includes) e sei quando adotar o padrão em vez de um formato próprio." }
+    ]
+  },
+  {
+    "slug": "php-relacionamentos-eloquent",
+    "title": "Relacionamentos Eloquent",
+    "description": "Modelagem de associações entre tabelas no Eloquent: um-para-um, um-para-muitos, muitos-para-muitos e relações polimórficas. Escopo: `hasMany`, `belongsTo`, `belongsToMany`, `morphTo`, `hasManyThrough`, tabelas pivot com atributos, criação e consulta via relações, `withCount`, `whereHas` e eager loading básico.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": ["php-migrations-e-eloquent-basico"],
+    "resources": [
+      { "name": "Laravel — Documentação: Eloquent relationships", "url": "https://laravel.com/docs/eloquent-relationships" },
+      { "name": "Laravel — Documentação: Eloquent collections", "url": "https://laravel.com/docs/eloquent-collections" },
+      { "name": "Laravel — Documentação: Query builder", "url": "https://laravel.com/docs/queries" }
+    ],
+    "checklist": [
+      { "key": "um-para-muitos", "text": "Defino e uso relações um-para-muitos (`hasMany`/`belongsTo`) e crio registros pela relação (`$user->posts()->create([...])`)." },
+      { "key": "muitos-para-muitos", "text": "Modelo muitos-para-muitos com tabela pivot e uso `attach`, `detach`, `sync` e `withPivot`/`withTimestamps`." },
+      { "key": "has-one-e-through", "text": "Entendo `hasOne`, `hasOneThrough` e `hasManyThrough` e reconheço quando cada um aparece." },
+      { "key": "polimorficas", "text": "Implementei uma relação polimórfica (`morphTo`/`morphMany`) e sei o papel de `Relation::enforceMorphMap`." },
+      { "key": "filtrar-e-contar", "text": "Filtro e conto por relação com `has`, `whereHas`, `withCount` e `withExists`." },
+      { "key": "lazy-vs-eager", "text": "Sei a diferença entre acessar uma relação como propriedade (lazy) e carregá-la com `with()`/`load()` (eager), e reconheço a origem de um N+1." }
+    ]
+  },
+  {
+    "slug": "php-autenticacao-sanctum",
+    "title": "Autenticação (Sanctum)",
+    "description": "Autenticação de APIs e SPAs com o Laravel Sanctum: tokens pessoais de API (com abilities) e autenticação por cookie de sessão para SPAs em domínios de primeira parte. Escopo: `HasApiTokens`, `createToken`, middleware `auth:sanctum`, fluxo do `csrf-cookie`, expiração e revogação de tokens, rate limiting no login e hash de senhas.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["php-validacao-e-form-requests", "php-migrations-e-eloquent-basico"],
+    "resources": [
+      { "name": "Laravel — Documentação: Sanctum", "url": "https://laravel.com/docs/sanctum" },
+      { "name": "Laravel — Documentação: Authentication", "url": "https://laravel.com/docs/authentication" },
+      { "name": "Laravel — Documentação: Hashing", "url": "https://laravel.com/docs/hashing" },
+      { "name": "OWASP — Authentication Cheat Sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html" }
+    ],
+    "checklist": [
+      { "key": "habilitar-sanctum", "text": "Habilito a autenticação de API (`php artisan install:api`), preparo o model com `HasApiTokens` e protejo rotas com o middleware `auth:sanctum`." },
+      { "key": "emitir-token", "text": "Implementei um login que valida as credenciais (`Auth::attempt` ou `Hash::check`), emite um token com `createToken('nome', ['abilities'])` e o devolve uma única vez." },
+      { "key": "abilities-do-token", "text": "Restrinjo tokens com abilities e verifico com `tokenCan()` ou com os middlewares de abilities." },
+      { "key": "logout-e-revogacao", "text": "Faço logout revogando o token atual (`currentAccessToken()->delete()`) e sei revogar todos os tokens do usuário." },
+      { "key": "spa-com-cookie", "text": "Entendo o fluxo de SPA com cookie: `/sanctum/csrf-cookie`, `statefulApi()`, a opção `stateful` do `config/sanctum.php` e `withCredentials` no cliente." },
+      { "key": "endurecer-login", "text": "Aplico `throttle`/`RateLimiter` ao login, guardo senhas apenas com hash (`Hash::make`) e nunca registro tokens em logs." }
+    ]
+  },
+  {
+    "slug": "php-autorizacao-policies-gates",
+    "title": "Autorização (Policies/Gates)",
+    "description": "Controle do que cada usuário autenticado pode fazer, centralizado em Gates (checagens avulsas) e Policies (regras por model). Escopo: `Gate::define`, policies (`make:policy`), `authorize`/`can`/`cannot`, middleware `can:`, respostas com `Response::deny()` e `denyAsNotFound()`, `before` para super admin e testes de autorização.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["php-autenticacao-sanctum", "php-relacionamentos-eloquent"],
+    "resources": [
+      { "name": "Laravel — Documentação: Authorization", "url": "https://laravel.com/docs/authorization" },
+      { "name": "OWASP — Authorization Cheat Sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html" },
+      { "name": "Spatie — laravel-permission (papéis e permissões)", "url": "https://spatie.be/docs/laravel-permission" }
+    ],
+    "checklist": [
+      { "key": "gates", "text": "Defino e uso um Gate (`Gate::define`, `Gate::allows`/`denies`) para regras que não pertencem a um model." },
+      { "key": "policies-de-model", "text": "Gero uma policy (`make:policy --model=Post`) com métodos `view`, `update`, `delete` etc. e entendo como ela é descoberta (convenção, `Gate::policy` ou `#[UsePolicy]`)." },
+      { "key": "autorizar-no-controller", "text": "Autorizo ações com `Gate::authorize()`, `$request->user()->can()` ou o middleware `can:`, e não apenas escondendo botões no front-end." },
+      { "key": "403-vs-404", "text": "Sei usar `Response::deny()` e `denyAsNotFound()` e quando responder 404 em vez de 403 para não vazar a existência de um recurso." },
+      { "key": "rbac-vs-ownership", "text": "Diferencio RBAC (papéis e permissões) de regras por propriedade do recurso (ownership) e conheço o `spatie/laravel-permission`." },
+      { "key": "testar-autorizacao", "text": "Escrevo testes que garantem 403 para um usuário sem permissão (`actingAs($user)->putJson(...)->assertForbidden()`)." }
+    ]
+  },
+  {
+    "slug": "php-testes-com-pest",
+    "title": "Testes com Pest",
+    "description": "Testes automatizados em Laravel com o Pest, framework de sintaxe fluente construído sobre o PHPUnit. Escopo: testes de feature (HTTP/JSON) e unitários, `RefreshDatabase`, factories, `actingAs`, expectations (`expect()`), datasets, fakes (`Http::fake`, `Event::fake`, `Queue::fake`, `Mail::fake`), testes de arquitetura (`arch()`), cobertura e execução em paralelo.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["php-migrations-e-eloquent-basico", "php-validacao-e-form-requests"],
+    "resources": [
+      { "name": "Pest — Documentação", "url": "https://pestphp.com/docs" },
+      { "name": "Laravel — Documentação: Testing", "url": "https://laravel.com/docs/testing" },
+      { "name": "Laravel — Documentação: HTTP tests", "url": "https://laravel.com/docs/http-tests" },
+      { "name": "Laravel — Documentação: Mocking", "url": "https://laravel.com/docs/mocking" }
+    ],
+    "checklist": [
+      { "key": "instalar-pest", "text": "Instalo e configuro o Pest em um projeto Laravel (`pestphp/pest` e `pestphp/pest-plugin-laravel`) e rodo a suíte com `./vendor/bin/pest` ou `php artisan test`." },
+      { "key": "feature-test-api", "text": "Escrevo um teste de feature para um endpoint JSON (`postJson`, `assertCreated`, `assertJsonPath`, `assertDatabaseHas`)." },
+      { "key": "banco-e-factories", "text": "Uso `RefreshDatabase`, factories e `actingAs()` para preparar cenários isolados e repetíveis." },
+      { "key": "expectations-e-datasets", "text": "Uso a API `expect()` com expectativas encadeadas e datasets (`with()`) para cobrir vários casos em um único teste." },
+      { "key": "fakes-de-efeitos", "text": "Isolo efeitos colaterais com `Http::fake()`, `Event::fake()`, `Queue::fake()`, `Mail::fake()` e `Notification::fake()`, e faço asserções sobre eles." },
+      { "key": "arch-e-cobertura", "text": "Já usei `arch()` para impor regras de arquitetura e `--coverage` e `--parallel` para medir cobertura e acelerar a suíte." }
+    ]
+  },
+  {
+    "slug": "php-filas-e-jobs",
+    "title": "Filas e Jobs",
+    "description": "Execução assíncrona de trabalho lento ou pesado (e-mails, relatórios, integrações) fora do ciclo da requisição, usando o sistema de filas do Laravel. Escopo: jobs (`ShouldQueue`), drivers (database, Redis, SQS), `queue:work`, tentativas, `backoff` e timeout, `failed_jobs`, chains e batches, jobs únicos, middleware de job (`WithoutOverlapping`, `RateLimited`), idempotência e testes com `Queue::fake()`.",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": ["php-poo", "php-migrations-e-eloquent-basico"],
+    "resources": [
+      { "name": "Laravel — Documentação: Queues", "url": "https://laravel.com/docs/queues" },
+      { "name": "Laravel — Documentação: Task scheduling", "url": "https://laravel.com/docs/scheduling" },
+      { "name": "Livro: Laravel Queues in Action — Mohamed Said" },
+      { "name": "Supervisor — Documentação", "url": "https://supervisord.org/" }
+    ],
+    "checklist": [
+      { "key": "criar-e-despachar-job", "text": "Crio um job (`make:job`) que implementa `ShouldQueue`, despacho com `Job::dispatch()` e o processo com `php artisan queue:work`." },
+      { "key": "tentativas-e-backoff", "text": "Configuro tentativas, `backoff` e timeout (propriedades ou atributos como `#[Tries]` e `#[Backoff]` nas versões novas), trato falhas em `failed()` e reprocesso com `queue:retry`." },
+      { "key": "idempotencia", "text": "Entendo que um job pode executar mais de uma vez e escrevo handlers idempotentes, usando `ShouldBeUnique` ou `WithoutOverlapping` quando preciso." },
+      { "key": "chains-e-batches", "text": "Já usei `Bus::chain()` e `Bus::batch()` para encadear ou agrupar jobs, tratando `then`, `catch` e `finally`." },
+      { "key": "after-commit", "text": "Evito a corrida com transações usando `afterCommit()` (ou `after_commit` na conexão) e passo models e IDs de forma segura para o job." },
+      { "key": "testar-jobs", "text": "Testo o despacho com `Queue::fake()` e `Queue::assertPushed()`, e a lógica do job chamando `handle()` diretamente." }
+    ]
+  },
+  {
+    "slug": "php-cache",
+    "title": "Cache",
+    "description": "Uso do cache para reduzir latência e carga no banco, com a API unificada do Laravel sobre vários drivers. Escopo: `Cache::remember`, TTL e invalidação, tags, locks atômicos, stale-while-revalidate (`Cache::flexible`), cache de configuração/rotas/views e armadilhas como dados desatualizados e cache stampede.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["php-rotas-e-controllers", "php-migrations-e-eloquent-basico"],
+    "resources": [
+      { "name": "Laravel — Documentação: Cache", "url": "https://laravel.com/docs/cache" },
+      { "name": "Laravel — Documentação: Redis", "url": "https://laravel.com/docs/redis" },
+      { "name": "Redis — Documentação", "url": "https://redis.io/docs/latest/" }
+    ],
+    "checklist": [
+      { "key": "remember-e-ttl", "text": "Cacheio o resultado de uma consulta com `Cache::remember`, definindo um TTL adequado." },
+      { "key": "invalidar-cache", "text": "Invalido o cache quando o dado muda (`Cache::forget`, eventos ou observers) e explico o trade-off entre TTL curto e invalidação explícita." },
+      { "key": "drivers-e-tags", "text": "Conheço os drivers (`file`, `database`, `redis`, `memcached`, `array`) e sei que as tags de cache não funcionam nos drivers `file`, `database` e DynamoDB." },
+      { "key": "locks-e-stampede", "text": "Entendo o cache stampede e sei mitigá-lo com `Cache::lock()` ou com `Cache::flexible()` (stale-while-revalidate)." },
+      { "key": "chaves-e-escopo", "text": "Defino chaves previsíveis, com namespace e versão (ex.: `posts:{id}:v2`), e nunca cacheio dados específicos de um usuário em uma chave compartilhada." },
+      { "key": "cache-do-framework", "text": "Uso `php artisan optimize` (config, rotas, views e eventos em cache) em produção e sei por que `env()` só deve ser lido nos arquivos de `config`." }
+    ]
+  },
+  {
+    "slug": "php-eventos-e-listeners",
+    "title": "Eventos e listeners",
+    "description": "Mecanismo de eventos do Laravel (padrão observer) para desacoplar a reação a algo que aconteceu (como `OrderPlaced`) da ação que o disparou. Escopo: eventos e listeners com auto-descoberta, `dispatch()`, listeners enfileirados (`ShouldQueue`), subscribers, eventos de model e observers, `ShouldDispatchAfterCommit` e `Event::fake()`.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["php-poo", "php-migrations-e-eloquent-basico"],
+    "resources": [
+      { "name": "Laravel — Documentação: Events", "url": "https://laravel.com/docs/events" },
+      { "name": "Laravel — Documentação: Notifications", "url": "https://laravel.com/docs/notifications" },
+      { "name": "Refactoring Guru — Observer", "url": "https://refactoring.guru/pt-br/design-patterns/observer" }
+    ],
+    "checklist": [
+      { "key": "evento-e-listener", "text": "Crio um evento e um listener (`make:event`, `make:listener`), disparo com `OrderPlaced::dispatch($order)` e entendo a auto-descoberta de listeners." },
+      { "key": "evento-vs-chamada-direta", "text": "Sei justificar quando um evento realmente desacopla e quando uma chamada direta (ou uma Action) é mais clara." },
+      { "key": "listeners-enfileirados", "text": "Criei um listener que implementa `ShouldQueue` e uso `ShouldDispatchAfterCommit` ou `ShouldQueueAfterCommit` para só agir depois do commit da transação." },
+      { "key": "observers-e-model-events", "text": "Uso eventos de model (`creating`, `created`, `updated`...) e Observers (`#[ObservedBy]`), e conheço os riscos (efeitos ocultos, `saveQuietly`)." },
+      { "key": "subscribers", "text": "Conheço subscribers e sei interromper a propagação retornando `false` de um listener." },
+      { "key": "testar-eventos", "text": "Testo eventos com `Event::fake()`, `Event::assertDispatched()` e `Event::assertListening()`." }
+    ]
+  },
+  {
+    "slug": "php-n-plus-1-e-otimizacao-eloquent",
+    "title": "N+1 e otimização Eloquent",
+    "description": "Diagnosticar e eliminar o problema de N+1 queries e outros gargalos comuns do Eloquent. Escopo: eager loading (`with`, `load`, `withCount`), `Model::preventLazyLoading()` e eager loading automático, seleção de colunas, `chunkById`/`lazy`/`cursor`, `exists()` versus `count()`, uso de índices e ferramentas de diagnóstico (`DB::listen`, Debugbar, Telescope, Pulse).",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": ["php-relacionamentos-eloquent", "php-api-resources"],
+    "resources": [
+      { "name": "Laravel — Documentação: Eloquent relationships (eager loading)", "url": "https://laravel.com/docs/eloquent-relationships" },
+      { "name": "Laravel — Documentação: Database (query log e DB::listen)", "url": "https://laravel.com/docs/database" },
+      { "name": "Laracasts — Eloquent Performance Patterns", "url": "https://laracasts.com/series/eloquent-performance-patterns" },
+      { "name": "Use The Index, Luke", "url": "https://use-the-index-luke.com/" }
+    ],
+    "checklist": [
+      { "key": "detectar-n-mais-1", "text": "Reconheço um N+1 (query dentro de um loop ou accessor) e confirmo com `DB::listen`, Debugbar/Telescope ou contando queries em um teste." },
+      { "key": "eager-loading", "text": "Corrijo N+1 com `with()`, `load()` e `loadMissing()`, inclusive relações aninhadas (`with('posts.comments')`) e colunas limitadas (`with('user:id,name')`)." },
+      { "key": "prevent-lazy-loading", "text": "Ativo `Model::preventLazyLoading(! app()->isProduction())` para falhar cedo em desenvolvimento e conheço o eager loading automático (`Model::automaticallyEagerLoadRelationships()`)." },
+      { "key": "agregar-no-banco", "text": "Prefiro `withCount`, `exists()` e agregações no banco a carregar coleções inteiras só para contar ou verificar." },
+      { "key": "processar-em-lotes", "text": "Processo grandes volumes com `chunkById`, `lazy()` ou `cursor()` sem estourar a memória e sei quando cada um se aplica." },
+      { "key": "indices-e-explain", "text": "Leio o SQL gerado (`toSql()` ou `dumpRawSql()`) e o plano de execução (`EXPLAIN`), identifico a falta de um índice e proponho a migration com o índice certo." }
+    ]
+  },
+  {
+    "slug": "php-actions-services-e-arquitetura",
+    "title": "Actions/Services e arquitetura",
+    "description": "Como organizar a regra de negócio para que os controllers fiquem finos e o código seja testável e evolua sem virar bagunça. Escopo: classes Action de responsabilidade única, Services, DTOs imutáveis, injeção de dependência e container de serviços (bind, singleton, interfaces), transações (`DB::transaction`), organização por domínio/módulo e quando a abstração é excessiva (repositories, over-engineering).",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": ["php-poo", "php-validacao-e-form-requests", "php-testes-com-pest"],
+    "resources": [
+      { "name": "Laravel — Documentação: Service container", "url": "https://laravel.com/docs/container" },
+      { "name": "Livro: Laravel Beyond CRUD — Brent Roose", "url": "https://laravel-beyond-crud.com/" },
+      { "name": "Spatie — laravel-data (DTOs)", "url": "https://spatie.be/docs/laravel-data" },
+      { "name": "Livro: Clean Architecture — Robert C. Martin" }
+    ],
+    "checklist": [
+      { "key": "controller-fino", "text": "Refatoro um controller gordo extraindo a regra de negócio para uma Action (como `CreateOrder` com um método `handle`) ou Service, deixando no controller só o que é HTTP." },
+      { "key": "dtos", "text": "Uso DTOs imutáveis (`readonly class`) para trafegar dados entre camadas, em vez de arrays soltos ou do objeto `Request`." },
+      { "key": "container-e-interfaces", "text": "Entendo o container de serviços: auto-resolução por type-hint, `bind`/`singleton`/`scoped` e como vincular uma interface a uma implementação em um Service Provider." },
+      { "key": "transacoes", "text": "Envolvo operações multi-tabela em `DB::transaction()` e sei posicionar `afterCommit` para eventos e jobs." },
+      { "key": "testar-isolado", "text": "Testo Actions e Services de forma isolada, trocando dependências por fakes ou mocks." },
+      { "key": "quando-abstrair", "text": "Sei argumentar quando uma abstração (repository, service) compensa e quando é over-engineering para o tamanho do projeto." }
+    ]
+  },
+  {
+    "slug": "php-reverb-e-broadcasting",
+    "title": "Reverb e broadcasting",
+    "description": "Comunicação em tempo real com WebSockets usando o Laravel Reverb (servidor WebSocket de primeira parte) e o sistema de broadcasting, com o Laravel Echo no cliente. Escopo: eventos `ShouldBroadcast`, canais públicos, privados e presence, autorização de canais, client events (whisper), configuração e operação do Reverb, escala com Redis e testes.",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": ["php-eventos-e-listeners", "php-filas-e-jobs", "php-autorizacao-policies-gates"],
+    "resources": [
+      { "name": "Laravel — Documentação: Broadcasting", "url": "https://laravel.com/docs/broadcasting" },
+      { "name": "Laravel — Documentação: Reverb", "url": "https://laravel.com/docs/reverb" },
+      { "name": "MDN — WebSockets API", "url": "https://developer.mozilla.org/pt-BR/docs/Web/API/WebSockets_API" }
+    ],
+    "checklist": [
+      { "key": "instalar-reverb", "text": "Instalo o broadcasting e o Reverb (`php artisan install:broadcasting`) e subo o servidor com `php artisan reverb:start`." },
+      { "key": "evento-broadcast", "text": "Crio um evento `ShouldBroadcast`, defino `broadcastOn()`, `broadcastAs()` e `broadcastWith()` e entendo que o envio passa pela fila (ou uso `ShouldBroadcastNow`)." },
+      { "key": "canais-e-autorizacao", "text": "Diferencio canais públicos, privados e presence e autorizo canais privados em `routes/channels.php` com `Broadcast::channel`." },
+      { "key": "echo-no-vue", "text": "Consumi eventos no front-end com o Laravel Echo (`Echo.private(...).listen(...)` ou o composable `useEcho` do `@laravel/echo-vue`) em um componente Vue, liberando o canal ao desmontar." },
+      { "key": "escala-e-producao", "text": "Entendo como operar o Reverb em produção: limite de arquivos abertos, `wss://` atrás de proxy reverso, Supervisor e escala horizontal com Redis." },
+      { "key": "testar-broadcast", "text": "Testo o disparo do broadcast com `Event::fake()` e `Event::assertDispatched()`, e depuro as mensagens com `php artisan reverb:start --debug` (lembrando de `reverb:restart` após mudar o código)." }
+    ]
+  },
+  {
+    "slug": "php-laravel-em-producao",
+    "title": "Laravel em produção (Horizon, Octane)",
+    "description": "Levar uma aplicação Laravel para produção com desempenho, confiabilidade e operabilidade. Escopo: filas gerenciadas com Horizon, servidores de aplicação de alta performance com Octane (FrankenPHP, Swoole, RoadRunner), caches do framework (`php artisan optimize`), OPcache, agendador, health check, observabilidade (Pulse) e deploy com rollback (Forge, Laravel Cloud ou servidor próprio).",
+    "level": "senior",
+    "difficulty": 5,
+    "prerequisites": ["php-filas-e-jobs", "php-cache", "php-n-plus-1-e-otimizacao-eloquent"],
+    "resources": [
+      { "name": "Laravel — Documentação: Deployment", "url": "https://laravel.com/docs/deployment" },
+      { "name": "Laravel — Documentação: Horizon", "url": "https://laravel.com/docs/horizon" },
+      { "name": "Laravel — Documentação: Octane", "url": "https://laravel.com/docs/octane" },
+      { "name": "The Twelve-Factor App (pt-BR)", "url": "https://12factor.net/pt_br/" }
+    ],
+    "checklist": [
+      { "key": "otimizar-no-deploy", "text": "Preparo um deploy com `composer install --no-dev --optimize-autoloader` e `php artisan optimize`, rodando `php artisan migrate --force` de forma segura." },
+      { "key": "workers-supervisionados", "text": "Mantenho workers de fila vivos com Supervisor/systemd (ou Horizon) e os reinicio a cada deploy com `queue:restart` ou `horizon:terminate`." },
+      { "key": "configurar-horizon", "text": "Configuro o Horizon (supervisors, estratégia de balanceamento, processos, tags e métricas), protejo o dashboard e interpreto o tempo de espera das filas." },
+      { "key": "riscos-do-octane", "text": "Entendo o modelo do Octane (aplicação mantida em memória) e seus riscos: singletons e estado estático vazando entre requisições, injeção de container/request e vazamentos de memória." },
+      { "key": "opcache-e-fpm", "text": "Sei dimensionar o PHP-FPM e habilitar o OPcache, medindo o ganho antes e depois." },
+      { "key": "operacao-e-rollback", "text": "Configuro logs estruturados, health check (`/up`), monitoramento (Pulse), o agendador (`schedule:run` a cada minuto) e uma estratégia de deploy com rollback." }
+    ]
+  }
+]
