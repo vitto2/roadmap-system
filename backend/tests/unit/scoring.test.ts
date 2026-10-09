@@ -57,19 +57,35 @@ describe('nível de carreira', () => {
   })
 
   it('é iniciante sem progresso suficiente', () => {
-    const result = evaluateCareerLevel([t('beginner', true), t('junior', false), t('junior', false)])
+    const result = evaluateCareerLevel([
+      t('beginner', true),
+      t('junior', false),
+      t('junior', false),
+    ])
     expect(result.level).toBe('beginner')
     expect(result.next?.level).toBe('junior')
   })
 
   it('atinge júnior com 40% dos tópicos até júnior', () => {
-    const topics = [t('beginner', true), t('beginner', true), t('junior', false), t('junior', false), t('mid', false)]
+    const topics = [
+      t('beginner', true),
+      t('beginner', true),
+      t('junior', false),
+      t('junior', false),
+      t('mid', false),
+    ]
     expect(evaluateCareerLevel(topics).level).toBe('junior')
   })
 
   it('exige os níveis anteriores (sequencial)', () => {
     // tudo de pleno e sênior concluído, mas nada de júnior
-    const topics = [t('junior', false), t('junior', false), t('mid', true), t('mid', true), t('senior', true)]
+    const topics = [
+      t('junior', false),
+      t('junior', false),
+      t('mid', true),
+      t('mid', true),
+      t('senior', true),
+    ]
     expect(evaluateCareerLevel(topics).level).toBe('beginner')
   })
 
@@ -122,7 +138,10 @@ describe('streak e meta semanal', () => {
   })
 
   it('quebra após um dia sem estudar e mantém o maior streak', () => {
-    const info = computeStreak(['2026-03-01', '2026-03-02', '2026-03-03', '2026-03-10'], '2026-03-11')
+    const info = computeStreak(
+      ['2026-03-01', '2026-03-02', '2026-03-03', '2026-03-10'],
+      '2026-03-11',
+    )
     expect(info.current).toBe(1)
     expect(info.longest).toBe(3)
   })

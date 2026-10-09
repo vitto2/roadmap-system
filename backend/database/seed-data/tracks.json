@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "fundamentos",
+    "title": "Fundamentos",
+    "description": "Lógica, algoritmos, estruturas de dados, Git e terminal: a base de qualquer carreira em programação.",
+    "required": true
+  },
+  {
+    "slug": "web-base",
+    "title": "Web base",
+    "description": "HTML, CSS, JavaScript, TypeScript, HTTP e acessibilidade: o alicerce da plataforma web.",
+    "required": true
+  },
+  {
+    "slug": "frontend-vue",
+    "title": "Front-end com Vue",
+    "description": "Vue 3, Composition API, Router, Pinia, Vite, testes e performance.",
+    "required": true
+  },
+  {
+    "slug": "backend-php-laravel",
+    "title": "Back-end com PHP e Laravel",
+    "description": "PHP moderno, POO, Composer, rotas, Eloquent, validação, autenticação, filas, cache, eventos e testes com Pest.",
+    "required": true
+  },
+  {
+    "slug": "banco-de-dados-sql",
+    "title": "Banco de dados e SQL",
+    "description": "Modelagem, normalização, índices, transações e otimização de queries.",
+    "required": true
+  },
+  {
+    "slug": "qualidade",
+    "title": "Qualidade",
+    "description": "Testes, CI/CD, code review, refatoração e clean code.",
+    "required": true
+  },
+  {
+    "slug": "arquitetura-system-design",
+    "title": "Arquitetura e System Design",
+    "description": "Padrões, DDD básico, escalabilidade e análise de trade-offs.",
+    "required": true
+  },
+  {
+    "slug": "devops-observabilidade",
+    "title": "DevOps e Observabilidade",
+    "description": "Linux, Docker, deploy, logs, métricas e operação em produção.",
+    "required": true
+  },
+  {
+    "slug": "seguranca",
+    "title": "Segurança",
+    "description": "OWASP, autenticação, autorização e boas práticas de segurança.",
+    "required": true
+  },
+  {
+    "slug": "carreira-soft-skills",
+    "title": "Carreira e Soft Skills",
+    "description": "Comunicação, estimativas, documentação, feedback e mentoria.",
+    "required": false
+  }
+]

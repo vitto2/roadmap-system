@@ -14,5 +14,8 @@ export interface ScheduledReview {
  */
 export function scheduleReviews(completedOn: string, mastered: boolean): ScheduledReview[] {
   const intervals = mastered ? MASTERED_REVIEW_INTERVALS : REVIEW_INTERVALS
-  return intervals.map((intervalDays) => ({ intervalDays, dueOn: addDays(completedOn, intervalDays) }))
+  return intervals.map((intervalDays) => ({
+    intervalDays,
+    dueOn: addDays(completedOn, intervalDays),
+  }))
 }
