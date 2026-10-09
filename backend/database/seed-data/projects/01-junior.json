@@ -1,0 +1,233 @@
+[
+  {
+    "slug": "encurtador-de-url",
+    "title": "Encurtador de URL",
+    "description": "Construa uma API em Laravel que cria links curtos com slug único, redireciona para a URL original e conta os cliques de forma atômica, com uma interface Vue simples para encurtar e listar os links. O projeto treina modelagem com índice único, concorrência em contadores, validação de entrada e testes de feature.",
+    "level": "junior",
+    "difficulty": 2,
+    "topics": [
+      "sql-indices",
+      "sql-transacoes-e-acid",
+      "vue-composition-api-script-setup",
+      "qual-testes-integracao",
+      "php-rotas-e-controllers",
+      "php-migrations-e-eloquent-basico",
+      "php-validacao-e-form-requests"
+    ],
+    "milestones": [
+      {
+        "key": "modelagem-links",
+        "title": "Modelagem e migration de links",
+        "acceptanceCriteria": [
+          "A migration cria a tabela `links` com `original_url`, `slug` único, `clicks` (inteiro com default 0) e timestamps",
+          "Inserir dois links com o mesmo slug lança erro de constraint do banco (coberto por um teste)",
+          "Existe uma factory de Link que gera dados válidos para uso nos testes"
+        ],
+        "xp": 20
+      },
+      {
+        "key": "criar-link-com-slug-unico",
+        "title": "Criação de links com slug único",
+        "acceptanceCriteria": [
+          "POST /api/links com uma URL válida retorna 201 com o slug curto e a URL curta completa no corpo",
+          "Em caso de colisão, um novo slug é gerado até ser único (um teste força a colisão com um gerador falso)",
+          "URLs inválidas ou com esquema diferente de http/https (ex.: javascript:) retornam 422 com mensagens por campo"
+        ],
+        "xp": 30
+      },
+      {
+        "key": "redirecionamento-e-cliques",
+        "title": "Redirecionamento e contagem atômica de cliques",
+        "acceptanceCriteria": [
+          "GET /{slug} responde 302 com o header Location da URL original (o README explica por que 301 prejudicaria a contagem)",
+          "Slug inexistente retorna 404 e não altera nenhum contador",
+          "O contador usa um único UPDATE atômico (`increment`), sem ler o valor em PHP e gravar de volta",
+          "Um teste faz 20 acessos seguidos e confirma que `clicks` vale 20"
+        ],
+        "xp": 35
+      },
+      {
+        "key": "interface-vue",
+        "title": "Interface Vue para encurtar e listar",
+        "acceptanceCriteria": [
+          "O formulário valida a URL antes de enviar e mostra os erros 422 devolvidos pela API",
+          "Após encurtar, a URL curta aparece na lista com um botão que a copia para a área de transferência",
+          "A lista mostra URL original, slug e número de cliques, com estados de carregando, erro e vazio",
+          "A SPA em modo dev consome a API sem erros de CORS (proxy do Vite ou configuração do Laravel)"
+        ],
+        "xp": 30
+      },
+      {
+        "key": "testes-e-entrega",
+        "title": "Testes de feature e entrega",
+        "acceptanceCriteria": [
+          "Testes de feature cobrem criação, colisão de slug, validação, redirecionamento e contagem de cliques",
+          "`php artisan test` passa em um clone limpo, usando `RefreshDatabase` e SQLite em memória",
+          "O README explica como instalar, migrar o banco, subir API e front e lista os endpoints"
+        ],
+        "xp": 25
+      }
+    ]
+  },
+  {
+    "slug": "todo-com-api-e-vue",
+    "title": "To-do com API e Vue",
+    "description": "Implemente um CRUD de tarefas em Laravel, com Form Requests para validação e API Resources para padronizar as respostas, e consuma a API em uma SPA Vue 3 com Pinia e Vue Router. O projeto treina o contrato entre back-end e front-end, o gerenciamento de estado e o tratamento dos estados de loading, erro e lista vazia.",
+    "level": "junior",
+    "difficulty": 2,
+    "topics": [
+      "vue-pinia",
+      "vue-router",
+      "vue-formularios-e-validacao",
+      "web-fetch-e-http",
+      "php-rotas-e-controllers",
+      "php-migrations-e-eloquent-basico",
+      "php-validacao-e-form-requests",
+      "php-api-resources"
+    ],
+    "milestones": [
+      {
+        "key": "api-crud-de-tarefas",
+        "title": "API CRUD de tarefas",
+        "acceptanceCriteria": [
+          "A migration cria `tasks` com `title`, `description` (opcional), `done` (boolean, default false), `due_date` (opcional) e timestamps",
+          "`Route::apiResource('tasks')` responde: GET lista, POST cria (201), GET por id, PUT/PATCH atualiza e DELETE remove (204)",
+          "Buscar, atualizar ou excluir um id inexistente retorna 404 em JSON, não uma página HTML"
+        ],
+        "xp": 25
+      },
+      {
+        "key": "validacao-e-api-resources",
+        "title": "Form Requests e API Resources",
+        "acceptanceCriteria": [
+          "`StoreTaskRequest` e `UpdateTaskRequest` concentram as regras (título obrigatório com no máximo 120 caracteres) e devolvem 422 com erros por campo",
+          "`TaskResource` define o formato público da resposta (id, title, done, due_date em ISO 8601) sem expor colunas internas",
+          "A listagem é paginada via `TaskResource::collection` e aceita o filtro `?done=true` ou `?done=false`"
+        ],
+        "xp": 30
+      },
+      {
+        "key": "spa-com-router-e-pinia",
+        "title": "SPA com Router e store Pinia",
+        "acceptanceCriteria": [
+          "O projeto Vite tem rotas `/` (lista), `/tasks/new`, `/tasks/:id` (edição) e uma rota curinga que mostra a página 404",
+          "Uma store Pinia guarda as tarefas e expõe as actions `fetchTasks`, `createTask`, `toggleTask` e `deleteTask`",
+          "Nenhum componente chama `fetch` diretamente: toda requisição passa por um módulo cliente da API"
+        ],
+        "xp": 35
+      },
+      {
+        "key": "componentes-e-formulario",
+        "title": "Componentes e formulário de tarefas",
+        "acceptanceCriteria": [
+          "`TaskList`, `TaskItem` e `TaskForm` se comunicam por props e emits, sem alterar props diretamente",
+          "O formulário mostra, abaixo de cada campo, os erros de validação (422) devolvidos pelo Laravel",
+          "Marcar como concluída atualiza a tela e persiste na API; se a API falhar, a tela volta ao estado anterior e mostra uma mensagem"
+        ],
+        "xp": 30
+      },
+      {
+        "key": "estados-de-loading-erro-e-vazio",
+        "title": "Estados de loading, erro e lista vazia",
+        "acceptanceCriteria": [
+          "Enquanto a lista carrega, a tela mostra um indicador (spinner ou skeleton) e as ações ficam desabilitadas",
+          "Com a API fora do ar, aparece uma mensagem de erro com o botão Tentar novamente, que refaz a requisição",
+          "Sem tarefas, a tela mostra um estado vazio com chamada para criar a primeira",
+          "Durante o envio do formulário o botão fica desabilitado, e um clique duplo não cria duas tarefas"
+        ],
+        "xp": 25
+      },
+      {
+        "key": "testes-e-entrega",
+        "title": "Testes e entrega",
+        "acceptanceCriteria": [
+          "Testes de feature da API cobrem criar, listar, atualizar, excluir e os casos 404 e 422",
+          "`php artisan test` e `npm run build` terminam sem erros",
+          "O README explica como rodar API e SPA e traz capturas das telas de lista, erro e vazio"
+        ],
+        "xp": 20
+      }
+    ]
+  },
+  {
+    "slug": "api-rest-sanctum-e-testes",
+    "title": "API REST com Sanctum e testes",
+    "description": "Crie uma API REST em Laravel com autenticação por tokens do Sanctum (registro, login, logout e gestão de tokens) e um recurso privado de anotações protegido por policies de dono. O comportamento é coberto por uma suíte de testes com Pest. O projeto treina autenticação, autorização, respostas de erro consistentes e disciplina de testes.",
+    "level": "junior",
+    "difficulty": 3,
+    "topics": [
+      "seg-autenticacao-sessoes",
+      "seg-autorizacao-rbac-abac",
+      "seg-hash-senhas-criptografia-basica",
+      "seg-owasp-top-10",
+      "php-autenticacao-sanctum",
+      "php-autorizacao-policies-gates",
+      "php-testes-com-pest"
+    ],
+    "milestones": [
+      {
+        "key": "setup-pest-e-modelagem",
+        "title": "Setup, Pest e modelagem de anotações",
+        "acceptanceCriteria": [
+          "O projeto Laravel tem Pest instalado e `php artisan test` roda com pelo menos um teste verde",
+          "A migration cria `notes` com `user_id` (chave estrangeira com exclusão em cascata), `title` e `body`",
+          "As factories de User e Note permitem montar cenários como `Note::factory()->for($user)->create()`"
+        ],
+        "xp": 20
+      },
+      {
+        "key": "registro-login-e-logout",
+        "title": "Registro, login e logout com tokens",
+        "acceptanceCriteria": [
+          "POST /api/register cria o usuário com a senha em hash (nunca em texto puro) e retorna 201 com o token de acesso",
+          "POST /api/login retorna um token para credenciais válidas; e-mail inexistente e senha errada devolvem o mesmo erro genérico (422 ou 401, de forma consistente)",
+          "POST /api/logout revoga o token atual e a mesma chamada com esse token passa a retornar 401",
+          "O login tem limite de tentativas (throttle) e responde 429 depois de exceder o limite"
+        ],
+        "xp": 35
+      },
+      {
+        "key": "crud-protegido-de-anotacoes",
+        "title": "CRUD de anotações protegido",
+        "acceptanceCriteria": [
+          "Todas as rotas de `notes` ficam sob `auth:sanctum` e, sem token, retornam 401 em JSON",
+          "GET /api/notes devolve só as anotações do usuário autenticado, paginadas",
+          "Form Requests validam `title` e `body` (422 com erros por campo) e as respostas usam API Resources"
+        ],
+        "xp": 30
+      },
+      {
+        "key": "tokens-com-abilities",
+        "title": "Tokens com abilities e expiração",
+        "acceptanceCriteria": [
+          "O login cria o token com abilities explícitas (ex.: `notes:read` e `notes:write`)",
+          "Um token só com `notes:read` consegue listar anotações, mas recebe 403 ao criar, editar ou excluir",
+          "GET /api/tokens lista os tokens do usuário e DELETE /api/tokens/{id} revoga um deles",
+          "Os tokens expiram (config `expiration` do Sanctum) e um token expirado recebe 401"
+        ],
+        "xp": 40
+      },
+      {
+        "key": "policies-por-dono",
+        "title": "Autorização por dono com Policies",
+        "acceptanceCriteria": [
+          "`NotePolicy` permite ver, editar e excluir apenas ao dono da anotação",
+          "Acessar, editar ou excluir a anotação de outro usuário retorna 403 (ou 404, decisão registrada no README)",
+          "Enviar `user_id` de outro usuário no corpo do POST é ignorado: a anotação sempre pertence a quem está autenticado"
+        ],
+        "xp": 35
+      },
+      {
+        "key": "suite-pest-e-entrega",
+        "title": "Suíte Pest e documentação",
+        "acceptanceCriteria": [
+          "Os testes de feature cobrem registro, login (sucesso e falha), logout, abilities, token expirado e policies (dono e não dono)",
+          "Há ao menos um dataset do Pest que testa várias entradas inválidas de validação em um único teste",
+          "O relatório `pest --coverage` mostra pelo menos 80% nos Controllers e nas Policies",
+          "O README lista os endpoints, mostra o fluxo de autenticação com exemplos `curl` e explica como rodar os testes"
+        ],
+        "xp": 30
+      }
+    ]
+  }
+]

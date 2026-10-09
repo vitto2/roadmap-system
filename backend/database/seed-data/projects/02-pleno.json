@@ -1,0 +1,409 @@
+[
+  {
+    "slug": "blog-com-markdown-e-cache",
+    "title": "Blog com markdown e cache",
+    "description": "Construa um blog em que os posts são escritos em markdown e renderizados com sanitização contra XSS, servidos por uma API Laravel com paginação, cache de listagem e de página e invalidação precisa, com front-end em Vue. O projeto treina estratégias de cache (cache-aside e cabeçalhos HTTP), segurança de conteúdo gerado por usuários e medição do ganho de desempenho.",
+    "level": "mid",
+    "difficulty": 3,
+    "topics": [
+      "arq-cache-e-cdn",
+      "sql-nosql-e-redis",
+      "web-http-em-profundidade",
+      "seg-xss-csrf",
+      "vue-router",
+      "php-cache",
+      "php-eventos-e-listeners"
+    ],
+    "milestones": [
+      {
+        "key": "modelagem-e-crud-de-posts",
+        "title": "Modelagem e CRUD de posts",
+        "acceptanceCriteria": [
+          "A migration cria `posts` com `slug` único, `title`, `body_markdown`, `status` (draft ou published) e `published_at`, com índice composto em `status` e `published_at`",
+          "Rotas administrativas autenticadas criam, editam, publicam e excluem posts, e o slug nasce do título",
+          "Um seeder gera pelo menos 100 posts (publicados e rascunhos) para tornar paginação e cache mensuráveis"
+        ],
+        "xp": 30
+      },
+      {
+        "key": "markdown-sanitizado",
+        "title": "Renderização de markdown sanitizada",
+        "acceptanceCriteria": [
+          "O servidor converte o markdown em HTML (ex.: league/commonmark) e a API devolve o campo `html` já pronto",
+          "Um post com `<script>` ou atributo `onerror` no markdown é renderizado sem esses elementos (teste automatizado de XSS)",
+          "Links `javascript:` são neutralizados e links externos recebem `rel=noopener noreferrer`"
+        ],
+        "xp": 35
+      },
+      {
+        "key": "listagem-e-pagina-com-cache",
+        "title": "Listagem e página com cache",
+        "acceptanceCriteria": [
+          "GET /api/posts devolve só posts publicados, do mais recente ao mais antigo, 10 por página, com metadados de paginação",
+          "Listagem e página (GET /api/posts/{slug}) usam `Cache::remember` com chaves que incluem página, filtros ou slug, e um TTL definido",
+          "A segunda requisição idêntica não executa nenhuma query (comprovado em teste com `DB::getQueryLog()`)",
+          "A resposta do post traz `ETag` e `Cache-Control`, e `If-None-Match` igual retorna 304 sem corpo"
+        ],
+        "xp": 45
+      },
+      {
+        "key": "invalidacao-de-cache",
+        "title": "Invalidação de cache",
+        "acceptanceCriteria": [
+          "Criar, editar, publicar, despublicar e excluir um post invalida a página dele e as listagens afetadas (via observer ou evento do model)",
+          "A invalidação usa tags de cache do Redis ou chaves versionadas, sem recorrer a `Cache::flush()`",
+          "Teste de feature: depois de editar o título, a listagem e a página já devolvem o título novo",
+          "Um rascunho (ou post despublicado) retorna 404 e não é servido de nenhum cache público"
+        ],
+        "xp": 45
+      },
+      {
+        "key": "front-vue-do-blog",
+        "title": "Front-end Vue do blog",
+        "acceptanceCriteria": [
+          "As rotas `/` (listagem paginada) e `/posts/:slug` usam Vue Router, e a página atual fica na query string (`?page=2`)",
+          "O HTML é exibido com `v-html` somente a partir do campo `html` sanitizado da API, nunca de markdown cru",
+          "Carregamento, erro e post não encontrado (404) têm tratamento visível nas duas telas"
+        ],
+        "xp": 35
+      },
+      {
+        "key": "testes-e-medicao",
+        "title": "Testes e medição do ganho de cache",
+        "acceptanceCriteria": [
+          "Os testes de feature cobrem sanitização (XSS), paginação, acerto e erro de cache e invalidação depois da edição",
+          "O README traz uma tabela de tempo de resposta e número de queries antes e depois do cache, com a metodologia usada",
+          "`php artisan test` e `npm run build` terminam sem erros"
+        ],
+        "xp": 30
+      }
+    ]
+  },
+  {
+    "slug": "painel-de-metricas-chartjs",
+    "title": "Painel de métricas com Chart.js",
+    "description": "Crie um dashboard em Vue 3 com vue-chartjs que consome uma API Laravel de agregações SQL (GROUP BY e window functions) sobre as vendas de uma loja fictícia, com filtros de período e granularidade. O projeto treina consultas analíticas, índices e leitura de EXPLAIN, composables reativos e o tratamento dos estados de carregamento, erro e vazio.",
+    "level": "mid",
+    "difficulty": 3,
+    "topics": [
+      "sql-agregacoes-e-group-by",
+      "sql-window-functions-e-ctes",
+      "sql-indices",
+      "sql-explain-e-otimizacao",
+      "vue-composables",
+      "vue-computed-e-watch",
+      "php-n-plus-1-e-otimizacao-eloquent",
+      "php-validacao-e-form-requests"
+    ],
+    "milestones": [
+      {
+        "key": "dados-de-vendas-e-seed",
+        "title": "Modelagem e carga de dados de vendas",
+        "acceptanceCriteria": [
+          "As migrations criam `products`, `orders` e `order_items` com chaves estrangeiras e valores monetários em centavos (inteiros)",
+          "O seeder gera pelo menos 50 mil pedidos em 12 meses, com status variados (`paid`, `canceled`, `refunded`) e categorias de produto",
+          "A carga é determinística (seed fixa), então duas cargas produzem os mesmos totais"
+        ],
+        "xp": 25
+      },
+      {
+        "key": "endpoints-de-agregacao",
+        "title": "Endpoints de agregação com GROUP BY",
+        "acceptanceCriteria": [
+          "GET /api/metrics/revenue?from=&to=&granularity=day|week|month soma a receita dos pedidos `paid` no banco (`SUM` e `GROUP BY`), sem somar em PHP",
+          "Períodos sem vendas aparecem na série com valor 0 (série contínua)",
+          "Datas fora de ordem ou granularidade desconhecida retornam 422 via Form Request",
+          "Há também agregações por status do pedido e por categoria de produto, respeitando o mesmo filtro de período"
+        ],
+        "xp": 40
+      },
+      {
+        "key": "window-functions-e-comparativos",
+        "title": "Window functions e comparativos",
+        "acceptanceCriteria": [
+          "A média móvel de 7 dias é calculada em SQL (`AVG() OVER` com `ROWS BETWEEN 6 PRECEDING AND CURRENT ROW`) sobre uma série diária contínua gerada por uma CTE de calendário",
+          "A variação percentual em relação ao período anterior da série é calculada com `LAG` e devolvida como `delta_pct`",
+          "Um endpoint devolve o top 5 de produtos por categoria usando `ROW_NUMBER() OVER (PARTITION BY ...)`",
+          "Testes comparam as respostas com valores calculados à mão sobre um dataset pequeno e fixo"
+        ],
+        "xp": 45
+      },
+      {
+        "key": "performance-das-queries",
+        "title": "Índices e análise com EXPLAIN",
+        "acceptanceCriteria": [
+          "O README registra o `EXPLAIN` da query principal antes e depois de criar o índice (ex.: composto em `status` e `created_at`), mostrando a mudança no plano",
+          "Com 50 mil pedidos, a query de receita responde em menos de 200 ms (tempo medido e registrado)",
+          "O número de queries por requisição é constante, sem N+1 (verificado em teste)"
+        ],
+        "xp": 35
+      },
+      {
+        "key": "dashboard-vue-com-graficos",
+        "title": "Dashboard Vue com vue-chartjs",
+        "acceptanceCriteria": [
+          "O Vue registra só os componentes do Chart.js que usa e renderiza gráfico de linha (receita), de barras (por categoria) e de rosca (por status) com vue-chartjs",
+          "Cartões de KPI mostram receita total, número de pedidos e ticket médio do período",
+          "A busca fica no composable `useMetrics`, que expõe `data`, `loading`, `error` e `refresh` e cancela a requisição anterior (`AbortController`) quando os filtros mudam",
+          "Valores monetários e datas aparecem em pt-BR (`Intl.NumberFormat` e `Intl.DateTimeFormat`) em eixos e tooltips"
+        ],
+        "xp": 40
+      },
+      {
+        "key": "filtros-estados-e-entrega",
+        "title": "Filtros, estados de interface e entrega",
+        "acceptanceCriteria": [
+          "Filtros de período (7, 30 e 90 dias e intervalo personalizado) e de granularidade atualizam todos os gráficos e ficam refletidos na URL",
+          "Cada gráfico mostra skeleton ao carregar, mensagem com Tentar novamente em caso de erro e estado vazio quando não há dados",
+          "Cada gráfico tem `role=img` com `aria-label` descritivo e uma tabela de dados alternativa",
+          "O README explica como carregar os dados de exemplo e rodar API e painel, e traz capturas de tela do dashboard"
+        ],
+        "xp": 35
+      }
+    ]
+  },
+  {
+    "slug": "sistema-de-tarefas-com-filas-e-jobs",
+    "title": "Sistema de tarefas com filas e jobs",
+    "description": "Construa um sistema em que o usuário submete tarefas pesadas (como importar um CSV ou gerar um relatório) que o Laravel processa em segundo plano, com jobs, filas (Redis ou database), retries, eventos, listeners e notificações. Uma interface Vue acompanha o status e o progresso de cada tarefa. O projeto treina processamento assíncrono, idempotência, tratamento de falhas e consistência eventual.",
+    "level": "mid",
+    "difficulty": 4,
+    "topics": [
+      "arq-filas-e-mensageria",
+      "sql-nosql-e-redis",
+      "sql-transacoes-e-acid",
+      "ops-logs-estruturados",
+      "vue-composables",
+      "php-filas-e-jobs",
+      "php-eventos-e-listeners",
+      "php-testes-com-pest"
+    ],
+    "milestones": [
+      {
+        "key": "modelo-e-api-de-tarefas",
+        "title": "Modelo e API de tarefas",
+        "acceptanceCriteria": [
+          "A migration cria `tasks` com `type`, `payload` (JSON), `status` (queued, processing, completed, failed), `progress` (0 a 100), `error_message`, `started_at` e `finished_at`",
+          "POST /api/tasks valida o payload, grava a tarefa como `queued` e responde 202 com o id e o header Location",
+          "GET /api/tasks/{id} e GET /api/tasks (paginada, com filtro por status) devolvem o estado atual via API Resource"
+        ],
+        "xp": 25
+      },
+      {
+        "key": "jobs-e-workers",
+        "title": "Jobs e workers em fila",
+        "acceptanceCriteria": [
+          "Um job `ProcessTask` (ShouldQueue) roda numa fila Redis ou database consumida por `php artisan queue:work`, sem bloquear a requisição HTTP",
+          "O job muda o status para `processing` e depois `completed`, e atualiza `progress` a cada lote processado",
+          "O dispatch usa `afterCommit`, para o worker nunca buscar uma tarefa que ainda não foi persistida",
+          "Com dois workers em paralelo e 20 tarefas, cada tarefa é processada uma única vez (conferido nos logs)"
+        ],
+        "xp": 40
+      },
+      {
+        "key": "retries-backoff-e-falhas",
+        "title": "Retries, backoff e falhas",
+        "acceptanceCriteria": [
+          "O job define `$tries` e `backoff()` crescente; uma falha transitória é reexecutada e a tarefa termina `completed` na segunda tentativa (teste com falha simulada)",
+          "Esgotadas as tentativas, `failed()` marca a tarefa como `failed` com `error_message`, e o job aparece em `failed_jobs`",
+          "O processamento é idempotente: `php artisan queue:retry` reprocessa uma falha sem duplicar resultados",
+          "O `$timeout` do job é menor que o `retry_after` da conexão, evitando que um job lento seja reservado e executado duas vezes"
+        ],
+        "xp": 50
+      },
+      {
+        "key": "eventos-listeners-e-notificacoes",
+        "title": "Eventos, listeners e notificações",
+        "acceptanceCriteria": [
+          "Ao terminar, a tarefa dispara `TaskCompleted` ou `TaskFailed`, tratados por listeners enfileirados (`ShouldQueue`)",
+          "O listener notifica o dono da tarefa por e-mail (mailer `log` ou Mailpit) e pelo canal `database`",
+          "Testes com `Event::fake` e `Notification::fake` provam que o usuário certo recebe a notificação certa, uma única vez"
+        ],
+        "xp": 40
+      },
+      {
+        "key": "acompanhamento-no-front",
+        "title": "Acompanhamento de status no front",
+        "acceptanceCriteria": [
+          "A SPA lista as tarefas com badge de status e barra de progresso e permite criar uma nova",
+          "O composable `usePolling` consulta o status em intervalos e para sozinho quando a tarefa chega a `completed` ou `failed`",
+          "O polling pausa com a aba oculta e retoma ao voltar, e os timers são limpos ao sair da tela",
+          "Tarefas com falha exibem o erro, e as notificações do canal `database` aparecem em um sino com contador de não lidas"
+        ],
+        "xp": 40
+      },
+      {
+        "key": "observabilidade-e-testes",
+        "title": "Observabilidade, testes e entrega",
+        "acceptanceCriteria": [
+          "Cada execução registra um log JSON com `task_id`, `attempt`, `duration_ms` e resultado",
+          "Testes cobrem o despacho (`Queue::fake`), o `handle` (status e progresso finais) e o ramo de falha (`failed()`)",
+          "O README explica como rodar o worker, como supervisioná-lo em produção e como tratar `failed_jobs`"
+        ],
+        "xp": 35
+      }
+    ]
+  },
+  {
+    "slug": "app-em-tempo-real-reverb-echo-vue",
+    "title": "App em tempo real com Reverb/Echo e Vue",
+    "description": "Construa um chat com salas e presença online usando Laravel Reverb no servidor e Laravel Echo em uma SPA Vue 3, com canais privados, canal de presença e autorização de canal. O projeto treina comunicação por WebSockets, eventos de broadcast, estados de conexão e estratégias de reconexão e ressincronização.",
+    "level": "mid",
+    "difficulty": 4,
+    "topics": [
+      "vue-composables",
+      "seg-autenticacao-sessoes",
+      "seg-autorizacao-rbac-abac",
+      "ops-nginx-proxy-reverso",
+      "arq-escalabilidade-horizontal",
+      "php-reverb-e-broadcasting",
+      "php-autenticacao-sanctum"
+    ],
+    "milestones": [
+      {
+        "key": "salas-e-mensagens-via-api",
+        "title": "Salas e mensagens via API",
+        "acceptanceCriteria": [
+          "As migrations criam `rooms`, `room_user` (membros) e `messages`, e POST /api/rooms/{room}/messages grava a mensagem e retorna 201",
+          "GET /api/rooms/{room}/messages devolve o histórico paginado e aceita `after_id` para buscar só mensagens mais novas",
+          "Somente membros da sala leem ou enviam mensagens; os demais recebem 403"
+        ],
+        "xp": 30
+      },
+      {
+        "key": "reverb-e-echo-no-ar",
+        "title": "Reverb e Echo funcionando",
+        "acceptanceCriteria": [
+          "`php artisan install:broadcasting` configura o Reverb e `php artisan reverb:start` sobe o servidor WebSocket com host, porta e credenciais no `.env`",
+          "O evento `MessageSent` (`ShouldBroadcast`) é disparado ao criar a mensagem e seu payload tem apenas id, texto, autor e `created_at`",
+          "O Echo no Vue assina o canal e uma segunda aba recebe a mensagem em menos de 1 segundo, sem recarregar"
+        ],
+        "xp": 35
+      },
+      {
+        "key": "canais-privados-e-autorizacao",
+        "title": "Canais privados e autorização",
+        "acceptanceCriteria": [
+          "O canal privado `rooms.{room}` é autorizado em `routes/channels.php` apenas para membros da sala",
+          "A SPA se autentica com Sanctum (cookie e CSRF) e o endpoint `/broadcasting/auth` autoriza a assinatura do canal",
+          "Um não membro que tenta assinar o canal recebe 403 (visível na aba Network e coberto por teste)",
+          "O remetente não vê a própria mensagem duplicada (`toOthers()` com o header `X-Socket-ID`, ou deduplicação por id)"
+        ],
+        "xp": 45
+      },
+      {
+        "key": "presenca-e-digitando",
+        "title": "Presença online e indicador de digitação",
+        "acceptanceCriteria": [
+          "Um canal de presença por sala lista quem está online usando `here`, `joining` e `leaving`",
+          "Os dados de presença expõem apenas `id` e `name`, sem e-mail nem outros campos",
+          "O indicador de digitação usa client events (`whisper`) com throttle e some depois de 2 segundos sem digitar",
+          "Com duas abas e usuários diferentes, a entrada e a saída de cada um aparecem na outra em tempo real"
+        ],
+        "xp": 40
+      },
+      {
+        "key": "reconexao-e-ressincronizacao",
+        "title": "Reconexão e ressincronização",
+        "acceptanceCriteria": [
+          "A interface mostra o estado da conexão (conectado, reconectando, offline) a partir dos eventos de conexão do Echo/Pusher",
+          "Ao derrubar e subir o Reverb, o cliente reconecta sozinho, sem recarregar a página",
+          "Depois de reconectar, o front busca as mensagens perdidas com `after_id` e as mescla sem duplicatas (deduplicação por id)",
+          "Uma mensagem enviada durante a queda aparece com o estado Enviando e, se a API falhar, é marcada com erro e botão de reenviar"
+        ],
+        "xp": 50
+      },
+      {
+        "key": "producao-testes-e-entrega",
+        "title": "Produção, testes e entrega",
+        "acceptanceCriteria": [
+          "Testes de feature cobrem a autorização de canais (membro autorizado, não membro negado, presença só com `id` e `name`) e o disparo do evento com `Event::fake`",
+          "Mensagens com HTML aparecem como texto no front, sem executar",
+          "O README documenta o proxy do Nginx para WebSocket (`Upgrade` e `Connection`), TLS (wss) e `allowed_origins` do Reverb",
+          "O README explica como escalar o Reverb horizontalmente (`REVERB_SCALING_ENABLED` com Redis)"
+        ],
+        "xp": 35
+      }
+    ]
+  },
+  {
+    "slug": "api-com-ci-cd-e-docker",
+    "title": "API com CI/CD e Docker",
+    "description": "Empacote uma API Laravel (por exemplo, a do projeto com Sanctum) em uma imagem Docker multi-stage e monte um pipeline no GitHub Actions com lint, análise estática, testes, build e publicação da imagem, seguido de deploy automatizado. O projeto treina containers prontos para produção, integração e entrega contínuas, gestão de segredos e estratégias de rollback.",
+    "level": "mid",
+    "difficulty": 4,
+    "topics": [
+      "ops-docker",
+      "ops-docker-compose",
+      "qual-ci-github-actions",
+      "qual-cd-estrategias-release",
+      "ops-deploy-php-node",
+      "seg-gestao-segredos",
+      "php-composer-e-psr",
+      "php-laravel-em-producao"
+    ],
+    "milestones": [
+      {
+        "key": "dockerfile-multi-stage",
+        "title": "Dockerfile multi-stage",
+        "acceptanceCriteria": [
+          "O Dockerfile multi-stage instala dependências com `composer install --no-dev --optimize-autoloader` e a imagem final não contém Composer, `.git` nem pacotes de desenvolvimento",
+          "O container roda com usuário não root e tem `HEALTHCHECK` apontando para o endpoint `/up`",
+          "O `.dockerignore` exclui `vendor`, `node_modules`, `.env` e `.git`, e o tamanho da imagem final (abaixo de 300 MB) é registrado no README"
+        ],
+        "xp": 40
+      },
+      {
+        "key": "compose-local",
+        "title": "Ambiente local com Docker Compose",
+        "acceptanceCriteria": [
+          "`docker compose up -d` sobe app (PHP-FPM), Nginx, banco (MySQL ou PostgreSQL) e Redis a partir de um clone limpo",
+          "Os serviços têm `healthcheck` e `depends_on` com `condition: service_healthy`, e a aplicação só inicia depois do banco",
+          "As migrations rodam por um serviço ou comando dedicado, e os dados do banco persistem em volume nomeado"
+        ],
+        "xp": 30
+      },
+      {
+        "key": "pipeline-de-ci",
+        "title": "Pipeline de CI no GitHub Actions",
+        "acceptanceCriteria": [
+          "O workflow roda em `push` e `pull_request` com jobs separados de lint (Pint `--test`), análise estática (Larastan/PHPStan) e testes (Pest)",
+          "Os testes rodam contra um banco real em `services:` do workflow, e as dependências do Composer ficam em cache entre execuções",
+          "`composer audit` faz parte do pipeline e quebra o build quando encontra vulnerabilidade",
+          "A proteção de branch exige os checks verdes para fazer merge na `main`"
+        ],
+        "xp": 50
+      },
+      {
+        "key": "build-e-publicacao-da-imagem",
+        "title": "Build e publicação da imagem",
+        "acceptanceCriteria": [
+          "O job de build usa `docker/build-push-action` com cache de camadas e só roda depois de lint, análise e testes passarem (`needs`)",
+          "A imagem vai para o GitHub Container Registry com tags `sha-<commit>` e `latest` em pushes na `main`, e com a versão semântica em tags `vX.Y.Z`",
+          "Um scan de vulnerabilidades da imagem (ex.: Trivy) roda no pipeline e falha o build para severidade CRITICAL"
+        ],
+        "xp": 40
+      },
+      {
+        "key": "deploy-automatizado-e-segredos",
+        "title": "Deploy automatizado e segredos",
+        "acceptanceCriteria": [
+          "Depois da publicação, o pipeline faz deploy automático em staging (SSH com `docker compose pull` e `up -d`, ou PaaS equivalente), e produção exige aprovação manual via GitHub Environment",
+          "Segredos (chave SSH, `APP_KEY`, credenciais do banco) ficam em GitHub Secrets ou Environments; nenhum aparece no repositório, nos logs do workflow ou nas camadas da imagem (checado com `docker history` e um scanner como gitleaks)",
+          "O deploy executa as migrations e só termina com sucesso quando o health check `/up` responde 200"
+        ],
+        "xp": 55
+      },
+      {
+        "key": "rollback-e-documentacao",
+        "title": "Rollback e documentação",
+        "acceptanceCriteria": [
+          "Existe um procedimento de rollback (redeploy da tag anterior via `workflow_dispatch` ou script) e ele foi exercitado ao menos uma vez",
+          "O README tem diagrama do pipeline, badge de status do CI e instruções para lançar uma versão e para reverter",
+          "A estratégia de release adotada (recreate, rolling ou blue-green) e a duração total do pipeline estão registradas no README"
+        ],
+        "xp": 30
+      }
+    ]
+  }
+]

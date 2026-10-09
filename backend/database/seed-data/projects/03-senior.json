@@ -1,0 +1,243 @@
+[
+  {
+    "slug": "ecommerce-modular-carrinho-pedido",
+    "title": "E-commerce modular (carrinho e pedido)",
+    "description": "Implemente um monólito modular em Laravel com DDD básico e os módulos de catálogo, carrinho, pedido e estoque, que se comunicam por contratos e eventos de domínio e expõem uma API versionada em /api/v1. O foco é a consistência do checkout: transações, locks contra venda além do estoque (overselling) e idempotência com Idempotency-Key. O projeto treina fronteiras de módulos, modelagem de agregados, concorrência no banco e registro de decisões em ADRs.",
+    "level": "senior",
+    "difficulty": 5,
+    "topics": [
+      "arq-monolito-modular",
+      "arq-ddd-basico",
+      "sql-transacoes-e-acid",
+      "sql-isolamento-e-locks",
+      "arq-apis-rest-maduras",
+      "php-actions-services-e-arquitetura",
+      "php-eventos-e-listeners",
+      "php-testes-com-pest"
+    ],
+    "milestones": [
+      {
+        "key": "modulos-e-fronteiras",
+        "title": "Módulos e fronteiras",
+        "acceptanceCriteria": [
+          "Os módulos Catalog (catálogo), Cart (carrinho), Ordering (pedidos) e Inventory (estoque) têm pasta, ServiceProvider, rotas e migrations próprios, com camadas Domain, Application e Infrastructure",
+          "Cada módulo expõe uma interface pública (contratos e DTOs), e nenhuma classe usa models Eloquent de outro módulo",
+          "Um teste de arquitetura (Pest `arch()` ou Deptrac) falha se alguém introduzir uma dependência proibida entre módulos"
+        ],
+        "xp": 50
+      },
+      {
+        "key": "catalogo-e-estoque",
+        "title": "Catálogo e estoque",
+        "acceptanceCriteria": [
+          "GET /api/v1/products e GET /api/v1/products/{id} devolvem o catálogo paginado, e o preço usa um value object `Money` (centavos inteiros e moeda), sem `float`",
+          "O módulo Inventory guarda `on_hand` e `reserved` por SKU, e uma constraint `CHECK` (ou validação equivalente) impede valores negativos",
+          "`reserve`, `release` e `commit` são operações do módulo Inventory cobertas por testes de unidade e de integração"
+        ],
+        "xp": 40
+      },
+      {
+        "key": "carrinho-como-agregado",
+        "title": "Carrinho como agregado",
+        "acceptanceCriteria": [
+          "O agregado `Cart` protege suas invariantes: quantidade de 1 a 10 por item, SKU único (adicionar de novo soma a quantidade) e carrinho vazio não vai ao checkout",
+          "POST, PATCH e DELETE em /api/v1/cart/items devolvem o carrinho com subtotais e total recalculados no servidor",
+          "Preços enviados pelo cliente são ignorados: o total sempre vem do catálogo no momento do cálculo (coberto por teste)"
+        ],
+        "xp": 45
+      },
+      {
+        "key": "checkout-transacional-e-concorrencia",
+        "title": "Checkout transacional e concorrência",
+        "acceptanceCriteria": [
+          "O checkout cria o pedido e seus itens, reserva o estoque e esvazia o carrinho em uma única transação, e uma falha no meio desfaz tudo (teste força o erro)",
+          "A reserva usa `lockForUpdate` ou um `UPDATE ... WHERE available >= ?` atômico; um teste com requisições concorrentes pelo último item gera exatamente 1 pedido e estoque nunca negativo",
+          "Os locks são adquiridos sempre na mesma ordem (por id de SKU), e deadlocks são tratados com retry (`DB::transaction` com tentativas)"
+        ],
+        "xp": 60
+      },
+      {
+        "key": "eventos-de-dominio-e-idempotencia",
+        "title": "Eventos de domínio e idempotência",
+        "acceptanceCriteria": [
+          "O módulo Ordering publica `OrderPlaced` e `OrderCancelled` somente depois do commit, e Inventory e Cart reagem por listeners, sem acoplamento direto",
+          "Cancelar um pedido libera as reservas via listener, e processar o mesmo evento duas vezes não libera o estoque em dobro",
+          "POST /api/v1/checkout exige o header `Idempotency-Key`: a mesma chave com o mesmo corpo devolve a resposta original sem criar outro pedido, e com corpo diferente retorna 422",
+          "Duas requisições simultâneas com a mesma chave criam um único pedido (índice único na tabela de chaves)"
+        ],
+        "xp": 55
+      },
+      {
+        "key": "qualidade-adrs-e-entrega",
+        "title": "Qualidade, ADRs e entrega",
+        "acceptanceCriteria": [
+          "Há ao menos 3 ADRs (fronteiras dos módulos, estratégia de lock e isolamento, idempotência) com contexto, decisão, alternativas e consequências",
+          "A API tem versão no caminho (`/api/v1`), erros padronizados (Problem Details ou formato único documentado) e documentação OpenAPI",
+          "`composer test` roda a suíte completa (unidade, feature, concorrência e arquitetura), e o README traz o mapa dos módulos e o fluxo do checkout"
+        ],
+        "xp": 35
+      }
+    ]
+  },
+  {
+    "slug": "observabilidade-logs-metricas-alertas",
+    "title": "Observabilidade: logs, métricas e alertas",
+    "description": "Instrumente uma aplicação Laravel (pode ser um dos projetos anteriores) com logs estruturados em JSON, métricas no formato Prometheus, traces com OpenTelemetry e dashboards no Grafana, definindo SLIs, SLOs e alertas por burn rate. O projeto treina observabilidade de ponta a ponta, a correlação entre logs, métricas e traces e a escrita de um runbook usado em uma simulação de incidente.",
+    "level": "senior",
+    "difficulty": 4,
+    "topics": [
+      "ops-logs-estruturados",
+      "ops-metricas-e-alertas",
+      "ops-tracing-distribuido",
+      "ops-sli-slo-incidentes",
+      "ops-docker-compose",
+      "car-documentacao-tecnica",
+      "php-laravel-em-producao"
+    ],
+    "milestones": [
+      {
+        "key": "stack-local-e-logs-estruturados",
+        "title": "Stack local e logs estruturados",
+        "acceptanceCriteria": [
+          "`docker compose up` sobe a aplicação, Prometheus, Grafana, Alertmanager e Loki (com Grafana Alloy ou OpenTelemetry Collector coletando os logs), com os datasources do Grafana provisionados por arquivo",
+          "Cada requisição gera uma linha de log JSON com `request_id`, `method`, `route`, `status`, `duration_ms` e `user_id` (quando há usuário)",
+          "Senhas, tokens e outros dados sensíveis aparecem mascarados nos logs (coberto por teste automatizado)",
+          "No Grafana, é possível filtrar os logs por `request_id` e por `level=error`"
+        ],
+        "xp": 45
+      },
+      {
+        "key": "metricas-red-e-de-negocio",
+        "title": "Métricas RED e de negócio",
+        "acceptanceCriteria": [
+          "O endpoint `/metrics` expõe `http_requests_total` e `http_request_duration_seconds` (histograma) com os labels `method`, `route` e `status`",
+          "O label `route` usa o padrão da rota (`/orders/{id}`), nunca a URL real, para evitar explosão de cardinalidade",
+          "Há ao menos uma métrica de negócio (ex.: `orders_created_total`) e uma de fila ou jobs (ex.: jobs com falha)",
+          "O Prometheus coleta a aplicação a cada 15 segundos e o target aparece como UP em `/targets`"
+        ],
+        "xp": 45
+      },
+      {
+        "key": "traces-com-opentelemetry",
+        "title": "Traces com OpenTelemetry",
+        "acceptanceCriteria": [
+          "A aplicação envia traces por OTLP para um OpenTelemetry Collector e um backend (Tempo ou Jaeger), com spans de HTTP, queries e chamadas externas",
+          "O `trace_id` aparece nos logs, permitindo ir de um log de erro ao trace correspondente no Grafana",
+          "O contexto é propagado em ao menos uma chamada de saída (header `traceparent`) ou em um job de fila"
+        ],
+        "xp": 40
+      },
+      {
+        "key": "dashboards-no-grafana",
+        "title": "Dashboards no Grafana",
+        "acceptanceCriteria": [
+          "Um dashboard versionado (JSON provisionado) mostra taxa de requisições, taxa de erros 5xx e latência p50, p95 e p99 por rota",
+          "Os percentis são calculados com `histogram_quantile` sobre o histograma de duração",
+          "Do painel de latência é possível pular para os logs e traces do mesmo intervalo (links de drilldown)"
+        ],
+        "xp": 35
+      },
+      {
+        "key": "slis-slos-e-alertas",
+        "title": "SLIs, SLOs e alertas",
+        "acceptanceCriteria": [
+          "SLIs de disponibilidade e de latência estão definidos como recording rules do Prometheus, com SLO e janela de 30 dias documentados",
+          "O orçamento de erro restante aparece em um painel do dashboard",
+          "Alertas de burn rate com duas janelas (ex.: 1h e 5min para o rápido, 6h e 30min para o lento) chegam ao Alertmanager com severidade e roteamento para um receiver de teste",
+          "Cada alerta tem `summary` e `runbook_url` e foi validado disparando e resolvendo de propósito (derrubando a aplicação ou injetando erros)"
+        ],
+        "xp": 50
+      },
+      {
+        "key": "runbook-e-simulacao-de-incidente",
+        "title": "Runbook e simulação de incidente",
+        "acceptanceCriteria": [
+          "Há um runbook em Markdown para cada alerta principal, com sintoma, impacto, como diagnosticar (painéis e queries), mitigação e escalonamento",
+          "Um incidente simulado (latência ou erros 500 injetados em uma rota) é detectado pelo alerta e diagnosticado seguindo métricas, traces e logs",
+          "Um post-mortem sem culpados registra linha do tempo, causa raiz, tempos de detecção e de mitigação e ações corretivas com responsáveis"
+        ],
+        "xp": 45
+      }
+    ]
+  },
+  {
+    "slug": "rate-limiter-e-cache-distribuido",
+    "title": "Rate limiter e cache distribuído",
+    "description": "Implemente em PHP/Laravel com Redis rate limiters (token bucket e sliding window) atômicos via scripts Lua, mais uma camada de cache distribuído com proteção contra cache stampede e estratégias de invalidação. Valide tudo com testes de carga em k6 e registre as decisões em ADRs. O projeto treina concorrência distribuída, trade-offs de consistência e medição de desempenho.",
+    "level": "senior",
+    "difficulty": 5,
+    "topics": [
+      "sql-nosql-e-redis",
+      "arq-cache-e-cdn",
+      "arq-escalabilidade-horizontal",
+      "arq-cap-consistencia-eventual",
+      "arq-adrs-documentacao-decisoes",
+      "fund-complexidade-big-o",
+      "php-cache",
+      "php-rotas-e-controllers"
+    ],
+    "milestones": [
+      {
+        "key": "token-bucket-atomico",
+        "title": "Token bucket atômico com Redis",
+        "acceptanceCriteria": [
+          "Uma interface `RateLimiter` e uma implementação de token bucket executam reposição e consumo em um único script Lua no Redis (EVAL ou EVALSHA), sem corrida entre ler e gravar",
+          "Testes mostram que a requisição seguinte à capacidade é negada e que os tokens voltam conforme a taxa de reposição, usando um relógio controlável em vez de `sleep`",
+          "As chaves por cliente (API key ou IP) expiram por TTL derivado da taxa de reposição, sem vazar memória no Redis"
+        ],
+        "xp": 50
+      },
+      {
+        "key": "sliding-window",
+        "title": "Sliding window",
+        "acceptanceCriteria": [
+          "Há uma implementação de sliding window (log em sorted set ou contador em duas janelas), também atômica via Lua, atrás da mesma interface `RateLimiter`",
+          "Um teste reproduz a rajada na virada da janela e mostra que a janela fixa admite até o dobro do limite, enquanto a sliding window não",
+          "O README compara custo de tempo e de memória por chave (log: O(n) por requisição; contador: O(1)) e diz quando usar cada algoritmo"
+        ],
+        "xp": 45
+      },
+      {
+        "key": "middleware-e-politica-de-falha",
+        "title": "Middleware HTTP e política de falha",
+        "acceptanceCriteria": [
+          "Um middleware aplica o limite por rota e por cliente e, ao excedê-lo, responde 429 com `Retry-After` e corpo JSON padronizado",
+          "As respostas trazem `X-RateLimit-Limit`, `X-RateLimit-Remaining` e `X-RateLimit-Reset` coerentes com o estado do limiter",
+          "Com o Redis indisponível, o comportamento é configurável (fail-open ou fail-closed por rota), registrado em log e coberto por teste"
+        ],
+        "xp": 40
+      },
+      {
+        "key": "cache-distribuido-e-stampede",
+        "title": "Cache distribuído e proteção contra stampede",
+        "acceptanceCriteria": [
+          "Uma camada de cache-aside com Redis aplica TTL com jitter e suporta invalidação por evento e por versão de chave",
+          "Com o cache vazio, 50 requisições concorrentes pelo mesmo recurso executam a consulta cara uma única vez (lock ou single-flight), provado por um contador de execuções no teste",
+          "Consultas repetidas a um recurso inexistente chegam ao banco só uma vez dentro do TTL do cache negativo"
+        ],
+        "xp": 55
+      },
+      {
+        "key": "testes-de-carga-e-medicao",
+        "title": "Testes de carga e medição",
+        "acceptanceCriteria": [
+          "Scripts k6 versionados cobrem carga constante e pico (spike), rodando contra a API com e sem cache",
+          "O relatório registra p50, p95 e p99, vazão, taxa de erro e taxa de acerto do cache, antes e depois do cache e do limiter",
+          "Com 200 usuários virtuais disputando a mesma chave, o limiter admite no máximo o limite configurado mais a tolerância documentada (contagem de respostas 2xx e 429)",
+          "Um teste de caos derruba o Redis durante a carga e confirma a política de falha definida e a recuperação quando ele volta"
+        ],
+        "xp": 55
+      },
+      {
+        "key": "adrs-e-documentacao",
+        "title": "ADRs e documentação",
+        "acceptanceCriteria": [
+          "Há ao menos 3 ADRs (algoritmo de limite, política de falha do Redis, estratégia de invalidação) com contexto, decisão, alternativas e consequências",
+          "Cada ADR discute o trade-off de consistência e disponibilidade (CAP) e os limites conhecidos (ex.: Redis único versus cluster com hash tags, relógio entre nós)",
+          "O README explica como rodar os testes e os testes de carga e como interpretar os resultados"
+        ],
+        "xp": 30
+      }
+    ]
+  }
+]
