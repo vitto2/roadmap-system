@@ -1,0 +1,761 @@
+[
+  {
+    "slug": "web-html-semantico",
+    "title": "HTML semântico",
+    "description": "Estruturar documentos com a tag certa para cada significado: landmarks (header, nav, main, section, article, aside e footer), títulos hierárquicos, listas, links, imagens com texto alternativo e formulários básicos. HTML semântico melhora acessibilidade, SEO e manutenção, e é a base sobre a qual CSS e JavaScript trabalham.",
+    "level": "beginner",
+    "difficulty": 1,
+    "prerequisites": [],
+    "resources": [
+      {
+        "name": "MDN — HTML: Linguagem de marcação de hipertexto",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/HTML"
+      },
+      {
+        "name": "web.dev — Learn HTML",
+        "url": "https://web.dev/learn/html"
+      },
+      {
+        "name": "MDN — Referência de elementos HTML",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/HTML/Reference/Elements"
+      },
+      {
+        "name": "W3C Markup Validation Service",
+        "url": "https://validator.w3.org/"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "estrutura-basica-do-documento",
+        "text": "Sei escrever do zero a estrutura de um documento HTML5 (doctype, html com lang, head com charset e viewport e body)."
+      },
+      {
+        "key": "landmarks-semanticos",
+        "text": "Consigo usar header, nav, main, section, article, aside e footer de forma adequada, em vez de div para tudo."
+      },
+      {
+        "key": "hierarquia-de-titulos",
+        "text": "Sei montar uma hierarquia de títulos (h1 a h6) coerente, sem pular níveis, e explico por que isso importa para leitores de tela e SEO."
+      },
+      {
+        "key": "imagens-links-e-listas",
+        "text": "Sei usar img com alt significativo (e alt vazio em imagens decorativas), links com texto descritivo e listas ul, ol e dl corretamente."
+      },
+      {
+        "key": "formularios-basicos",
+        "text": "Consigo criar um formulário básico com label associado a cada campo, tipos de input apropriados e botão de envio."
+      },
+      {
+        "key": "validar-html",
+        "text": "Sei validar meu HTML (ex.: com o W3C Validator) e corrigir os erros apontados."
+      }
+    ]
+  },
+  {
+    "slug": "web-css-basico-e-box-model",
+    "title": "CSS básico e box model",
+    "description": "Estilizar páginas com CSS: seletores, especificidade, cascata e herança, unidades (px, rem, em, %, vw), cores e tipografia, e o box model (content, padding, border e margin, com box-sizing). Entender como o navegador calcula tamanhos e espaçamentos evita a maioria dos bugs de layout.",
+    "level": "beginner",
+    "difficulty": 1,
+    "prerequisites": [
+      "web-html-semantico"
+    ],
+    "resources": [
+      {
+        "name": "MDN — CSS: Cascading Style Sheets",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/CSS"
+      },
+      {
+        "name": "web.dev — Learn CSS",
+        "url": "https://web.dev/learn/css"
+      },
+      {
+        "name": "MDN — Modelo de caixa CSS (box model)",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/CSS/Guides/Box_model"
+      },
+      {
+        "name": "MDN — Especificidade (Specificity)",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Specificity"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "seletores-e-especificidade",
+        "text": "Sei usar seletores de tag, classe, id, atributo e pseudo-classes e calcular qual regra vence pela especificidade."
+      },
+      {
+        "key": "cascata-e-heranca",
+        "text": "Consigo explicar a cascata e a herança e dizer quais propriedades são herdadas (ex.: color e font-family sim; margin e border não)."
+      },
+      {
+        "key": "box-model-e-box-sizing",
+        "text": "Sei desenhar o box model (content, padding, border e margin), calcular a largura total de um elemento e explicar o efeito de box-sizing: border-box."
+      },
+      {
+        "key": "colapso-de-margens",
+        "text": "Entendo o colapso de margens verticais e sei em que situações ele acontece."
+      },
+      {
+        "key": "unidades-e-tipografia",
+        "text": "Sei escolher entre px, rem, em, % e vw/vh e configurar tipografia (font-family, tamanho e line-height) de forma escalável."
+      },
+      {
+        "key": "inspecionar-no-devtools",
+        "text": "Sei usar o DevTools para inspecionar um elemento, ver o box model calculado e testar mudanças de CSS ao vivo."
+      }
+    ]
+  },
+  {
+    "slug": "web-flexbox-e-grid",
+    "title": "Flexbox e Grid",
+    "description": "Layouts modernos e responsivos com Flexbox (eixos, justify/align, wrap, grow, shrink e basis) e CSS Grid (tracks, unidade fr, áreas nomeadas, auto-fit com minmax e gap). Veja quando usar cada um, como combiná-los e como adaptá-los a telas diferentes com media queries e abordagem mobile-first.",
+    "level": "beginner",
+    "difficulty": 2,
+    "prerequisites": [
+      "web-css-basico-e-box-model"
+    ],
+    "resources": [
+      {
+        "name": "MDN — Layout flexível (CSS Flexible Box Layout)",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/CSS/Guides/Flexible_box_layout"
+      },
+      {
+        "name": "MDN — Layout em grade (CSS Grid Layout)",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/CSS/Guides/Grid_layout"
+      },
+      {
+        "name": "Flexbox Froggy — jogo para praticar Flexbox",
+        "url": "https://flexboxfroggy.com/"
+      },
+      {
+        "name": "CSS Grid Garden — jogo para praticar Grid",
+        "url": "https://cssgridgarden.com/"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "flex-eixos-e-alinhamento",
+        "text": "Sei explicar os eixos principal e transversal do Flexbox e usar justify-content, align-items e gap para alinhar itens."
+      },
+      {
+        "key": "flex-grow-shrink-basis",
+        "text": "Consigo controlar o tamanho dos itens com flex-grow, flex-shrink e flex-basis (e com a abreviação flex)."
+      },
+      {
+        "key": "grid-tracks-e-areas",
+        "text": "Sei criar um grid com grid-template-columns e grid-template-rows, unidade fr, gap e grid-template-areas."
+      },
+      {
+        "key": "grid-responsivo-sem-media-query",
+        "text": "Consigo montar uma galeria responsiva com repeat(auto-fit, minmax(...)) sem usar media queries."
+      },
+      {
+        "key": "flex-ou-grid",
+        "text": "Sei decidir entre Flexbox (uma dimensão) e Grid (duas dimensões) e combinar os dois (ex.: grid para o layout da página e flex dentro dos componentes)."
+      },
+      {
+        "key": "layout-mobile-first",
+        "text": "Já construí um layout completo (header, menu lateral, conteúdo e footer) responsivo, partindo do mobile e adicionando media queries."
+      }
+    ]
+  },
+  {
+    "slug": "web-javascript-essencial",
+    "title": "JavaScript essencial",
+    "description": "A linguagem da web: tipos e coerção, variáveis (let e const), funções e arrow functions, objetos e arrays, desestruturação, spread e rest, template strings, escopo e closures, this, classes e tratamento de erros. Foco em ES2015+ e nos comportamentos que mais causam bugs em quem está começando.",
+    "level": "beginner",
+    "difficulty": 2,
+    "prerequisites": [],
+    "resources": [
+      {
+        "name": "MDN — Guia JavaScript",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide"
+      },
+      {
+        "name": "javascript.info — The Modern JavaScript Tutorial",
+        "url": "https://javascript.info/"
+      },
+      {
+        "name": "Livro: Eloquent JavaScript — Marijn Haverbeke (gratuito online)",
+        "url": "https://eloquentjavascript.net/"
+      },
+      {
+        "name": "Livro: You Don't Know JS Yet — Kyle Simpson",
+        "url": "https://github.com/getify/You-Dont-Know-JS"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "tipos-let-const-e-igualdade",
+        "text": "Sei usar let e const (e por que evito var), os tipos primitivos, a diferença entre == e === e quais valores são truthy ou falsy."
+      },
+      {
+        "key": "objetos-arrays-e-desestruturacao",
+        "text": "Sei manipular objetos e arrays com desestruturação, spread e rest e com métodos como map, filter, reduce, find, some e every."
+      },
+      {
+        "key": "arrow-functions-e-this",
+        "text": "Sei a diferença entre function e arrow function quanto ao this e explico o que acontece ao passar um método como callback."
+      },
+      {
+        "key": "escopo-e-closures",
+        "text": "Consigo explicar escopo léxico e closures com um exemplo e o clássico bug de var em laços com setTimeout."
+      },
+      {
+        "key": "classes-e-prototipos",
+        "text": "Sei criar classes (campos, métodos, extends e static) e entendo, em alto nível, que por baixo existe herança por protótipos."
+      },
+      {
+        "key": "tratamento-de-erros",
+        "text": "Sei lançar e capturar erros com try/catch/finally e criar erros personalizados."
+      }
+    ]
+  },
+  {
+    "slug": "web-dom-e-eventos",
+    "title": "DOM e eventos",
+    "description": "Como o JavaScript lê e altera a página: a árvore DOM, seleção de elementos, criação e remoção de nós, atributos e classes, e o modelo de eventos (captura, bubbling, delegação e preventDefault). Também cobre formulários, armazenamento no navegador (localStorage) e cuidados para não prejudicar performance e acessibilidade.",
+    "level": "beginner",
+    "difficulty": 2,
+    "prerequisites": [
+      "web-html-semantico",
+      "web-javascript-essencial"
+    ],
+    "resources": [
+      {
+        "name": "MDN — Document Object Model (DOM)",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/API/Document_Object_Model"
+      },
+      {
+        "name": "MDN — Interface Event (referência de eventos)",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/API/Event"
+      },
+      {
+        "name": "javascript.info — Browser: Document, Events, Interfaces",
+        "url": "https://javascript.info/document"
+      },
+      {
+        "name": "MDN — Web Storage API",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/API/Web_Storage_API"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "selecionar-e-alterar-elementos",
+        "text": "Sei selecionar elementos com querySelector e querySelectorAll e alterar texto, atributos, classes (classList) e estilos."
+      },
+      {
+        "key": "criar-e-remover-nos",
+        "text": "Sei criar, inserir e remover elementos dinamicamente (createElement, append e remove) e explico por que evitar innerHTML com conteúdo não confiável."
+      },
+      {
+        "key": "eventos-e-listeners",
+        "text": "Sei registrar e remover listeners com addEventListener e usar o objeto do evento (target, currentTarget, key e preventDefault)."
+      },
+      {
+        "key": "bubbling-captura-e-delegacao",
+        "text": "Consigo explicar bubbling e captura e implementar delegação de eventos em uma lista com itens adicionados dinamicamente."
+      },
+      {
+        "key": "formularios-e-validacao-nativa",
+        "text": "Sei tratar o submit de um formulário, ler valores com FormData e usar a validação nativa (required, pattern e setCustomValidity)."
+      },
+      {
+        "key": "mini-projeto-com-dom",
+        "text": "Já construí um mini projeto interativo só com DOM e JavaScript puro (ex.: lista de tarefas persistida em localStorage)."
+      }
+    ]
+  },
+  {
+    "slug": "web-assincronismo-promises-async",
+    "title": "Assincronismo (Promises/async)",
+    "description": "Lidar com operações demoradas sem travar a aplicação: callbacks e o 'callback hell', Promises (estados, then, catch e finally), async/await, tratamento de erros, execução em paralelo (Promise.all, allSettled, race e any), timeouts e cancelamento com AbortController. É a base para consumir APIs e usar qualquer biblioteca moderna.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": [
+      "web-javascript-essencial",
+      "web-dom-e-eventos"
+    ],
+    "resources": [
+      {
+        "name": "MDN — Usando Promises",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Using_promises"
+      },
+      {
+        "name": "MDN — Funções assíncronas (async/await)",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Statements/async_function"
+      },
+      {
+        "name": "javascript.info — Promises, async/await",
+        "url": "https://javascript.info/async"
+      },
+      {
+        "name": "MDN — AbortController",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/AbortController"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "callbacks-e-callback-hell",
+        "text": "Consigo explicar por que callbacks aninhados são difíceis de manter e refatorar um exemplo para Promises ou async/await."
+      },
+      {
+        "key": "estados-de-uma-promise",
+        "text": "Sei descrever os estados de uma Promise (pending, fulfilled e rejected) e criar uma com new Promise (ex.: uma função sleep(ms))."
+      },
+      {
+        "key": "async-await-e-erros",
+        "text": "Sei usar async/await com try/catch e entendo que uma função async sempre retorna uma Promise."
+      },
+      {
+        "key": "promise-all-allsettled-race-any",
+        "text": "Sei quando usar Promise.all, allSettled, race e any e o que acontece com os resultados quando uma das Promises falha."
+      },
+      {
+        "key": "paralelo-vs-sequencial",
+        "text": "Consigo identificar awaits em sequência que poderiam rodar em paralelo e corrigi-los (ex.: await dentro de um for versus Promise.all)."
+      },
+      {
+        "key": "cancelamento-e-timeout",
+        "text": "Sei cancelar uma requisição ou impor um timeout usando AbortController e AbortSignal.timeout."
+      }
+    ]
+  },
+  {
+    "slug": "web-fetch-e-http",
+    "title": "Fetch e HTTP",
+    "description": "Como o navegador conversa com servidores: o ciclo de requisição e resposta, métodos (GET, POST, PUT, PATCH e DELETE), códigos de status, cabeçalhos e corpo em JSON. Pratique a Fetch API para consumir APIs REST, tratar erros de rede e de HTTP e enviar dados de formulário, usando async/await de forma introdutória.",
+    "level": "junior",
+    "difficulty": 2,
+    "prerequisites": [
+      "web-javascript-essencial",
+      "web-dom-e-eventos"
+    ],
+    "resources": [
+      {
+        "name": "MDN — Fetch API",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API"
+      },
+      {
+        "name": "MDN — HTTP",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/HTTP"
+      },
+      {
+        "name": "MDN — Códigos de status de resposta HTTP",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Reference/Status"
+      },
+      {
+        "name": "JSONPlaceholder — API pública para praticar requisições",
+        "url": "https://jsonplaceholder.typicode.com/"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "ciclo-requisicao-resposta",
+        "text": "Consigo descrever o ciclo de uma requisição HTTP (URL, método, cabeçalhos, corpo e status) e inspecioná-lo na aba Network do DevTools."
+      },
+      {
+        "key": "metodos-e-codigos-de-status",
+        "text": "Sei quando usar GET, POST, PUT, PATCH e DELETE e interpretar as famílias de status (2xx, 3xx, 4xx e 5xx) e códigos comuns como 200, 201, 204, 400, 401, 403, 404, 422 e 500."
+      },
+      {
+        "key": "fetch-get-e-post-com-json",
+        "text": "Sei fazer GET e POST com fetch, enviando JSON (Content-Type e JSON.stringify) e lendo a resposta com response.json()."
+      },
+      {
+        "key": "erros-de-rede-vs-erros-http",
+        "text": "Sei que fetch só rejeita em falhas de rede e que preciso checar response.ok para erros 4xx e 5xx, e trato os dois casos."
+      },
+      {
+        "key": "query-string-e-cabecalhos",
+        "text": "Sei montar query strings com URLSearchParams e enviar cabeçalhos como Authorization e Accept."
+      },
+      {
+        "key": "tela-com-estados-de-requisicao",
+        "text": "Já construí uma tela que consome uma API pública mostrando os estados de carregando, erro e sucesso."
+      }
+    ]
+  },
+  {
+    "slug": "web-typescript-basico",
+    "title": "TypeScript básico",
+    "description": "Adicionar tipos estáticos ao JavaScript: anotações e inferência, tipos primitivos, arrays e objetos, interfaces e type aliases, unions e literais, narrowing, funções tipadas e a configuração do tsconfig com strict. Os tipos capturam bugs durante o desenvolvimento e servem como documentação viva do código.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": [
+      "web-javascript-essencial"
+    ],
+    "resources": [
+      {
+        "name": "TypeScript Handbook",
+        "url": "https://www.typescriptlang.org/docs/handbook/intro.html"
+      },
+      {
+        "name": "TypeScript — Everyday Types",
+        "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html"
+      },
+      {
+        "name": "TypeScript — Narrowing",
+        "url": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html"
+      },
+      {
+        "name": "TypeScript — referência do TSConfig",
+        "url": "https://www.typescriptlang.org/tsconfig"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "anotar-e-inferir-tipos",
+        "text": "Sei anotar variáveis, parâmetros e retornos de função e sei quando posso deixar o TypeScript inferir o tipo."
+      },
+      {
+        "key": "interface-vs-type-alias",
+        "text": "Sei criar interfaces e type aliases para objetos e explicar quando usar cada um."
+      },
+      {
+        "key": "unions-literais-e-narrowing",
+        "text": "Sei usar union types, tipos literais e narrowing (typeof, in e checagem de igualdade) e escrever uma discriminated union simples."
+      },
+      {
+        "key": "unknown-vs-any",
+        "text": "Sei por que evitar any e usar unknown para valores externos (ex.: resposta de uma API), validando antes de usar."
+      },
+      {
+        "key": "strict-e-tsconfig",
+        "text": "Sei ativar strict no tsconfig.json e corrigir erros comuns, como valores possivelmente null ou undefined."
+      },
+      {
+        "key": "migrar-js-para-ts",
+        "text": "Já converti um pequeno projeto ou módulo de JavaScript para TypeScript sem recorrer a any nem a @ts-ignore."
+      }
+    ]
+  },
+  {
+    "slug": "web-acessibilidade-wcag-aria",
+    "title": "Acessibilidade (WCAG, ARIA)",
+    "description": "Construir interfaces utilizáveis por todos: os princípios POUR da WCAG (perceptível, operável, compreensível e robusto) e seus níveis A, AA e AAA, navegação por teclado e gerenciamento de foco, contraste e texto alternativo, formulários acessíveis e quando (e quando não) usar ARIA. Inclui testar com leitores de tela e ferramentas automatizadas.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": [
+      "web-html-semantico",
+      "web-css-basico-e-box-model",
+      "web-dom-e-eventos"
+    ],
+    "resources": [
+      {
+        "name": "W3C — WCAG 2 Quick Reference",
+        "url": "https://www.w3.org/WAI/WCAG22/quickref/"
+      },
+      {
+        "name": "W3C — ARIA Authoring Practices Guide (APG)",
+        "url": "https://www.w3.org/WAI/ARIA/apg/"
+      },
+      {
+        "name": "web.dev — Learn Accessibility",
+        "url": "https://web.dev/learn/accessibility"
+      },
+      {
+        "name": "MDN — Acessibilidade",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/Accessibility"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "principios-pour-e-niveis",
+        "text": "Consigo explicar os quatro princípios da WCAG (perceptível, operável, compreensível e robusto) e a diferença entre os níveis A, AA e AAA."
+      },
+      {
+        "key": "teclado-e-foco",
+        "text": "Consigo usar uma página inteira só com o teclado, com foco sempre visível e ordem lógica, e sei por que evitar tabindex com valor positivo."
+      },
+      {
+        "key": "contraste-e-texto-alternativo",
+        "text": "Sei verificar o contraste de cores (mínimo de 4,5:1 para texto normal no nível AA) e escrever alt útil para imagens informativas e vazio para decorativas."
+      },
+      {
+        "key": "formularios-acessiveis",
+        "text": "Sei tornar um formulário acessível: label associado, mensagens de erro vinculadas ao campo (aria-describedby), agrupamento com fieldset e legend e indicação de campos obrigatórios."
+      },
+      {
+        "key": "aria-quando-usar",
+        "text": "Sei a primeira regra do ARIA (usar HTML nativo sempre que possível) e aplicar roles, estados (aria-expanded, aria-live) e aria-label corretamente em um componente como menu ou modal."
+      },
+      {
+        "key": "testar-acessibilidade",
+        "text": "Já auditei uma página com Lighthouse ou axe e testei com um leitor de tela (NVDA, VoiceOver ou TalkBack), corrigindo os problemas encontrados."
+      }
+    ]
+  },
+  {
+    "slug": "web-typescript-avancado-generics",
+    "title": "TypeScript avançado (generics)",
+    "description": "Tipos que se adaptam ao uso: generics com restrições (extends) e valores padrão, keyof e indexed access, mapped e conditional types, infer, template literal types, utility types (Partial, Pick, Omit, Record, ReturnType e Awaited) e type guards personalizados. Foco em escrever APIs tipadas reutilizáveis (hooks, clientes HTTP, stores) e em ler tipos complexos de bibliotecas.",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": [
+      "web-typescript-basico"
+    ],
+    "resources": [
+      {
+        "name": "TypeScript Handbook — Generics",
+        "url": "https://www.typescriptlang.org/docs/handbook/2/generics.html"
+      },
+      {
+        "name": "TypeScript Handbook — Creating Types from Types",
+        "url": "https://www.typescriptlang.org/docs/handbook/2/types-from-types.html"
+      },
+      {
+        "name": "TypeScript — Utility Types",
+        "url": "https://www.typescriptlang.org/docs/handbook/utility-types.html"
+      },
+      {
+        "name": "Livro: Effective TypeScript — Dan Vanderkam"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "generics-em-funcoes-e-interfaces",
+        "text": "Sei escrever funções, interfaces e classes genéricas (ex.: um tipo Result<T, E> ou um fetchJson<T>) em vez de duplicar código ou usar any."
+      },
+      {
+        "key": "constraints-e-keyof",
+        "text": "Sei restringir parâmetros de tipo com extends e usar keyof para escrever uma função segura como getProp<T, K extends keyof T>(obj: T, key: K)."
+      },
+      {
+        "key": "utility-types",
+        "text": "Sei usar Partial, Required, Pick, Omit, Record, ReturnType e Awaited e explico o que cada um faz."
+      },
+      {
+        "key": "mapped-e-conditional-types",
+        "text": "Consigo escrever um mapped type (ex.: tornar todas as propriedades opcionais ou readonly) e um conditional type simples com infer."
+      },
+      {
+        "key": "discriminated-unions-e-type-guards",
+        "text": "Sei modelar estados com discriminated unions, garantir exaustividade com never e escrever type guards (x is T)."
+      },
+      {
+        "key": "ler-tipos-de-bibliotecas",
+        "text": "Consigo ler a assinatura de tipos genéricos de bibliotecas (ex.: Promise<T> ou Ref<T> do Vue) e usar as mensagens do compilador para corrigir meu código."
+      }
+    ]
+  },
+  {
+    "slug": "web-http-em-profundidade",
+    "title": "HTTP em profundidade (cache, CORS)",
+    "description": "O protocolo além do básico: cache HTTP (Cache-Control, ETag, Last-Modified, validação condicional, stale-while-revalidate), CORS (origem, preflight e credenciais), cookies e SameSite, compressão e diferenças entre HTTP/1.1, HTTP/2 e HTTP/3, com HTTPS/TLS em alto nível. Permite diagnosticar erros misteriosos do navegador e projetar APIs mais rápidas.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": [
+      "web-fetch-e-http"
+    ],
+    "resources": [
+      {
+        "name": "MDN — Cache HTTP",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Guides/Caching"
+      },
+      {
+        "name": "MDN — Cross-Origin Resource Sharing (CORS)",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Guides/CORS"
+      },
+      {
+        "name": "web.dev — Prevent unnecessary network requests with the HTTP Cache",
+        "url": "https://web.dev/articles/http-cache"
+      },
+      {
+        "name": "RFC 9110 — HTTP Semantics (IETF)",
+        "url": "https://datatracker.ietf.org/doc/html/rfc9110"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "cache-control-e-diretivas",
+        "text": "Sei configurar Cache-Control (max-age, no-cache, no-store, public, private e immutable) e explicar a diferença entre no-cache e no-store."
+      },
+      {
+        "key": "etag-e-requisicoes-condicionais",
+        "text": "Consigo explicar como ETag com If-None-Match (e Last-Modified com If-Modified-Since) geram respostas 304 e economizam banda."
+      },
+      {
+        "key": "assets-com-hash-e-cache-longo",
+        "text": "Sei por que arquivos com hash no nome (ex.: app.3f9a1c.js) podem ter cache longo enquanto o HTML tem cache curto."
+      },
+      {
+        "key": "cors-e-preflight",
+        "text": "Consigo explicar a Same-Origin Policy, quando o navegador faz um preflight (OPTIONS) e quais cabeçalhos Access-Control-* o servidor deve enviar, e diagnosticar um erro de CORS no console."
+      },
+      {
+        "key": "cookies-e-samesite",
+        "text": "Sei os atributos de cookie (HttpOnly, Secure, SameSite, Domain, Path e Max-Age) e como interagem com requisições cross-site e com credentials: 'include'."
+      },
+      {
+        "key": "http2-http3-e-tls",
+        "text": "Consigo explicar, em alto nível, o que HTTP/2 e HTTP/3 melhoram em relação ao HTTP/1.1 (multiplexação, compressão de cabeçalhos e QUIC) e o que o TLS garante."
+      }
+    ]
+  },
+  {
+    "slug": "web-performance-core-web-vitals",
+    "title": "Performance web (Core Web Vitals)",
+    "description": "Medir e melhorar a experiência de carregamento e interação: Core Web Vitals (LCP, INP e CLS), caminho crítico de renderização, otimização de imagens e fontes, lazy loading, code splitting, uso de CDN e cache, e medição com Lighthouse, DevTools e dados de campo (RUM). O foco é priorizar o que realmente impacta o usuário, sempre com métricas antes e depois.",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": [
+      "web-http-em-profundidade",
+      "web-dom-e-eventos"
+    ],
+    "resources": [
+      {
+        "name": "web.dev — Web Vitals",
+        "url": "https://web.dev/articles/vitals"
+      },
+      {
+        "name": "web.dev — Learn Performance",
+        "url": "https://web.dev/learn/performance"
+      },
+      {
+        "name": "Chrome DevTools — Performance",
+        "url": "https://developer.chrome.com/docs/devtools/performance"
+      },
+      {
+        "name": "PageSpeed Insights",
+        "url": "https://pagespeed.web.dev/"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "explicar-lcp-inp-cls",
+        "text": "Consigo explicar o que LCP, INP e CLS medem, os limiares de 'bom' (LCP até 2,5 s, INP até 200 ms e CLS até 0,1) e o que costuma piorar cada um."
+      },
+      {
+        "key": "medir-com-lighthouse-e-devtools",
+        "text": "Sei medir uma página com Lighthouse, PageSpeed Insights e o painel Performance do DevTools e diferenciar dados de laboratório de dados de campo (CrUX/RUM)."
+      },
+      {
+        "key": "otimizar-imagens-e-fontes",
+        "text": "Sei otimizar imagens (formatos modernos, srcset e sizes, width e height, loading='lazy') e fontes (font-display, preload e subset)."
+      },
+      {
+        "key": "recursos-bloqueantes-e-code-splitting",
+        "text": "Sei identificar recursos que bloqueiam a renderização (CSS e JS no head) e usar defer, async, preload e code splitting para reduzi-los."
+      },
+      {
+        "key": "layout-shift-e-long-tasks",
+        "text": "Sei evitar layout shifts (reservando espaço para mídia e anúncios) e quebrar long tasks para melhorar o INP."
+      },
+      {
+        "key": "melhoria-medida-antes-e-depois",
+        "text": "Já otimizei uma página real e documentei a melhoria com métricas antes e depois."
+      }
+    ]
+  },
+  {
+    "slug": "web-event-loop-e-modulos",
+    "title": "Event loop e módulos",
+    "description": "Como o JavaScript executa código: call stack, Web APIs, fila de macrotarefas e de microtarefas (Promises e queueMicrotask), ordem de execução, bloqueio da thread principal e workers. Também cobre o sistema de módulos (ES Modules versus CommonJS), import e export, imports dinâmicos, tree shaking e dependências circulares.",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": [
+      "web-javascript-essencial",
+      "web-assincronismo-promises-async"
+    ],
+    "resources": [
+      {
+        "name": "MDN — Modelo de execução do JavaScript (event loop)",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Execution_model"
+      },
+      {
+        "name": "Jake Archibald — Tasks, microtasks, queues and schedules",
+        "url": "https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/"
+      },
+      {
+        "name": "MDN — Módulos JavaScript",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Modules"
+      },
+      {
+        "name": "Vídeo: What the heck is the event loop anyway? — Philip Roberts (JSConf EU)"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "call-stack-e-filas",
+        "text": "Consigo explicar o papel da call stack, das Web APIs, da fila de macrotarefas e da fila de microtarefas na execução de um programa JavaScript."
+      },
+      {
+        "key": "prever-ordem-de-execucao",
+        "text": "Sei prever a ordem de saída de um código que mistura console.log síncrono, setTimeout com 0, Promise.then e queueMicrotask e explicar o porquê."
+      },
+      {
+        "key": "nao-bloquear-a-thread-principal",
+        "text": "Sei identificar o que bloqueia a thread principal (laço pesado, processamento de JSON gigante) e mitigar com divisão em partes, requestIdleCallback ou Web Workers."
+      },
+      {
+        "key": "esm-vs-commonjs",
+        "text": "Sei a diferença entre ES Modules (import e export) e CommonJS (require e module.exports) e configurar um projeto para usar ESM (type: module)."
+      },
+      {
+        "key": "import-dinamico-e-tree-shaking",
+        "text": "Sei usar import() dinâmico para carregar código sob demanda e explico por que exports nomeados ajudam o tree shaking."
+      },
+      {
+        "key": "dependencia-circular",
+        "text": "Já reproduzi uma dependência circular entre módulos e sei reorganizar o código para eliminá-la."
+      }
+    ]
+  },
+  {
+    "slug": "web-pwa-e-service-workers",
+    "title": "PWA e Service Workers",
+    "description": "Transformar um site em aplicação instalável e resiliente: Web App Manifest, ciclo de vida do Service Worker (install, activate e fetch), estratégias de cache (cache-first, network-first e stale-while-revalidate), funcionamento offline e atualização de versões, além de noções de notificações push e background sync (com suporte desigual entre navegadores). Inclui os riscos: cache obsoleto, escopo e HTTPS obrigatório.",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": [
+      "web-http-em-profundidade",
+      "web-event-loop-e-modulos",
+      "web-performance-core-web-vitals"
+    ],
+    "resources": [
+      {
+        "name": "web.dev — Learn PWA",
+        "url": "https://web.dev/learn/pwa"
+      },
+      {
+        "name": "MDN — Service Worker API",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/API/Service_Worker_API"
+      },
+      {
+        "name": "Workbox — Chrome for Developers",
+        "url": "https://developer.chrome.com/docs/workbox"
+      },
+      {
+        "name": "vite-plugin-pwa — documentação oficial",
+        "url": "https://vite-pwa-org.netlify.app/"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "manifest-e-instalabilidade",
+        "text": "Sei criar um Web App Manifest (name, icons, start_url, display e theme_color) e explicar os critérios para o app ser instalável."
+      },
+      {
+        "key": "ciclo-de-vida-do-service-worker",
+        "text": "Consigo explicar o ciclo de vida do Service Worker (register, install, waiting e activate) e por que uma nova versão fica esperando até as abas antigas fecharem ou skipWaiting ser chamado."
+      },
+      {
+        "key": "estrategias-de-cache",
+        "text": "Sei implementar e comparar as estratégias cache-first, network-first e stale-while-revalidate com a Cache API (ou Workbox), escolhendo a certa para HTML, API e assets."
+      },
+      {
+        "key": "offline-e-fallback",
+        "text": "Já fiz uma página funcionar offline, com uma tela de fallback quando o recurso não está em cache."
+      },
+      {
+        "key": "atualizacao-e-limpeza-de-caches",
+        "text": "Sei lançar uma nova versão do app limpando os caches antigos e avisando o usuário de que há uma atualização disponível."
+      },
+      {
+        "key": "depurar-e-escopo-do-service-worker",
+        "text": "Sei depurar Service Workers na aba Application do DevTools e entendo escopo, a exigência de HTTPS (exceto em localhost) e os riscos de um SW com bug ou cache obsoleto."
+      }
+    ]
+  }
+]

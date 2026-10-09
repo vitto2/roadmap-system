@@ -1,0 +1,266 @@
+[
+  {
+    "slug": "seg-principios-cia-menor-privilegio",
+    "title": "Princípios (CIA, menor privilégio)",
+    "description": "Fundamentos que guiam toda decisão de segurança: a tríade CIA (confidencialidade, integridade e disponibilidade), menor privilégio, defesa em profundidade e falha segura. Dominar esses princípios permite avaliar riscos e justificar controles antes de partir para técnicas específicas.",
+    "level": "junior",
+    "difficulty": 2,
+    "prerequisites": [],
+    "resources": [
+      { "name": "MDN — Segurança na Web", "url": "https://developer.mozilla.org/pt-BR/docs/Web/Security" },
+      { "name": "Artigo: The Protection of Information in Computer Systems — Saltzer e Schroeder (1975)" },
+      { "name": "Livro: Security Engineering — Ross Anderson" },
+      { "name": "Livro: Designing Secure Software — Loren Kohnfelder" }
+    ],
+    "checklist": [
+      { "key": "explicar-cia", "text": "Consigo explicar confidencialidade, integridade e disponibilidade com um exemplo concreto de cada e citar um ataque que compromete cada propriedade." },
+      { "key": "aplicar-menor-privilegio", "text": "Sei aplicar o menor privilégio ao configurar o usuário do banco de dados, papéis de serviços e permissões de arquivos." },
+      { "key": "defesa-em-profundidade", "text": "Consigo descrever defesa em profundidade e dar um exemplo de várias camadas protegendo um mesmo recurso." },
+      { "key": "falha-segura", "text": "Sei explicar o que é falhar de forma segura (fail-safe defaults) e identificar um trecho de código que 'falha aberto'." },
+      { "key": "ameaca-vulnerabilidade-risco", "text": "Sei diferenciar ameaça, vulnerabilidade e risco e dar um exemplo que relacione os três." },
+      { "key": "classificar-dados", "text": "Consigo classificar os dados de um sistema por sensibilidade (público, interno, confidencial) e dizer quais controles cada classe exige." }
+    ]
+  },
+  {
+    "slug": "seg-owasp-top-10",
+    "title": "OWASP Top 10",
+    "description": "Lista de consenso da OWASP com as categorias de risco mais críticas em aplicações web, como controle de acesso quebrado, falhas criptográficas, injeção e configuração insegura. Funciona como vocabulário comum para revisar código, priorizar correções e conversar com times de segurança e auditoria.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": ["seg-principios-cia-menor-privilegio"],
+    "resources": [
+      { "name": "OWASP Top 10", "url": "https://owasp.org/www-project-top-ten/" },
+      { "name": "OWASP Cheat Sheet Series", "url": "https://cheatsheetseries.owasp.org/" },
+      { "name": "PortSwigger Web Security Academy", "url": "https://portswigger.net/web-security" },
+      { "name": "Livro: Web Application Security — Andrew Hoffman" }
+    ],
+    "checklist": [
+      { "key": "listar-categorias", "text": "Consigo citar as categorias do OWASP Top 10 e dar um exemplo de falha de cada uma." },
+      { "key": "controle-de-acesso-quebrado", "text": "Sei explicar por que o controle de acesso quebrado é um dos riscos mais recorrentes e como testar um IDOR na minha própria API." },
+      { "key": "mapear-no-codigo", "text": "Consigo mapear ao menos três categorias do Top 10 para trechos reais de um projeto meu ou de um laboratório (ex.: OWASP Juice Shop)." },
+      { "key": "consultar-cheat-sheets", "text": "Sei consultar o OWASP Cheat Sheet Series para encontrar a mitigação recomendada de cada categoria." },
+      { "key": "listas-complementares", "text": "Sei que existem listas complementares, como o OWASP API Security Top 10, e consigo dizer quando consultá-las." },
+      { "key": "usar-em-revisao", "text": "Já usei o Top 10 como checklist ao revisar um pull request ou ao desenhar uma funcionalidade nova." }
+    ]
+  },
+  {
+    "slug": "seg-xss-csrf",
+    "title": "XSS e CSRF",
+    "description": "XSS injeta scripts no navegador da vítima por causa de saídas sem escape, enquanto CSRF induz um navegador já autenticado a enviar requisições que o usuário não pretendia. Cobre as variantes de XSS (refletido, armazenado, DOM), escape contextual, Content Security Policy, tokens anti-CSRF e cookies SameSite.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": ["seg-owasp-top-10"],
+    "resources": [
+      { "name": "OWASP — Cross Site Scripting Prevention Cheat Sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html" },
+      { "name": "OWASP — Cross-Site Request Forgery Prevention Cheat Sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html" },
+      { "name": "PortSwigger Web Security Academy — Cross-site scripting", "url": "https://portswigger.net/web-security/cross-site-scripting" },
+      { "name": "Laravel — Proteção contra CSRF", "url": "https://laravel.com/docs/csrf" }
+    ],
+    "checklist": [
+      { "key": "tipos-de-xss", "text": "Consigo diferenciar XSS refletido, armazenado e baseado em DOM e demonstrar cada um em um laboratório." },
+      { "key": "escape-contextual", "text": "Sei aplicar escape de saída conforme o contexto (HTML, atributo, JavaScript, URL) e explico por que sanitizar só na entrada não basta." },
+      { "key": "escape-desativado", "text": "Sei identificar onde o framework desativa o escape automático (ex.: {!! !!} no Blade, dangerouslySetInnerHTML no React, v-html no Vue) e evito esses usos com dados não confiáveis." },
+      { "key": "csp-basica", "text": "Sei configurar uma Content Security Policy básica e explico como ela reduz o impacto de um XSS." },
+      { "key": "defesa-csrf", "text": "Consigo explicar como o CSRF funciona e implementar a defesa com token anti-CSRF e cookies SameSite." },
+      { "key": "flags-de-cookie", "text": "Sei configurar os atributos HttpOnly, Secure e SameSite de um cookie de sessão e dizer o que cada um previne." }
+    ]
+  },
+  {
+    "slug": "seg-sql-injection",
+    "title": "SQL Injection",
+    "description": "Ataque em que a entrada do usuário altera a estrutura de uma consulta SQL, permitindo ler, alterar ou apagar dados e, em alguns casos, executar comandos no servidor. Cobre queries parametrizadas, uso seguro de ORMs e query builders, allowlist para identificadores e privilégio mínimo no usuário do banco.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": ["seg-owasp-top-10"],
+    "resources": [
+      { "name": "OWASP — SQL Injection Prevention Cheat Sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html" },
+      { "name": "OWASP — Query Parameterization Cheat Sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html" },
+      { "name": "PortSwigger Web Security Academy — SQL injection", "url": "https://portswigger.net/web-security/sql-injection" },
+      { "name": "Manual do PHP — Prepared statements e stored procedures (PDO)", "url": "https://www.php.net/manual/pt_BR/pdo.prepared-statements.php" }
+    ],
+    "checklist": [
+      { "key": "explicar-ataque", "text": "Consigo explicar como a concatenação de strings em uma query permite SQL Injection e demonstrar com um payload simples em ambiente de teste." },
+      { "key": "queries-parametrizadas", "text": "Sei usar prepared statements com parâmetros vinculados (PDO, mysqli, pg ou mysql2 no Node) em vez de concatenar valores." },
+      { "key": "orm-raw", "text": "Sei identificar onde ORMs e query builders voltam a ser vulneráveis (ex.: DB::raw, whereRaw, orderBy com nome de coluna vindo do usuário)." },
+      { "key": "allowlist-identificadores", "text": "Sei tratar com allowlist o que não pode ser parametrizado, como nomes de colunas e direção de ordenação." },
+      { "key": "privilegio-minimo-banco", "text": "Já configurei um usuário de banco da aplicação sem permissões de DDL e sem acesso a outros schemas para limitar o dano de uma injeção." },
+      { "key": "laboratorio-sqli", "text": "Já explorei e corrigi uma SQL Injection em um laboratório (PortSwigger Academy, DVWA ou Juice Shop)." }
+    ]
+  },
+  {
+    "slug": "seg-hash-senhas-criptografia-basica",
+    "title": "Hash de senhas e criptografia básica",
+    "description": "Como armazenar senhas com hash lento e salt (Argon2id, bcrypt, scrypt) e quando usar hash, HMAC, criptografia simétrica (AES-GCM) ou assimétrica. Evita erros clássicos como MD5 ou SHA-1 para senhas, criptografia caseira e reuso de nonce.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": ["seg-principios-cia-menor-privilegio"],
+    "resources": [
+      { "name": "OWASP — Password Storage Cheat Sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html" },
+      { "name": "OWASP — Cryptographic Storage Cheat Sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html" },
+      { "name": "Manual do PHP — password_hash", "url": "https://www.php.net/manual/pt_BR/function.password-hash.php" },
+      { "name": "Livro: Serious Cryptography — Jean-Philippe Aumasson" }
+    ],
+    "checklist": [
+      { "key": "hash-vs-criptografia", "text": "Consigo diferenciar hash, HMAC, criptografia simétrica e assimétrica e dizer quando usar cada uma." },
+      { "key": "algoritmos-de-senha", "text": "Sei explicar por que senhas exigem hash lento com salt (Argon2id, bcrypt) e por que MD5, SHA-1 e SHA-256 simples não servem para isso." },
+      { "key": "implementar-hash", "text": "Já implementei cadastro e login com password_hash e password_verify, Hash::make do Laravel ou bcrypt/argon2 no Node, incluindo rehash quando o custo muda." },
+      { "key": "criptografia-autenticada", "text": "Sei usar criptografia autenticada (AES-GCM ou libsodium) e explico por que nunca se reutiliza o nonce com a mesma chave." },
+      { "key": "nao-inventar-cripto", "text": "Consigo justificar por que não se inventa algoritmo criptográfico e priorizo bibliotecas consolidadas, como libsodium e OpenSSL." },
+      { "key": "garantias-do-tls", "text": "Sei explicar o que o TLS garante (confidencialidade, integridade e autenticação do servidor) e como verificar a validade de um certificado." }
+    ]
+  },
+  {
+    "slug": "seg-autenticacao-sessoes",
+    "title": "Autenticação e sessões",
+    "description": "Como verificar quem é o usuário e manter essa identidade entre requisições: fluxos de login, recuperação de senha, MFA e cookies de sessão, com proteção contra fixação, roubo de sessão e força bruta. Falhas aqui levam direto à tomada de conta, por isso o desenho do fluxo importa tanto quanto o código.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["seg-hash-senhas-criptografia-basica", "seg-xss-csrf"],
+    "resources": [
+      { "name": "OWASP — Authentication Cheat Sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html" },
+      { "name": "OWASP — Session Management Cheat Sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html" },
+      { "name": "PortSwigger Web Security Academy — Authentication vulnerabilities", "url": "https://portswigger.net/web-security/authentication" },
+      { "name": "NIST SP 800-63B — Digital Identity Guidelines (Authentication)", "url": "https://pages.nist.gov/800-63-3/sp800-63b.html" }
+    ],
+    "checklist": [
+      { "key": "login-seguro", "text": "Sei implementar um fluxo de login seguro com mensagens de erro genéricas, limite de tentativas e proteção contra credential stuffing." },
+      { "key": "cookie-de-sessao", "text": "Consigo configurar cookies de sessão com HttpOnly, Secure e SameSite e regenerar o ID da sessão após o login para evitar session fixation." },
+      { "key": "logout-e-expiracao", "text": "Sei implementar um logout que invalida a sessão no servidor e definir expiração por inatividade e expiração absoluta." },
+      { "key": "tipos-de-mfa", "text": "Consigo explicar os tipos de MFA (TOTP, WebAuthn/passkeys, SMS) e seus níveis de resistência a phishing." },
+      { "key": "recuperacao-de-senha", "text": "Sei desenhar a recuperação de senha com token aleatório de uso único, expiração curta e sem revelar se o e-mail existe." },
+      { "key": "stateful-vs-stateless", "text": "Consigo comparar sessão no servidor com tokens stateless e explicar o custo de revogação de cada abordagem." }
+    ]
+  },
+  {
+    "slug": "seg-oauth2-jwt",
+    "title": "OAuth2 e JWT",
+    "description": "OAuth 2.0 é o framework de delegação de acesso (com OpenID Connect para identidade) e JWT é um formato de token assinado, muito usado e frequentemente mal aplicado. Cobre os fluxos (Authorization Code com PKCE, Client Credentials), a validação de assinatura e claims, expiração, refresh tokens e armadilhas como alg=none e armazenamento no navegador.",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": ["seg-autenticacao-sessoes", "seg-hash-senhas-criptografia-basica"],
+    "resources": [
+      { "name": "OAuth 2.0 — oauth.net", "url": "https://oauth.net/2/" },
+      { "name": "JWT.io — Introduction", "url": "https://jwt.io/introduction" },
+      { "name": "RFC 8725 — JSON Web Token Best Current Practices", "url": "https://datatracker.ietf.org/doc/html/rfc8725" },
+      { "name": "Livro: OAuth 2 in Action — Justin Richer e Antonio Sanso" }
+    ],
+    "checklist": [
+      { "key": "papeis-oauth", "text": "Consigo explicar os papéis do OAuth 2.0 (resource owner, client, authorization server, resource server) e a diferença entre autenticação (OpenID Connect) e autorização (OAuth)." },
+      { "key": "escolher-fluxo", "text": "Sei escolher o fluxo adequado (Authorization Code com PKCE para apps de usuário, Client Credentials entre serviços) e explico por que Implicit e Password foram abandonados." },
+      { "key": "validar-jwt", "text": "Sei validar um JWT corretamente (assinatura, algoritmo fixado, iss, aud, exp e nbf) e explico os riscos de alg=none e de confusão entre HS256 e RS256." },
+      { "key": "refresh-e-revogacao", "text": "Consigo projetar tokens de acesso de vida curta com refresh token rotativo e uma estratégia de revogação." },
+      { "key": "armazenamento-de-token", "text": "Sei comparar guardar tokens em cookie HttpOnly e em localStorage e os riscos de XSS e CSRF de cada escolha." },
+      { "key": "integrar-provedor", "text": "Já integrei login com um provedor OAuth2/OpenID Connect (Google, Keycloak, Auth0 ou similar) validando state e nonce." }
+    ]
+  },
+  {
+    "slug": "seg-autorizacao-rbac-abac",
+    "title": "Autorização (RBAC/ABAC)",
+    "description": "Define o que cada identidade autenticada pode fazer, usando papéis (RBAC), atributos e contexto (ABAC) ou relações entre recursos. Falhas de controle de acesso, como IDOR e escalada de privilégio, estão no topo do OWASP Top 10, então a checagem deve ser centralizada, negada por padrão e sempre feita no servidor.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["seg-autenticacao-sessoes", "seg-principios-cia-menor-privilegio"],
+    "resources": [
+      { "name": "OWASP — Authorization Cheat Sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html" },
+      { "name": "PortSwigger Web Security Academy — Access control vulnerabilities", "url": "https://portswigger.net/web-security/access-control" },
+      { "name": "Laravel — Autorização (Gates e Policies)", "url": "https://laravel.com/docs/authorization" },
+      { "name": "NIST SP 800-162 — Guide to Attribute Based Access Control (ABAC)" }
+    ],
+    "checklist": [
+      { "key": "rbac-abac-rebac", "text": "Consigo comparar RBAC, ABAC e autorização baseada em relações (ReBAC) e indicar quando cada modelo se encaixa." },
+      { "key": "negar-por-padrao", "text": "Sei aplicar 'negar por padrão' e centralizar as decisões em um ponto único (middleware, policies e gates do Laravel, guards) em vez de espalhar ifs pelo código." },
+      { "key": "corrigir-idor", "text": "Consigo identificar e corrigir um IDOR verificando a propriedade do recurso no servidor, e não apenas escondendo o ID ou o botão na interface." },
+      { "key": "escalada-de-privilegio", "text": "Sei testar escalada de privilégio horizontal e vertical em uma API alterando papéis, IDs e métodos HTTP." },
+      { "key": "isolamento-multi-tenant", "text": "Sei garantir isolamento entre tenants com filtro obrigatório em toda consulta (global scopes ou row-level security)." },
+      { "key": "testes-de-permissao", "text": "Já escrevi testes automatizados que cobrem a matriz de permissões (quem pode e quem não pode) de um recurso." }
+    ]
+  },
+  {
+    "slug": "seg-gestao-segredos",
+    "title": "Gestão de segredos",
+    "description": "Como guardar, distribuir e rotacionar senhas de banco, chaves de API, tokens e certificados sem deixá-los no código, em imagens Docker ou em logs. Cobre variáveis de ambiente, cofres de segredos (Vault, AWS Secrets Manager), rotação sem downtime e detecção de vazamentos em repositórios.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["seg-hash-senhas-criptografia-basica", "seg-principios-cia-menor-privilegio"],
+    "resources": [
+      { "name": "OWASP — Secrets Management Cheat Sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html" },
+      { "name": "The Twelve-Factor App — Config", "url": "https://12factor.net/config" },
+      { "name": "HashiCorp Vault — Documentação", "url": "https://developer.hashicorp.com/vault/docs" },
+      { "name": "Gitleaks — detecção de segredos em repositórios", "url": "https://github.com/gitleaks/gitleaks" }
+    ],
+    "checklist": [
+      { "key": "fora-do-codigo", "text": "Sei manter segredos fora do código e do controle de versão (.env no .gitignore, variáveis de ambiente, arquivos montados) e explico os limites de cada abordagem." },
+      { "key": "usar-cofre", "text": "Consigo explicar o que um cofre de segredos oferece (controle de acesso, auditoria, rotação, segredos dinâmicos) e já usei um ou o equivalente do meu provedor de nuvem." },
+      { "key": "rotacao-sem-downtime", "text": "Sei planejar a rotação de um segredo sem downtime, por exemplo mantendo duas credenciais válidas durante a troca." },
+      { "key": "detectar-vazamentos", "text": "Já configurei uma ferramenta de detecção de segredos (gitleaks, trufflehog ou secret scanning) em um hook de pre-commit ou no pipeline de CI." },
+      { "key": "resposta-a-vazamento", "text": "Sei o que fazer quando um segredo vaza: revogar e rotacionar primeiro, depois investigar o uso indevido e só então limpar o histórico do Git." },
+      { "key": "imagens-e-logs", "text": "Consigo garantir que segredos não vão parar em imagens Docker (uso BuildKit secrets em vez de ARG/ENV), logs ou mensagens de erro." }
+    ]
+  },
+  {
+    "slug": "seg-dependencias-vulneraveis",
+    "title": "Dependências vulneráveis",
+    "description": "Bibliotecas de terceiros trazem vulnerabilidades conhecidas (CVEs) e riscos de cadeia de suprimentos, como pacotes maliciosos e typosquatting. Cobre auditoria (npm audit, composer audit), atualizações automatizadas com Dependabot ou Renovate, lockfiles e geração de SBOM.",
+    "level": "mid",
+    "difficulty": 2,
+    "prerequisites": ["seg-principios-cia-menor-privilegio"],
+    "resources": [
+      { "name": "OWASP — Vulnerable Dependency Management Cheat Sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Vulnerable_Dependency_Management_Cheat_Sheet.html" },
+      { "name": "npm Docs — npm audit", "url": "https://docs.npmjs.com/cli/commands/npm-audit" },
+      { "name": "Composer — comando audit", "url": "https://getcomposer.org/doc/03-cli.md#audit" },
+      { "name": "OSV — Open Source Vulnerabilities", "url": "https://osv.dev/" }
+    ],
+    "checklist": [
+      { "key": "cve-e-cvss", "text": "Sei explicar o que são CVE e CVSS e priorizar uma vulnerabilidade considerando explorabilidade e contexto real, não só a nota." },
+      { "key": "rodar-auditoria", "text": "Já rodei npm audit e composer audit (ou equivalente) em um projeto e triei os resultados, distinguindo dependências diretas e transitivas." },
+      { "key": "lockfiles", "text": "Sei explicar o papel dos lockfiles (package-lock.json, composer.lock) e uso instalações reproduzíveis (npm ci) no CI." },
+      { "key": "atualizacao-automatica", "text": "Já configurei Dependabot ou Renovate para abrir pull requests de atualização e sei definir um prazo de correção por severidade." },
+      { "key": "cadeia-de-suprimentos", "text": "Consigo descrever ataques de cadeia de suprimentos (typosquatting, dependency confusion, pacote comprometido) e medidas para reduzi-los." },
+      { "key": "gerar-sbom", "text": "Sei o que é um SBOM e consigo gerar um para um projeto (CycloneDX ou SPDX)." }
+    ]
+  },
+  {
+    "slug": "seg-threat-modeling",
+    "title": "Threat modeling",
+    "description": "Prática de identificar, ainda no design, o que pode dar errado em um sistema: mapear ativos, fluxos de dados e fronteiras de confiança, enumerar ameaças com STRIDE ou árvores de ataque e definir mitigações priorizadas. Traz a segurança para o início do ciclo, quando corrigir é mais barato.",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": ["seg-owasp-top-10", "seg-autenticacao-sessoes", "seg-autorizacao-rbac-abac"],
+    "resources": [
+      { "name": "Threat Modeling Manifesto", "url": "https://www.threatmodelingmanifesto.org/" },
+      { "name": "OWASP Threat Dragon", "url": "https://owasp.org/www-project-threat-dragon/" },
+      { "name": "MITRE ATT&CK", "url": "https://attack.mitre.org/" },
+      { "name": "Livro: Threat Modeling: Designing for Security — Adam Shostack" }
+    ],
+    "checklist": [
+      { "key": "quatro-perguntas", "text": "Consigo conduzir uma sessão de threat modeling com as quatro perguntas clássicas (o que estamos construindo, o que pode dar errado, o que faremos a respeito, se foi suficiente)." },
+      { "key": "dfd-e-fronteiras", "text": "Sei desenhar um diagrama de fluxo de dados (DFD) com ativos, atores, armazenamentos e fronteiras de confiança." },
+      { "key": "aplicar-stride", "text": "Sei aplicar STRIDE (spoofing, tampering, repudiation, information disclosure, denial of service e elevation of privilege) a cada elemento do diagrama." },
+      { "key": "priorizar-e-mitigar", "text": "Consigo priorizar ameaças por probabilidade e impacto e propor mitigações rastreáveis (reduzir, eliminar, transferir ou aceitar o risco)." },
+      { "key": "modelo-de-sistema-real", "text": "Já produzi e revisei o threat model de um sistema real e registrei os resultados como itens de backlog." },
+      { "key": "integrar-ao-ciclo", "text": "Sei integrar o threat modeling ao ciclo de desenvolvimento, revisando o modelo a cada mudança arquitetural relevante." }
+    ]
+  },
+  {
+    "slug": "seg-hardening-auditoria",
+    "title": "Hardening e auditoria",
+    "description": "Reduzir a superfície de ataque de servidores, contêineres e da aplicação (TLS, cabeçalhos HTTP, configuração mínima, imagens enxutas) e manter trilhas de auditoria confiáveis para detectar e investigar incidentes. Inclui benchmarks CIS, varredura de vulnerabilidades, logs protegidos contra adulteração e noções de resposta a incidentes.",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": ["seg-gestao-segredos", "seg-dependencias-vulneraveis", "seg-threat-modeling"],
+    "resources": [
+      { "name": "OWASP Application Security Verification Standard (ASVS)", "url": "https://owasp.org/www-project-application-security-verification-standard/" },
+      { "name": "CIS Benchmarks", "url": "https://www.cisecurity.org/cis-benchmarks" },
+      { "name": "OWASP — Docker Security Cheat Sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html" },
+      { "name": "OWASP — Logging Cheat Sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html" }
+    ],
+    "checklist": [
+      { "key": "superficie-de-ataque", "text": "Consigo inventariar a superfície de ataque de um serviço (portas, endpoints, usuários, pacotes, permissões) e reduzi-la ao mínimo necessário." },
+      { "key": "tls-e-cabecalhos", "text": "Sei configurar TLS moderno e cabeçalhos de segurança HTTP (HSTS, CSP, X-Content-Type-Options, Referrer-Policy) e validá-los com uma ferramenta de varredura." },
+      { "key": "endurecer-conteineres", "text": "Sei endurecer contêineres: imagem mínima, usuário não root, sistema de arquivos somente leitura e capabilities removidas." },
+      { "key": "auditar-com-cis-asvs", "text": "Já usei um benchmark CIS ou o OWASP ASVS como checklist para auditar um serviço e registrei as não conformidades." },
+      { "key": "logs-de-auditoria", "text": "Sei desenhar logs de auditoria (quem, o quê, quando, de onde) sem registrar dados sensíveis e protegê-los contra adulteração." },
+      { "key": "deteccao-e-resposta", "text": "Consigo descrever um plano básico de resposta a incidentes e quais alertas eu configuraria para detecção (logins anômalos, picos de 401/403, mudanças de permissão)." }
+    ]
+  }
+]

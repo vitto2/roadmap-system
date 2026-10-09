@@ -1,0 +1,754 @@
+[
+  {
+    "slug": "fund-logica-de-programacao",
+    "title": "Lógica de programação",
+    "description": "Decompor um problema em passos claros e sem ambiguidade antes de escrever código: algoritmos, pseudocódigo, fluxogramas e os três blocos básicos (sequência, decisão e repetição). É o raciocínio que sustenta todo o resto da carreira, em qualquer linguagem.",
+    "level": "beginner",
+    "difficulty": 1,
+    "prerequisites": [],
+    "resources": [
+      {
+        "name": "CS50x — Introdução à Ciência da Computação (Harvard)",
+        "url": "https://cs50.harvard.edu/x/"
+      },
+      {
+        "name": "Livro: Lógica de Programação: A Construção de Algoritmos e Estruturas de Dados — Forbellone e Eberspächer"
+      },
+      {
+        "name": "Livro: Think Like a Programmer — V. Anton Spraul"
+      },
+      {
+        "name": "Exercism — exercícios práticos de programação",
+        "url": "https://exercism.org/"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "explicar-algoritmo",
+        "text": "Consigo explicar com minhas palavras o que é um algoritmo e quais propriedades ele precisa ter (finito, não ambíguo, com entrada e saída definidas)."
+      },
+      {
+        "key": "pseudocodigo-e-fluxograma",
+        "text": "Sei escrever o pseudocódigo ou desenhar o fluxograma de um problema simples (ex.: calcular a média de notas e dizer se o aluno foi aprovado) antes de codar."
+      },
+      {
+        "key": "sequencia-decisao-repeticao",
+        "text": "Consigo identificar, em uma solução, quais trechos são sequência, decisão e repetição e combinar os três para resolver um problema."
+      },
+      {
+        "key": "teste-de-mesa",
+        "text": "Sei fazer um teste de mesa: simular o algoritmo à mão, passo a passo, anotando o valor de cada variável."
+      },
+      {
+        "key": "decompor-problemas",
+        "text": "Consigo quebrar um problema maior em subproblemas menores e resolver um de cada vez."
+      },
+      {
+        "key": "exercicios-resolvidos",
+        "text": "Já resolvi pelo menos 10 exercícios de lógica (ex.: no Exercism) sem consultar a solução pronta."
+      }
+    ]
+  },
+  {
+    "slug": "fund-variaveis-e-tipos",
+    "title": "Variáveis e tipos",
+    "description": "Como os programas guardam e manipulam dados: variáveis, constantes, tipos primitivos (inteiros, ponto flutuante, strings, booleanos, null), conversões de tipo e a diferença entre tipagem estática e dinâmica. Inclui armadilhas clássicas, como a precisão de ponto flutuante e a comparação entre tipos diferentes.",
+    "level": "beginner",
+    "difficulty": 1,
+    "prerequisites": [
+      "fund-logica-de-programacao"
+    ],
+    "resources": [
+      {
+        "name": "MDN — Gramática e tipos (Guia JavaScript)",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Grammar_and_types"
+      },
+      {
+        "name": "Manual do PHP — Tipos",
+        "url": "https://www.php.net/manual/pt_BR/language.types.php"
+      },
+      {
+        "name": "Manual do PHP — Manipulação de tipos (type juggling)",
+        "url": "https://www.php.net/manual/pt_BR/language.types.type-juggling.php"
+      },
+      {
+        "name": "0.30000000000000004.com — por que 0.1 + 0.2 não é 0.3",
+        "url": "https://0.30000000000000004.com/"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "declarar-variaveis-e-constantes",
+        "text": "Sei declarar variáveis e constantes na linguagem que estou estudando e explicar quando usar cada uma (ex.: const e let em JavaScript)."
+      },
+      {
+        "key": "tipos-primitivos",
+        "text": "Consigo listar os tipos primitivos (inteiro, ponto flutuante, string, booleano, null) e dar um exemplo de valor de cada um."
+      },
+      {
+        "key": "conversao-de-tipos",
+        "text": "Sei converter valores entre tipos de forma explícita e prever o resultado de conversões implícitas, como '5' + 3 e '5' - 3 em JavaScript."
+      },
+      {
+        "key": "igualdade-e-valores-falsos",
+        "text": "Sei comparar valores corretamente, entendendo a diferença entre == e === e quais valores são tratados como falsos na linguagem que uso (ex.: 0, string vazia, null)."
+      },
+      {
+        "key": "precisao-ponto-flutuante",
+        "text": "Consigo explicar por que 0.1 + 0.2 não resulta exatamente em 0.3 e como evitar esse problema com dinheiro (guardar centavos como inteiros ou usar tipos decimais)."
+      },
+      {
+        "key": "tipagem-estatica-vs-dinamica",
+        "text": "Sei diferenciar tipagem estática de dinâmica e tipagem forte de fraca, citando uma linguagem de cada tipo."
+      }
+    ]
+  },
+  {
+    "slug": "fund-condicionais-e-lacos",
+    "title": "Condicionais e laços",
+    "description": "Controle de fluxo: decisões com if/else, switch/match e operadores lógicos, e repetições com for, while e do-while, incluindo break e continue. Aprenda a escolher o laço certo, evitar laços infinitos e erros de off-by-one e simplificar condições aninhadas com retorno antecipado.",
+    "level": "beginner",
+    "difficulty": 1,
+    "prerequisites": [
+      "fund-variaveis-e-tipos"
+    ],
+    "resources": [
+      {
+        "name": "MDN — Controle de fluxo e tratamento de erros (Guia JavaScript)",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Control_flow_and_error_handling"
+      },
+      {
+        "name": "MDN — Laços e iteração (Guia JavaScript)",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Loops_and_iteration"
+      },
+      {
+        "name": "Manual do PHP — Estruturas de controle",
+        "url": "https://www.php.net/manual/pt_BR/language.control-structures.php"
+      },
+      {
+        "name": "Manual do PHP — match (PHP 8)",
+        "url": "https://www.php.net/manual/pt_BR/control-structures.match.php"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "if-else-e-operadores-logicos",
+        "text": "Sei escrever decisões com if/else if/else combinando operadores lógicos (&&, || e !) e explicar em que condições cada ramo executa."
+      },
+      {
+        "key": "switch-ou-match",
+        "text": "Sei quando usar switch ou match em vez de uma cadeia de if/else e por que um switch sem break causa fall-through."
+      },
+      {
+        "key": "escolher-o-laco-certo",
+        "text": "Consigo escolher entre for, while, do-while e foreach/for...of e justificar a escolha para cada problema."
+      },
+      {
+        "key": "laco-infinito-e-off-by-one",
+        "text": "Sei identificar e corrigir um laço infinito e erros de off-by-one (um passo a mais ou a menos) usando teste de mesa."
+      },
+      {
+        "key": "break-continue-e-guard-clauses",
+        "text": "Uso break, continue e retorno antecipado (guard clauses) para reduzir o aninhamento de condições."
+      },
+      {
+        "key": "fizzbuzz-tabuada-e-primos",
+        "text": "Já implementei sozinho FizzBuzz, tabuada e verificação de número primo usando apenas condicionais e laços."
+      }
+    ]
+  },
+  {
+    "slug": "fund-funcoes",
+    "title": "Funções",
+    "description": "Como encapsular lógica reutilizável: parâmetros e retorno, escopo de variáveis, funções puras versus efeitos colaterais, funções anônimas e arrow functions, funções como valores (callbacks) e noções de closure. Funções pequenas e bem nomeadas são a base de código legível e testável.",
+    "level": "beginner",
+    "difficulty": 2,
+    "prerequisites": [
+      "fund-condicionais-e-lacos"
+    ],
+    "resources": [
+      {
+        "name": "MDN — Funções (Guia JavaScript)",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Functions"
+      },
+      {
+        "name": "MDN — Closures",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Closures"
+      },
+      {
+        "name": "Manual do PHP — Funções",
+        "url": "https://www.php.net/manual/pt_BR/language.functions.php"
+      },
+      {
+        "name": "Livro: Código Limpo (Clean Code) — Robert C. Martin, capítulo sobre funções"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "parametros-e-retorno",
+        "text": "Sei definir funções com parâmetros, valores padrão e retorno, inclusive devolvendo mais de um valor (array ou objeto)."
+      },
+      {
+        "key": "escopo-de-variaveis",
+        "text": "Consigo explicar escopo local, de função e global e prever a saída de um código com variáveis de mesmo nome em escopos diferentes."
+      },
+      {
+        "key": "funcao-pura-vs-efeito-colateral",
+        "text": "Sei diferenciar função pura de função com efeito colateral e reescrever uma função impura para que fique pura."
+      },
+      {
+        "key": "funcoes-como-valores",
+        "text": "Sei passar uma função como argumento (callback) e usar funções anônimas e arrow functions, como em map, filter e reduce."
+      },
+      {
+        "key": "closure-basica",
+        "text": "Consigo explicar o que é uma closure com um exemplo simples (ex.: uma função que cria contadores independentes)."
+      },
+      {
+        "key": "funcao-pequena-e-bem-nomeada",
+        "text": "Consigo dividir uma função grande em funções menores, cada uma com um único propósito e um nome que revele a intenção."
+      }
+    ]
+  },
+  {
+    "slug": "fund-terminal-e-shell",
+    "title": "Terminal e shell",
+    "description": "Trabalhar pela linha de comando: navegar e manipular arquivos, ler e buscar conteúdo, permissões, variáveis de ambiente, pipes e redirecionamento e scripts simples. Dominar o shell acelera o dia a dia de qualquer dev, de Git e Composer a Docker e deploy.",
+    "level": "beginner",
+    "difficulty": 2,
+    "prerequisites": [],
+    "resources": [
+      {
+        "name": "The Missing Semester of Your CS Education (MIT) — aula sobre o shell",
+        "url": "https://missing.csail.mit.edu/2020/course-shell/"
+      },
+      {
+        "name": "Linux man pages online (man7.org)",
+        "url": "https://man7.org/linux/man-pages/"
+      },
+      {
+        "name": "explainshell — explica comandos de shell trecho a trecho",
+        "url": "https://explainshell.com/"
+      },
+      {
+        "name": "Documentação do PowerShell — Microsoft Learn",
+        "url": "https://learn.microsoft.com/pt-br/powershell/"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "navegar-e-manipular-arquivos",
+        "text": "Consigo navegar entre diretórios e criar, copiar, mover e remover arquivos e pastas apenas pelo terminal (cd, ls, mkdir, cp, mv, rm)."
+      },
+      {
+        "key": "ler-e-buscar-conteudo",
+        "text": "Sei ler arquivos com cat, less, head e tail e buscar texto com grep e arquivos com find."
+      },
+      {
+        "key": "pipes-e-redirecionamento",
+        "text": "Sei combinar comandos com pipe (|) e redirecionar saída e erros (>, >> e 2>), por exemplo filtrando um log e salvando o resultado em um arquivo."
+      },
+      {
+        "key": "variaveis-de-ambiente-e-path",
+        "text": "Entendo o que são variáveis de ambiente e o PATH e sei definir uma variável para um comando e exportá-la na sessão."
+      },
+      {
+        "key": "permissoes-de-arquivo",
+        "text": "Sei ler permissões (rwx) e alterá-las com chmod, e explico por que um script pode falhar com 'permission denied'."
+      },
+      {
+        "key": "script-simples",
+        "text": "Já escrevi um script de shell simples (com argumentos, condicional e laço) que automatiza uma tarefa repetitiva."
+      }
+    ]
+  },
+  {
+    "slug": "fund-git-basico",
+    "title": "Git básico",
+    "description": "Controle de versão com Git no dia a dia: repositório, working tree, staging e commits, branches e merge, repositórios remotos (clone, fetch, pull, push), .gitignore e resolução de conflitos simples. Inclui boas mensagens de commit e o fluxo básico de trabalho com pull requests.",
+    "level": "beginner",
+    "difficulty": 2,
+    "prerequisites": [
+      "fund-terminal-e-shell"
+    ],
+    "resources": [
+      {
+        "name": "Pro Git (livro oficial, em português)",
+        "url": "https://git-scm.com/book/pt-br/v2"
+      },
+      {
+        "name": "Documentação de referência do Git",
+        "url": "https://git-scm.com/docs"
+      },
+      {
+        "name": "Learn Git Branching — tutorial interativo",
+        "url": "https://learngitbranching.js.org/"
+      },
+      {
+        "name": "Conventional Commits 1.0.0",
+        "url": "https://www.conventionalcommits.org/pt-br/v1.0.0/"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "working-tree-staging-commit",
+        "text": "Consigo explicar a diferença entre working tree, staging area (index) e repositório e o caminho de uma alteração até virar um commit."
+      },
+      {
+        "key": "init-add-commit-status-log",
+        "text": "Sei criar um repositório e usar git init, status, add, commit, diff e log no dia a dia."
+      },
+      {
+        "key": "branches-e-merge",
+        "text": "Sei criar branches, alternar entre elas e fazer merge, e explico a diferença entre fast-forward e merge commit."
+      },
+      {
+        "key": "remotos-clone-fetch-pull-push",
+        "text": "Sei clonar um repositório e sincronizar com o remoto usando fetch, pull e push, e explico a diferença entre fetch e pull."
+      },
+      {
+        "key": "resolver-conflito-de-merge",
+        "text": "Já resolvi um conflito de merge manualmente, entendendo os marcadores <<<<<<<, ======= e >>>>>>>."
+      },
+      {
+        "key": "gitignore-e-mensagens-de-commit",
+        "text": "Uso .gitignore corretamente (sem versionar .env, node_modules ou vendor) e escrevo mensagens de commit claras, no padrão Conventional Commits."
+      }
+    ]
+  },
+  {
+    "slug": "fund-git-avancado",
+    "title": "Git avançado (rebase, bisect)",
+    "description": "Reescrever e investigar o histórico com segurança: rebase (inclusive interativo), cherry-pick, reset versus revert, stash, reflog para recuperar trabalho perdido e bisect para achar o commit que introduziu um bug. Também cobre estratégias de integração (merge, squash e rebase) e por que não reescrever histórico compartilhado.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": [
+      "fund-git-basico"
+    ],
+    "resources": [
+      {
+        "name": "Pro Git — Git Branching: Rebasing",
+        "url": "https://git-scm.com/book/en/v2/Git-Branching-Rebasing"
+      },
+      {
+        "name": "Pro Git — Git Tools: Rewriting History",
+        "url": "https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History"
+      },
+      {
+        "name": "Pro Git — Git Tools: Debugging with Git (bisect)",
+        "url": "https://git-scm.com/book/en/v2/Git-Tools-Debugging-with-Git"
+      },
+      {
+        "name": "Documentação do git reflog",
+        "url": "https://git-scm.com/docs/git-reflog"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "rebase-vs-merge",
+        "text": "Consigo explicar a diferença entre merge e rebase, o efeito de cada um no histórico e por que não devo reescrever commits já publicados em branches compartilhadas."
+      },
+      {
+        "key": "rebase-interativo",
+        "text": "Já usei git rebase -i para fazer squash, reword e reordenar commits antes de abrir um pull request, e sei publicar o resultado com git push --force-with-lease."
+      },
+      {
+        "key": "reset-revert-restore",
+        "text": "Sei diferenciar reset (--soft, --mixed e --hard), revert e restore e escolher o certo para desfazer um commit local ou já publicado."
+      },
+      {
+        "key": "reflog-recuperar-trabalho",
+        "text": "Já recuperei commits ou uma branch 'perdida' (após um reset --hard ou um rebase errado) usando git reflog."
+      },
+      {
+        "key": "bisect-achar-bug",
+        "text": "Já usei git bisect (manual ou com git bisect run) para localizar o commit que introduziu um bug."
+      },
+      {
+        "key": "cherry-pick-e-stash",
+        "text": "Sei usar git cherry-pick para levar um commit a outra branch e git stash para guardar trabalho em andamento e retomá-lo depois."
+      }
+    ]
+  },
+  {
+    "slug": "fund-arrays-listas-e-mapas",
+    "title": "Arrays, listas e mapas",
+    "description": "As estruturas de dados do dia a dia: arrays/listas, mapas (dicionários e arrays associativos) e conjuntos. Veja como percorrer, buscar, inserir e remover elementos, transformar coleções com map, filter e reduce e escolher a estrutura certa para cada problema.",
+    "level": "junior",
+    "difficulty": 2,
+    "prerequisites": [
+      "fund-variaveis-e-tipos",
+      "fund-condicionais-e-lacos"
+    ],
+    "resources": [
+      {
+        "name": "MDN — Array (JavaScript)",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array"
+      },
+      {
+        "name": "MDN — Coleções com chave: Map e Set (Guia JavaScript)",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Keyed_collections"
+      },
+      {
+        "name": "Manual do PHP — Arrays",
+        "url": "https://www.php.net/manual/pt_BR/language.types.array.php"
+      },
+      {
+        "name": "Manual do PHP — Funções de array",
+        "url": "https://www.php.net/manual/pt_BR/ref.array.php"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "criar-acessar-e-modificar-arrays",
+        "text": "Sei criar arrays/listas, acessar elementos por índice e adicionar, remover e alterar itens (push/pop, shift/unshift, splice ou equivalentes)."
+      },
+      {
+        "key": "percorrer-colecoes",
+        "text": "Consigo percorrer arrays e mapas com laços e iteradores (for...of, foreach) e sei quando preciso do índice."
+      },
+      {
+        "key": "map-filter-reduce",
+        "text": "Sei transformar coleções com map, filter e reduce (ou array_map, array_filter e array_reduce) sem escrever laços manuais."
+      },
+      {
+        "key": "mapas-e-conjuntos",
+        "text": "Sei usar mapas (chave e valor) e conjuntos para contar ocorrências, agrupar itens e remover duplicados."
+      },
+      {
+        "key": "escolher-a-estrutura-certa",
+        "text": "Consigo justificar quando usar array, mapa ou conjunto em um problema (ex.: busca por id, lista ordenada, garantia de unicidade)."
+      },
+      {
+        "key": "copia-rasa-vs-profunda",
+        "text": "Entendo a diferença entre copiar a referência, fazer uma cópia rasa e uma cópia profunda de um array ou objeto, e o risco de mutação inesperada."
+      }
+    ]
+  },
+  {
+    "slug": "fund-recursao",
+    "title": "Recursão",
+    "description": "Resolver problemas fazendo uma função chamar a si mesma: caso base, caso recursivo, pilha de chamadas e risco de estouro de pilha. Inclui exemplos clássicos (fatorial, Fibonacci, soma de listas, permutações, estruturas aninhadas), memoização e quando preferir iteração.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": [
+      "fund-funcoes",
+      "fund-arrays-listas-e-mapas"
+    ],
+    "resources": [
+      {
+        "name": "Python Tutor — visualize a execução do código e a pilha de chamadas",
+        "url": "https://pythontutor.com/"
+      },
+      {
+        "name": "Khan Academy — Algoritmos (algoritmos recursivos)",
+        "url": "https://pt.khanacademy.org/computing/computer-science/algorithms"
+      },
+      {
+        "name": "Livro: Entendendo Algoritmos — Aditya Bhargava (capítulo sobre recursão)"
+      },
+      {
+        "name": "MDN — Recursão (glossário)",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Glossary/Recursion"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "caso-base-e-caso-recursivo",
+        "text": "Consigo identificar o caso base e o caso recursivo de uma função e explicar por que, sem o caso base, ela nunca termina."
+      },
+      {
+        "key": "pilha-de-chamadas",
+        "text": "Sei desenhar a pilha de chamadas de uma função recursiva simples (ex.: fatorial de 4) e explicar o que é um estouro de pilha (stack overflow)."
+      },
+      {
+        "key": "recursao-classica",
+        "text": "Já implementei recursivamente fatorial, Fibonacci, soma dos elementos de uma lista e inversão de uma string, sem consultar a solução."
+      },
+      {
+        "key": "estruturas-aninhadas",
+        "text": "Sei usar recursão para percorrer estruturas aninhadas (ex.: achatar um array de arrays ou listar os arquivos de um diretório)."
+      },
+      {
+        "key": "memoizacao",
+        "text": "Sei aplicar memoização para evitar recálculos (ex.: Fibonacci) e explicar o ganho de desempenho."
+      },
+      {
+        "key": "recursao-vs-iteracao",
+        "text": "Consigo converter uma recursão simples em iteração (e o contrário) e decidir qual é mais adequada em cada caso."
+      }
+    ]
+  },
+  {
+    "slug": "fund-complexidade-big-o",
+    "title": "Complexidade (Big-O)",
+    "description": "Medir como o tempo e a memória de um algoritmo crescem com o tamanho da entrada: notação Big-O, classes comuns (O(1), O(log n), O(n), O(n log n), O(n²) e O(2^n)), pior caso versus caso médio e complexidade de espaço. O objetivo é comparar soluções antes de implementá-las e justificar trade-offs entre tempo e memória.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": [
+      "fund-arrays-listas-e-mapas",
+      "fund-recursao"
+    ],
+    "resources": [
+      {
+        "name": "Big-O Cheat Sheet",
+        "url": "https://www.bigocheatsheet.com/"
+      },
+      {
+        "name": "Algorithms, 4th Edition — Sedgewick e Wayne (análise de algoritmos)",
+        "url": "https://algs4.cs.princeton.edu/14analysis/"
+      },
+      {
+        "name": "Livro: Entendendo Algoritmos — Aditya Bhargava (introdução e notação Big O)"
+      },
+      {
+        "name": "VisuAlgo — visualização de algoritmos e estruturas de dados",
+        "url": "https://visualgo.net/en"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "explicar-big-o",
+        "text": "Consigo explicar com minhas palavras o que o Big-O mede (crescimento em função de n) e por que ignoramos constantes e termos menores."
+      },
+      {
+        "key": "analisar-codigo-com-lacos",
+        "text": "Sei determinar a complexidade de tempo de um trecho de código com laços simples, laços aninhados e laços que dividem o espaço de busca pela metade."
+      },
+      {
+        "key": "comparar-classes-de-crescimento",
+        "text": "Consigo ordenar O(1), O(log n), O(n), O(n log n), O(n²) e O(2^n) por crescimento e estimar o que cada uma significa para n = 1 milhão."
+      },
+      {
+        "key": "complexidade-de-espaco",
+        "text": "Sei analisar a complexidade de espaço (memória extra e pilha de recursão) de um algoritmo."
+      },
+      {
+        "key": "custo-das-operacoes-comuns",
+        "text": "Sei de cabeça o custo típico das operações em array, mapa (hash) e conjunto: acesso, busca, inserção e remoção."
+      },
+      {
+        "key": "otimizar-solucao-ingenua",
+        "text": "Já otimizei uma solução O(n²) para O(n) (ex.: soma de dois números com um mapa) e expliquei o ganho."
+      }
+    ]
+  },
+  {
+    "slug": "fund-pilhas-filas-e-listas-ligadas",
+    "title": "Pilhas, filas e listas ligadas",
+    "description": "Estruturas de dados lineares fundamentais: pilha (LIFO), fila (FIFO), deque e lista ligada (simples e dupla), com seus custos de operação e usos reais (pilha de chamadas, desfazer/refazer, filas de tarefas, cache LRU). Aprenda a implementá-las do zero e a decidir quando usar cada uma.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": [
+      "fund-arrays-listas-e-mapas",
+      "fund-complexidade-big-o"
+    ],
+    "resources": [
+      {
+        "name": "Manual do PHP — Estruturas de dados da SPL (SplStack, SplQueue)",
+        "url": "https://www.php.net/manual/pt_BR/spl.datastructures.php"
+      },
+      {
+        "name": "VisuAlgo — Linked List, Stack, Queue e Deque",
+        "url": "https://visualgo.net/en/list"
+      },
+      {
+        "name": "Algorithms, 4th Edition — Sedgewick e Wayne (pilhas, filas e bags)",
+        "url": "https://algs4.cs.princeton.edu/13stacks/"
+      },
+      {
+        "name": "Livro: Entendendo Algoritmos — Aditya Bhargava (arrays e listas ligadas)"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "lifo-e-fifo",
+        "text": "Consigo explicar LIFO e FIFO e dar um exemplo real de cada (ex.: desfazer/refazer em um editor; fila de jobs)."
+      },
+      {
+        "key": "implementar-pilha-e-fila",
+        "text": "Já implementei uma pilha e uma fila do zero, com inserção e remoção em O(1)."
+      },
+      {
+        "key": "implementar-lista-ligada",
+        "text": "Já implementei uma lista ligada simples com inserção, remoção e busca, e sei invertê-la."
+      },
+      {
+        "key": "lista-ligada-vs-array",
+        "text": "Sei comparar lista ligada e array em acesso por índice, inserção no meio e uso de memória, e justificar a escolha."
+      },
+      {
+        "key": "problemas-classicos-com-pilha",
+        "text": "Sei resolver com pilha o problema dos parênteses balanceados e avaliar uma expressão em notação pós-fixa."
+      },
+      {
+        "key": "deque-e-fila-de-prioridade",
+        "text": "Conheço deque e fila de prioridade e sei dizer quando usá-los (ex.: janela deslizante, agendador de tarefas)."
+      }
+    ]
+  },
+  {
+    "slug": "fund-arvores-e-grafos",
+    "title": "Árvores e grafos",
+    "description": "Estruturas não lineares para modelar hierarquias e redes: árvores binárias e de busca (BST), heaps e grafos (direcionados ou não, com ou sem pesos). Cobre representações (lista e matriz de adjacência), percursos em profundidade (DFS) e em largura (BFS), detecção de ciclos, ordenação topológica e noções de caminho mínimo.",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": [
+      "fund-recursao",
+      "fund-pilhas-filas-e-listas-ligadas"
+    ],
+    "resources": [
+      {
+        "name": "VisuAlgo — Binary Search Tree, Heap e Graph Traversal",
+        "url": "https://visualgo.net/en/bst"
+      },
+      {
+        "name": "Algorithms, 4th Edition — Sedgewick e Wayne (árvores de busca e grafos)",
+        "url": "https://algs4.cs.princeton.edu/home/"
+      },
+      {
+        "name": "CP-Algorithms — algoritmos de grafos e estruturas de dados",
+        "url": "https://cp-algorithms.com/"
+      },
+      {
+        "name": "Livro: Entendendo Algoritmos — Aditya Bhargava (busca em largura e algoritmo de Dijkstra)"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "arvores-e-bst",
+        "text": "Consigo explicar o que é uma árvore binária de busca e por que a busca é O(log n) quando ela está balanceada e O(n) quando degenera em uma lista."
+      },
+      {
+        "key": "implementar-bst-e-percursos",
+        "text": "Já implementei uma BST com inserção, busca e os percursos in-order, pre-order e post-order de forma recursiva."
+      },
+      {
+        "key": "heap-e-fila-de-prioridade",
+        "text": "Sei explicar o que é um heap e usá-lo como fila de prioridade (ex.: obter os k maiores elementos de uma lista)."
+      },
+      {
+        "key": "representar-grafos",
+        "text": "Sei representar um grafo com lista e com matriz de adjacência e escolher entre elas conforme a densidade."
+      },
+      {
+        "key": "bfs-e-dfs",
+        "text": "Já implementei BFS e DFS e sei dizer quando usar cada uma (ex.: menor caminho sem pesos versus detecção de ciclos)."
+      },
+      {
+        "key": "problemas-classicos-de-grafos",
+        "text": "Sei resolver problemas clássicos como contar componentes conectados, detectar ciclos e ordenar tarefas por dependência (ordenação topológica)."
+      }
+    ]
+  },
+  {
+    "slug": "fund-ordenacao-e-busca",
+    "title": "Ordenação e busca",
+    "description": "Algoritmos clássicos de ordenação (bubble, selection, insertion, merge e quick sort) e de busca (linear e binária), com análise de complexidade, estabilidade e uso de memória. Mostra também como usar a ordenação das bibliotecas padrão com comparadores e por que a busca binária resolve problemas além de achar um valor.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": [
+      "fund-complexidade-big-o",
+      "fund-recursao"
+    ],
+    "resources": [
+      {
+        "name": "VisuAlgo — animações de algoritmos de ordenação",
+        "url": "https://visualgo.net/en/sorting"
+      },
+      {
+        "name": "Algorithms, 4th Edition — Sedgewick e Wayne (ordenação)",
+        "url": "https://algs4.cs.princeton.edu/20sorting/"
+      },
+      {
+        "name": "Manual do PHP — Ordenando arrays",
+        "url": "https://www.php.net/manual/pt_BR/array.sorting.php"
+      },
+      {
+        "name": "MDN — Array.prototype.sort",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/sort"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "ordenacoes-quadraticas",
+        "text": "Já implementei bubble, selection e insertion sort e sei explicar por que são O(n²) no pior caso (e por que o insertion sort vai bem em listas quase ordenadas)."
+      },
+      {
+        "key": "merge-sort-e-quick-sort",
+        "text": "Sei implementar merge sort e quick sort e explicar a estratégia de dividir e conquistar, o custo O(n log n) e o pior caso do quick sort."
+      },
+      {
+        "key": "estabilidade-e-in-place",
+        "text": "Sei explicar o que significa um algoritmo de ordenação ser estável e in-place e dar exemplos de cada tipo."
+      },
+      {
+        "key": "busca-binaria",
+        "text": "Já implementei busca binária (iterativa e recursiva) sem erros de limites e sei que ela exige dados ordenados."
+      },
+      {
+        "key": "sort-da-biblioteca-com-comparador",
+        "text": "Sei usar o sort da linguagem com comparador personalizado (ex.: ordenar objetos por vários campos) e explico por que [10, 9, 1].sort() em JavaScript retorna [1, 10, 9]."
+      },
+      {
+        "key": "busca-binaria-na-resposta",
+        "text": "Sei aplicar a ideia da busca binária além de achar um valor (ex.: primeiro elemento maior ou igual a x, ou o menor valor que satisfaz uma condição)."
+      }
+    ]
+  },
+  {
+    "slug": "fund-programacao-dinamica-e-greedy",
+    "title": "Programação dinâmica e greedy",
+    "description": "Duas técnicas para problemas de otimização. Programação dinâmica resolve subproblemas sobrepostos com memoização (top-down) ou tabulação (bottom-up); algoritmos gulosos (greedy) fazem a melhor escolha local e exigem argumentar que ela leva ao ótimo global. Você aprende a reconhecer o padrão de cada problema (mochila, subsequência comum, troco de moedas, agendamento de intervalos) e a analisar o custo.",
+    "level": "senior",
+    "difficulty": 5,
+    "prerequisites": [
+      "fund-recursao",
+      "fund-ordenacao-e-busca",
+      "fund-arvores-e-grafos"
+    ],
+    "resources": [
+      {
+        "name": "Algorithms — Jeff Erickson (programação dinâmica e algoritmos gulosos)",
+        "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+      },
+      {
+        "name": "MIT OpenCourseWare — 6.006 Introduction to Algorithms",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
+      },
+      {
+        "name": "AtCoder — Educational DP Contest (problemas graduais de DP)",
+        "url": "https://atcoder.jp/contests/dp"
+      },
+      {
+        "name": "Livro: Entendendo Algoritmos — Aditya Bhargava (algoritmos gulosos e programação dinâmica)"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "subproblemas-sobrepostos",
+        "text": "Consigo identificar subestrutura ótima e subproblemas sobrepostos em um problema e explicar por que a recursão ingênua é exponencial (ex.: Fibonacci)."
+      },
+      {
+        "key": "dp-top-down-com-memoizacao",
+        "text": "Sei transformar uma recursão em uma solução top-down com memoização (mapa ou array de cache)."
+      },
+      {
+        "key": "dp-bottom-up-com-tabulacao",
+        "text": "Sei escrever a versão bottom-up (tabulação) e reduzir o uso de memória quando só preciso da linha ou do valor anterior."
+      },
+      {
+        "key": "dp-problemas-classicos",
+        "text": "Já resolvi sozinho pelo menos três problemas clássicos de DP (ex.: troco de moedas, mochila 0/1, maior subsequência comum, subida de escada)."
+      },
+      {
+        "key": "quando-o-greedy-funciona",
+        "text": "Sei explicar quando o greedy funciona (escolha gulosa e subestrutura ótima) e dar um contraexemplo em que ele falha (ex.: troco com moedas de 1, 3 e 4)."
+      },
+      {
+        "key": "greedy-problemas-classicos",
+        "text": "Já implementei um problema guloso clássico (ex.: agendamento de intervalos, código de Huffman ou Dijkstra) e analisei seu custo."
+      }
+    ]
+  }
+]

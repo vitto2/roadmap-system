@@ -1,0 +1,633 @@
+[
+  {
+    "slug": "qual-testes-unitarios",
+    "title": "Testes unitários",
+    "description": "Testes unitários verificam o comportamento de uma unidade pequena de código (função, classe ou método) de forma isolada, rápida e determinística. Dominar o padrão Arrange-Act-Assert, os dublês de teste (stubs, mocks e fakes) e a escolha de casos de borda dá segurança para evoluir o código sem medo de regressões. O foco é escrever testes legíveis em Pest (PHP) e Vitest (JavaScript) que só falhem quando o comportamento muda.",
+    "level": "junior",
+    "difficulty": 2,
+    "prerequisites": [],
+    "resources": [
+      {
+        "name": "Pest — Documentação",
+        "url": "https://pestphp.com/docs"
+      },
+      {
+        "name": "Vitest — Guia",
+        "url": "https://vitest.dev/guide/"
+      },
+      {
+        "name": "Martin Fowler — Unit Test",
+        "url": "https://martinfowler.com/bliki/UnitTest.html"
+      },
+      {
+        "name": "Livro: The Art of Unit Testing — Roy Osherove"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "escrever-teste-aaa",
+        "text": "Consigo escrever um teste unitário no padrão Arrange-Act-Assert para uma função pura."
+      },
+      {
+        "key": "nomear-testes",
+        "text": "Sei nomear testes de modo que o nome descreva o cenário e o resultado esperado, sem precisar ler o corpo."
+      },
+      {
+        "key": "casos-de-borda",
+        "text": "Consigo identificar e cobrir casos de borda, entradas inválidas e caminhos de erro de uma função."
+      },
+      {
+        "key": "dubles-de-teste",
+        "text": "Sei explicar a diferença entre stub, mock, spy e fake e escolher o dublê adequado para isolar uma dependência."
+      },
+      {
+        "key": "testes-deterministicos",
+        "text": "Sei eliminar a instabilidade causada por relógio, aleatoriedade, rede e ordem de execução, deixando o teste determinístico."
+      },
+      {
+        "key": "rodar-pest-vitest",
+        "text": "Sei rodar toda a suíte, um arquivo ou um único teste com Pest ou Vitest e interpretar a saída de uma falha."
+      }
+    ]
+  },
+  {
+    "slug": "qual-testes-integracao",
+    "title": "Testes de integração",
+    "description": "Testes de integração verificam que módulos e camadas funcionam juntos de verdade: repositórios com banco de dados real, rotas HTTP, filas e clientes de APIs externas. Eles pegam falhas de configuração, de contrato e de SQL que testes unitários com dublês não enxergam, ao custo de serem mais lentos e exigirem um ambiente controlado. Entender a pirâmide de testes ajuda a decidir quantos escrever e onde.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": [
+      "qual-testes-unitarios"
+    ],
+    "resources": [
+      {
+        "name": "Martin Fowler — Integration Test",
+        "url": "https://martinfowler.com/bliki/IntegrationTest.html"
+      },
+      {
+        "name": "The Practical Test Pyramid — Ham Vocke",
+        "url": "https://martinfowler.com/articles/practical-test-pyramid.html"
+      },
+      {
+        "name": "Testcontainers",
+        "url": "https://testcontainers.com/"
+      },
+      {
+        "name": "Livro: Unit Testing Principles, Practices, and Patterns — Vladimir Khorikov"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "banco-de-dados-real",
+        "text": "Consigo escrever um teste de integração para um repositório ou consulta usando um banco de dados real (local ou em container)."
+      },
+      {
+        "key": "rota-http",
+        "text": "Sei testar uma rota HTTP validando status, corpo da resposta e efeitos colaterais, como registros gravados no banco."
+      },
+      {
+        "key": "isolar-estado",
+        "text": "Sei isolar o estado entre testes (transação com rollback, truncate ou banco efêmero) para que a ordem de execução não importe."
+      },
+      {
+        "key": "api-externa-simulada",
+        "text": "Consigo substituir uma API externa por um fake ou servidor simulado e testar timeouts e respostas de erro."
+      },
+      {
+        "key": "piramide-de-testes",
+        "text": "Sei explicar a pirâmide de testes e justificar o que cobrir com testes unitários e o que cobrir com testes de integração."
+      }
+    ]
+  },
+  {
+    "slug": "qual-tdd",
+    "title": "TDD",
+    "description": "TDD (Test-Driven Development) é a prática de escrever primeiro um teste que falha, fazer o teste passar com o código mais simples possível e então refatorar, no ciclo Red-Green-Refactor. Ela guia o design para código mais simples e desacoplado e deixa uma suíte de testes de regressão como subproduto. Também é preciso saber quando TDD rende menos, como em spikes exploratórios e protótipos de interface.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": [
+      "qual-testes-unitarios",
+      "qual-clean-code"
+    ],
+    "resources": [
+      {
+        "name": "Martin Fowler — Test Driven Development",
+        "url": "https://martinfowler.com/bliki/TestDrivenDevelopment.html"
+      },
+      {
+        "name": "Vitest — Guia",
+        "url": "https://vitest.dev/guide/"
+      },
+      {
+        "name": "Livro: Test-Driven Development: By Example — Kent Beck"
+      },
+      {
+        "name": "Livro: Growing Object-Oriented Software, Guided by Tests — Steve Freeman e Nat Pryce"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "ciclo-red-green-refactor",
+        "text": "Consigo executar o ciclo Red-Green-Refactor em passos pequenos, sem escrever código de produção antes de ter um teste falhando."
+      },
+      {
+        "key": "kata-completa",
+        "text": "Já resolvi uma kata (como FizzBuzz, String Calculator ou Bowling Game) usando TDD do início ao fim."
+      },
+      {
+        "key": "falha-pelo-motivo-certo",
+        "text": "Sei confirmar que o teste falha pelo motivo certo antes de escrever a implementação."
+      },
+      {
+        "key": "fake-it-triangulacao",
+        "text": "Sei usar 'fake it' e triangulação para chegar de forma incremental a uma implementação geral."
+      },
+      {
+        "key": "bug-primeiro-teste",
+        "text": "Já corrigi um bug escrevendo antes um teste que o reproduz e só então alterando o código."
+      },
+      {
+        "key": "limites-do-tdd",
+        "text": "Sei apontar situações em que TDD rende menos, como spikes exploratórios e protótipos de interface, e como adaptar a prática."
+      }
+    ]
+  },
+  {
+    "slug": "qual-clean-code",
+    "title": "Clean code",
+    "description": "Clean code reúne práticas para escrever código legível e fácil de mudar: nomes que revelam intenção, funções pequenas com uma única responsabilidade, poucos parâmetros e ausência de duplicação. Como o código é lido muito mais vezes do que é escrito, a clareza reduz bugs e o custo de manutenção. O escopo inclui reconhecer code smells e aplicar DRY, KISS, YAGNI e SOLID com bom senso, sem criar abstrações prematuras.",
+    "level": "junior",
+    "difficulty": 2,
+    "prerequisites": [],
+    "resources": [
+      {
+        "name": "Livro: Clean Code — Robert C. Martin"
+      },
+      {
+        "name": "Livro: A Philosophy of Software Design — John Ousterhout"
+      },
+      {
+        "name": "Martin Fowler — Code Smell",
+        "url": "https://martinfowler.com/bliki/CodeSmell.html"
+      },
+      {
+        "name": "clean-code-javascript — Ryan McDermott (GitHub)",
+        "url": "https://github.com/ryanmcdermott/clean-code-javascript"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "nomes-reveladores",
+        "text": "Consigo renomear variáveis, funções e classes para que revelem a intenção sem depender de comentários."
+      },
+      {
+        "key": "funcoes-pequenas",
+        "text": "Consigo quebrar uma função longa em funções pequenas, com uma única responsabilidade e poucos parâmetros."
+      },
+      {
+        "key": "reconhecer-code-smells",
+        "text": "Sei reconhecer ao menos cinco code smells comuns, como método longo, duplicação, lista longa de parâmetros, feature envy e números mágicos."
+      },
+      {
+        "key": "dry-kiss-yagni",
+        "text": "Sei explicar DRY, KISS e YAGNI e identificar quando aplicá-los de forma exagerada gera abstração prematura."
+      },
+      {
+        "key": "responsabilidade-e-dependencias",
+        "text": "Sei explicar os princípios da responsabilidade única e da inversão de dependência com exemplos do meu próprio código."
+      },
+      {
+        "key": "comentarios-uteis",
+        "text": "Sei diferenciar comentários úteis, que explicam o porquê, de comentários que repetem o código ou disfarçam código confuso."
+      }
+    ]
+  },
+  {
+    "slug": "qual-code-review",
+    "title": "Code review",
+    "description": "Code review é a revisão das mudanças por outra pessoa antes do merge, com o objetivo de achar defeitos, melhorar o design e espalhar conhecimento pelo time. Uma boa revisão combina pull requests pequenos e bem descritos, feedback objetivo e respeitoso e critérios claros do que bloqueia o merge e do que é apenas sugestão. Vale tanto para quem revisa quanto para quem tem o código revisado.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": [
+      "qual-clean-code"
+    ],
+    "resources": [
+      {
+        "name": "Google Engineering Practices — Code Review",
+        "url": "https://google.github.io/eng-practices/review/"
+      },
+      {
+        "name": "Martin Fowler — Ship / Show / Ask",
+        "url": "https://martinfowler.com/articles/ship-show-ask.html"
+      },
+      {
+        "name": "GitHub Docs — Pull requests",
+        "url": "https://docs.github.com/en/pull-requests"
+      },
+      {
+        "name": "Livro: Software Engineering at Google — Titus Winters, Tom Manshreck e Hyrum Wright",
+        "url": "https://abseil.io/resources/swe-book"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "pr-pequeno-e-descrito",
+        "text": "Consigo abrir um pull request pequeno e focado, com descrição que explica o porquê da mudança, como testá-la e quais são os riscos."
+      },
+      {
+        "key": "revisar-pr-completo",
+        "text": "Já revisei o pull request de outra pessoa verificando correção, testes, legibilidade, segurança e impacto em desempenho."
+      },
+      {
+        "key": "feedback-construtivo",
+        "text": "Sei escrever comentários objetivos e respeitosos, distinguindo o que bloqueia o merge do que é sugestão ou detalhe menor."
+      },
+      {
+        "key": "receber-feedback",
+        "text": "Sei responder a comentários de revisão sem levar para o lado pessoal, justificando minhas decisões ou ajustando o código."
+      },
+      {
+        "key": "checklist-pessoal",
+        "text": "Já montei um checklist pessoal de revisão (tratamento de erros, casos de borda, nomes, testes e migrações) e o uso nas minhas revisões."
+      },
+      {
+        "key": "automatizar-o-mecanico",
+        "text": "Sei delegar a linters, formatadores e à CI as checagens mecânicas para que a revisão humana foque em design e lógica de negócio."
+      }
+    ]
+  },
+  {
+    "slug": "qual-refatoracao",
+    "title": "Refatoração",
+    "description": "Refatoração é alterar a estrutura interna do código sem mudar o comportamento observável, em passos pequenos e protegidos por testes. Técnicas como extrair método, renomear, introduzir objeto de parâmetro e substituir condicional por polimorfismo melhoram o design e reduzem o custo de mudanças futuras. É a prática que mantém uma base de código saudável ao longo do tempo, inclusive em código legado.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": [
+      "qual-testes-unitarios",
+      "qual-clean-code"
+    ],
+    "resources": [
+      {
+        "name": "Refactoring Guru — Refatoração",
+        "url": "https://refactoring.guru/pt-br/refactoring"
+      },
+      {
+        "name": "Refactoring.com — Catálogo de refatorações (Martin Fowler)",
+        "url": "https://refactoring.com/catalog/"
+      },
+      {
+        "name": "Livro: Refactoring: Improving the Design of Existing Code — Martin Fowler"
+      },
+      {
+        "name": "Livro: Working Effectively with Legacy Code — Michael Feathers"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "refatorar-com-testes-verdes",
+        "text": "Consigo refatorar um trecho de código mantendo a suíte de testes verde a cada passo pequeno."
+      },
+      {
+        "key": "refatoracoes-da-ide",
+        "text": "Sei aplicar as refatorações Extract Method, Rename, Inline e Extract Variable com as ferramentas automáticas da IDE."
+      },
+      {
+        "key": "testes-de-caracterizacao",
+        "text": "Sei escrever testes de caracterização para cobrir código legado antes de refatorá-lo."
+      },
+      {
+        "key": "smell-para-tecnica",
+        "text": "Sei relacionar code smells (método longo, classe grande, condicionais repetidas) à técnica de refatoração adequada para cada caso."
+      },
+      {
+        "key": "commits-separados",
+        "text": "Sei manter refatorações em commits ou pull requests separados de mudanças de comportamento, para facilitar revisão e reversão."
+      }
+    ]
+  },
+  {
+    "slug": "qual-linters-analise-estatica",
+    "title": "Linters e análise estática",
+    "description": "Linters, formatadores e analisadores estáticos inspecionam o código sem executá-lo para apontar erros de tipo, variáveis não usadas, vulnerabilidades e violações de estilo. Ferramentas como ESLint, Prettier, PHPStan e PHP-CS-Fixer automatizam convenções e pegam bugs cedo, antes da revisão e da produção. A adoção gradual, com baseline e níveis de rigor, permite usá-las até em bases legadas.",
+    "level": "junior",
+    "difficulty": 2,
+    "prerequisites": [
+      "qual-clean-code"
+    ],
+    "resources": [
+      {
+        "name": "ESLint — Documentação",
+        "url": "https://eslint.org/docs/latest/"
+      },
+      {
+        "name": "Prettier",
+        "url": "https://prettier.io/"
+      },
+      {
+        "name": "PHPStan — Primeiros passos",
+        "url": "https://phpstan.org/user-guide/getting-started"
+      },
+      {
+        "name": "PHP CS Fixer (GitHub)",
+        "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "configurar-linter",
+        "text": "Já configurei um linter ou analisador estático (ESLint, PHPStan ou similar) em um projeto, fixando a versão e o conjunto de regras."
+      },
+      {
+        "key": "formatador-e-hook",
+        "text": "Sei configurar um formatador automático (Prettier, PHP-CS-Fixer ou similar) e executá-lo no editor e em um hook de pre-commit."
+      },
+      {
+        "key": "linter-formatador-tipos",
+        "text": "Sei explicar a diferença entre formatador, linter e analisador estático de tipos e o tipo de problema que cada um detecta."
+      },
+      {
+        "key": "adocao-gradual",
+        "text": "Sei adotar uma ferramenta em código legado de forma gradual, usando baseline, níveis de rigor ou regras por diretório."
+      },
+      {
+        "key": "falsos-positivos",
+        "text": "Sei tratar um falso positivo desativando a regra de forma pontual e justificada, em vez de desligá-la globalmente."
+      }
+    ]
+  },
+  {
+    "slug": "qual-ci-github-actions",
+    "title": "CI com GitHub Actions",
+    "description": "Integração contínua é a prática de integrar mudanças com frequência e validá-las automaticamente a cada push ou pull request. Com GitHub Actions você define workflows em YAML que instalam dependências, rodam linters e testes, geram artefatos e bloqueiam o merge quando algo falha. O objetivo é um pipeline rápido, confiável e seguro, com cache, matriz de versões e segredos bem gerenciados.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": [
+      "qual-testes-unitarios",
+      "qual-testes-integracao",
+      "qual-linters-analise-estatica"
+    ],
+    "resources": [
+      {
+        "name": "GitHub Actions — Documentação",
+        "url": "https://docs.github.com/en/actions"
+      },
+      {
+        "name": "Martin Fowler — Continuous Integration",
+        "url": "https://martinfowler.com/articles/continuousIntegration.html"
+      },
+      {
+        "name": "setup-php — GitHub Action para PHP (GitHub)",
+        "url": "https://github.com/shivammathur/setup-php"
+      },
+      {
+        "name": "actions/setup-node — GitHub Action para Node.js (GitHub)",
+        "url": "https://github.com/actions/setup-node"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "workflow-de-pr",
+        "text": "Já criei um workflow do GitHub Actions que roda linter e testes a cada pull request."
+      },
+      {
+        "key": "cache-de-dependencias",
+        "text": "Sei configurar cache de dependências (Composer e npm) para reduzir o tempo da pipeline."
+      },
+      {
+        "key": "matriz-de-versoes",
+        "text": "Sei usar uma matriz de build para testar mais de uma versão de PHP ou de Node.js."
+      },
+      {
+        "key": "segredos-e-permissoes",
+        "text": "Sei guardar segredos em GitHub Secrets e restringir as permissões do GITHUB_TOKEN ao mínimo necessário."
+      },
+      {
+        "key": "protecao-de-branch",
+        "text": "Sei configurar regras de proteção de branch para exigir checks verdes antes do merge."
+      },
+      {
+        "key": "pipeline-rapida",
+        "text": "Sei diagnosticar uma pipeline lenta ou instável e reduzir seu tempo com paralelismo, cache e execução condicional."
+      }
+    ]
+  },
+  {
+    "slug": "qual-cd-estrategias-release",
+    "title": "CD e estratégias de release",
+    "description": "Entrega contínua mantém o software sempre pronto para ir a produção, e o deploy contínuo vai além e publica automaticamente cada mudança aprovada. Estratégias como rolling update, blue-green, canary e feature flags reduzem o risco de uma release e permitem rollback rápido. O tema inclui migrações de banco compatíveis entre versões e métricas DORA para medir a saúde do processo de entrega.",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": [
+      "qual-ci-github-actions",
+      "qual-testes-e2e"
+    ],
+    "resources": [
+      {
+        "name": "Martin Fowler — Continuous Delivery",
+        "url": "https://martinfowler.com/bliki/ContinuousDelivery.html"
+      },
+      {
+        "name": "Martin Fowler — Blue Green Deployment",
+        "url": "https://martinfowler.com/bliki/BlueGreenDeployment.html"
+      },
+      {
+        "name": "Feature Toggles (aka Feature Flags) — Pete Hodgson",
+        "url": "https://martinfowler.com/articles/feature-toggles.html"
+      },
+      {
+        "name": "Livro: Continuous Delivery — Jez Humble e David Farley"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "delivery-vs-deployment",
+        "text": "Sei explicar a diferença entre entrega contínua e deploy contínuo e quando cada um é apropriado."
+      },
+      {
+        "key": "pipeline-de-cd",
+        "text": "Já montei um pipeline que faz deploy automático em staging após os testes passarem e exige aprovação manual para produção."
+      },
+      {
+        "key": "estrategias-de-release",
+        "text": "Sei comparar rolling update, blue-green e canary quanto a risco, custo e velocidade de rollback."
+      },
+      {
+        "key": "feature-flags",
+        "text": "Já usei feature flags para separar deploy de release e sei o risco de deixá-las acumuladas no código."
+      },
+      {
+        "key": "rollback-e-migracoes",
+        "text": "Sei planejar um rollback e escrever migrações de banco compatíveis com a versão antiga e a nova (expand/contract)."
+      },
+      {
+        "key": "metricas-dora",
+        "text": "Sei explicar as métricas DORA (frequência de deploy, lead time, taxa de falha de mudanças e tempo de recuperação) e como coletá-las."
+      }
+    ]
+  },
+  {
+    "slug": "qual-testes-e2e",
+    "title": "Testes E2E",
+    "description": "Testes end-to-end exercitam o sistema completo pela perspectiva do usuário: um navegador real navega, preenche formulários e valida o resultado na tela. Ferramentas como Playwright e Cypress cobrem os fluxos críticos de negócio, mas são mais lentas e frágeis que os testes de camadas inferiores, então devem ser poucas e bem escolhidas. A estabilidade (seletores resilientes, esperas automáticas e dados de teste controlados) é o principal desafio.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": [
+      "qual-testes-integracao"
+    ],
+    "resources": [
+      {
+        "name": "Playwright — Documentação",
+        "url": "https://playwright.dev/"
+      },
+      {
+        "name": "Cypress — Documentação",
+        "url": "https://docs.cypress.io/"
+      },
+      {
+        "name": "Martin Fowler — Eradicating Non-Determinism in Tests",
+        "url": "https://martinfowler.com/articles/nonDeterminism.html"
+      },
+      {
+        "name": "Martin Fowler — Test Pyramid",
+        "url": "https://martinfowler.com/bliki/TestPyramid.html"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "primeiro-teste-e2e",
+        "text": "Já escrevi um teste E2E com Playwright (ou Cypress) para um fluxo crítico, como login ou checkout."
+      },
+      {
+        "key": "seletores-resilientes",
+        "text": "Sei escolher seletores resilientes (papéis, rótulos e data-testid) em vez de classes CSS ou XPath frágeis."
+      },
+      {
+        "key": "esperas-automaticas",
+        "text": "Sei evitar esperas fixas (sleep), usando esperas automáticas e asserções com retry."
+      },
+      {
+        "key": "dados-de-teste",
+        "text": "Sei preparar e limpar dados de teste de forma determinística (seeds, API de setup ou banco efêmero) a cada execução."
+      },
+      {
+        "key": "depurar-na-ci",
+        "text": "Sei executar os testes E2E na CI e usar traces, vídeos e screenshots para depurar falhas."
+      },
+      {
+        "key": "escolher-fluxos",
+        "text": "Sei decidir quais fluxos merecem teste E2E e quais devem ser cobertos por testes de camadas inferiores."
+      }
+    ]
+  },
+  {
+    "slug": "qual-cobertura-mutation-testing",
+    "title": "Cobertura e mutation testing",
+    "description": "Cobertura de código mede quais linhas e ramos são executados pelos testes, mas não garante que eles realmente verifiquem o comportamento. O mutation testing injeta pequenas falhas (mutantes) no código e checa se a suíte as detecta, medindo a eficácia real dos testes por meio do mutation score. Saber interpretar essas métricas, evitar a cobertura como meta cega e aplicá-las onde mais importa é uma habilidade de nível sênior.",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": [
+      "qual-testes-unitarios",
+      "qual-testes-integracao",
+      "qual-ci-github-actions"
+    ],
+    "resources": [
+      {
+        "name": "Martin Fowler — Test Coverage",
+        "url": "https://martinfowler.com/bliki/TestCoverage.html"
+      },
+      {
+        "name": "Infection — Mutation testing para PHP",
+        "url": "https://infection.github.io/"
+      },
+      {
+        "name": "StrykerJS — Mutation testing para JavaScript",
+        "url": "https://stryker-mutator.io/"
+      },
+      {
+        "name": "Pest — Documentação",
+        "url": "https://pestphp.com/docs"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "relatorio-de-cobertura",
+        "text": "Consigo gerar um relatório de cobertura de linhas e ramos com Pest/PHPUnit ou Vitest e interpretá-lo."
+      },
+      {
+        "key": "cobertura-nao-e-qualidade",
+        "text": "Sei explicar por que 100% de cobertura não significa testes bons, com um exemplo de teste que executa o código sem verificar nada."
+      },
+      {
+        "key": "rodar-mutation-testing",
+        "text": "Já executei uma ferramenta de mutation testing (Infection, StrykerJS ou Pest) e analisei os mutantes sobreviventes."
+      },
+      {
+        "key": "matar-mutantes",
+        "text": "Sei transformar um mutante sobrevivente em um teste mais forte ou reconhecer um mutante equivalente."
+      },
+      {
+        "key": "quality-gate",
+        "text": "Sei definir metas de cobertura realistas por tipo de módulo e aplicar quality gates na CI, como cobertura mínima no código novo."
+      },
+      {
+        "key": "custo-do-mutation",
+        "text": "Sei reduzir o custo do mutation testing executando-o apenas em arquivos alterados ou em módulos críticos."
+      }
+    ]
+  },
+  {
+    "slug": "qual-divida-tecnica",
+    "title": "Dívida técnica",
+    "description": "Dívida técnica é o custo futuro assumido ao escolher uma solução rápida ou imperfeita hoje, e pode ser deliberada ou acidental, prudente ou imprudente. Gerenciá-la exige tornar a dívida visível, estimar os juros (impacto na velocidade e no risco), priorizar o pagamento junto ao roadmap de produto e comunicar o trade-off para pessoas não técnicas. Quem atua como sênior sabe quando assumir dívida de propósito e como impedir que ela paralise o time.",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": [
+      "qual-refatoracao",
+      "qual-code-review",
+      "qual-linters-analise-estatica"
+    ],
+    "resources": [
+      {
+        "name": "Martin Fowler — Technical Debt",
+        "url": "https://martinfowler.com/bliki/TechnicalDebt.html"
+      },
+      {
+        "name": "Martin Fowler — Technical Debt Quadrant",
+        "url": "https://martinfowler.com/bliki/TechnicalDebtQuadrant.html"
+      },
+      {
+        "name": "Martin Fowler — Strangler Fig Application",
+        "url": "https://martinfowler.com/bliki/StranglerFigApplication.html"
+      },
+      {
+        "name": "Livro: Software Design X-Rays — Adam Tornhill"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "quadrante-da-divida",
+        "text": "Sei classificar uma dívida técnica usando o quadrante de Martin Fowler (deliberada ou acidental, prudente ou imprudente)."
+      },
+      {
+        "key": "registrar-divida",
+        "text": "Já registrei dívida técnica de forma rastreável (backlog, ADR ou comentário com link) com contexto, impacto e custo estimado."
+      },
+      {
+        "key": "priorizar-pelos-juros",
+        "text": "Sei priorizar o pagamento da dívida pelos juros (frequência de mudança, incidentes e lentidão do time) e não por incômodo estético."
+      },
+      {
+        "key": "comunicar-tradeoff",
+        "text": "Sei defender o investimento em dívida técnica perante produto e gestão em termos de risco, prazo e custo."
+      },
+      {
+        "key": "pagar-incrementalmente",
+        "text": "Já conduzi o pagamento de uma dívida de forma incremental (regra do escoteiro, refatoração contínua ou strangler fig) sem parar a entrega de funcionalidades."
+      },
+      {
+        "key": "medir-a-divida",
+        "text": "Sei usar métricas (complexidade ciclomática, churn, duplicação e tempo de ciclo) para acompanhar a evolução da dívida."
+      }
+    ]
+  }
+]

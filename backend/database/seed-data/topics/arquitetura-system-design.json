@@ -1,0 +1,309 @@
+[
+  {
+    "slug": "arq-principios-solid",
+    "title": "Princípios SOLID",
+    "description": "Os cinco princípios de design orientado a objetos (responsabilidade única, aberto/fechado, substituição de Liskov, segregação de interfaces e inversão de dependência) que mantêm o código fácil de mudar e de testar. O foco é reconhecer violações em código real, em PHP/Laravel ou TypeScript, e corrigi-las com interfaces pequenas, composição e injeção de dependência.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": [],
+    "resources": [
+      { "name": "Livro: Clean Architecture — Robert C. Martin (Parte III, princípios de design)" },
+      { "name": "Martin Fowler — Inversion of Control Containers and the Dependency Injection pattern", "url": "https://martinfowler.com/articles/injection.html" },
+      { "name": "Laravel — Service Container (injeção de dependência)", "url": "https://laravel.com/framework/docs/container" },
+      { "name": "Martin Fowler — YAGNI (contrapeso ao excesso de abstração)", "url": "https://martinfowler.com/bliki/Yagni.html" }
+    ],
+    "checklist": [
+      { "key": "explicar-srp", "text": "Consigo explicar o princípio da responsabilidade única (SRP) com um exemplo de uma classe minha que acumulava responsabilidades e mostrar como a dividi." },
+      { "key": "aplicar-ocp", "text": "Sei trocar um `if/switch` por tipo por polimorfismo (ex.: Strategy) para estender o comportamento sem modificar o código existente (OCP)." },
+      { "key": "violacao-lsp", "text": "Consigo dar um exemplo de violação do princípio de substituição de Liskov (LSP) e explicar por que composição era a melhor escolha ali." },
+      { "key": "segregar-interfaces", "text": "Já dividi uma interface grande em interfaces menores e coesas, aplicando a segregação de interfaces (ISP)." },
+      { "key": "inverter-dependencia", "text": "Já apliquei inversão de dependência (DIP): uma classe de alto nível passou a depender de uma interface, com a implementação injetada pelo construtor ou pelo container." },
+      { "key": "evitar-excesso", "text": "Sei dizer quando aplicar SOLID vira excesso de engenharia e por que um pouco de duplicação costuma custar menos que uma abstração prematura." }
+    ]
+  },
+  {
+    "slug": "arq-padroes-criacionais",
+    "title": "Padrões de projeto (criacionais)",
+    "description": "Os padrões de criação do catálogo GoF (Factory Method, Abstract Factory, Builder, Prototype e Singleton) e o problema de instanciação que cada um resolve. Compara com alternativas modernas, como injeção de dependência e containers, que substituem boa parte do uso de Singleton e de fábricas manuais.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["arq-principios-solid"],
+    "resources": [
+      { "name": "Refactoring Guru — Padrões criacionais", "url": "https://refactoring.guru/pt-br/design-patterns/creational-patterns" },
+      { "name": "Livro: Design Patterns: Elements of Reusable Object-Oriented Software — Gamma, Helm, Johnson e Vlissides (GoF)" },
+      { "name": "Livro: Head First Design Patterns — Eric Freeman e Elisabeth Robson" },
+      { "name": "PHP-FIG — PSR-11: Container Interface", "url": "https://www.php-fig.org/psr/psr-11/" }
+    ],
+    "checklist": [
+      { "key": "factory-method-vs-abstract-factory", "text": "Consigo diferenciar Factory Method de Abstract Factory e escrever um exemplo de cada em código." },
+      { "key": "implementar-builder", "text": "Já implementei um Builder para um objeto com muitos parâmetros opcionais (ex.: query, e-mail ou requisição HTTP) e sei explicar o ganho de legibilidade." },
+      { "key": "critica-singleton", "text": "Sei explicar por que um Singleton global dificulta testes e como um container de injeção de dependência resolve o mesmo problema." },
+      { "key": "prototype-copia", "text": "Consigo explicar o padrão Prototype e a diferença entre cópia rasa e cópia profunda (shallow e deep copy) ao clonar objetos." },
+      { "key": "ver-no-framework", "text": "Consigo apontar onde um framework que uso (ex.: Laravel ou Vue) aplica Factory, Builder ou Manager internamente." },
+      { "key": "quando-nao-usar", "text": "Sei decidir quando um construtor simples ou uma função fábrica resolve e um padrão criacional seria exagero." }
+    ]
+  },
+  {
+    "slug": "arq-padroes-estruturais-comportamentais",
+    "title": "Padrões (estruturais/comportamentais)",
+    "description": "Padrões GoF que organizam a composição entre objetos (Adapter, Decorator, Facade, Proxy e Composite) e a divisão de responsabilidades em tempo de execução (Strategy, Observer, Command, Template Method, State e Chain of Responsibility). O objetivo é reconhecê-los em frameworks, como middlewares, eventos e jobs, e aplicá-los só quando simplificam o código.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["arq-principios-solid", "arq-padroes-criacionais"],
+    "resources": [
+      { "name": "Refactoring Guru — Padrões estruturais", "url": "https://refactoring.guru/pt-br/design-patterns/structural-patterns" },
+      { "name": "Refactoring Guru — Padrões comportamentais", "url": "https://refactoring.guru/pt-br/design-patterns/behavioral-patterns" },
+      { "name": "PHP-FIG — PSR-15: HTTP Server Request Handlers (middleware)", "url": "https://www.php-fig.org/psr/psr-15/" },
+      { "name": "Livro: Design Patterns: Elements of Reusable Object-Oriented Software — Gamma, Helm, Johnson e Vlissides (GoF)" }
+    ],
+    "checklist": [
+      { "key": "adapter-facade-proxy", "text": "Consigo explicar a diferença entre Adapter, Facade e Proxy e já escrevi um Adapter para isolar uma biblioteca ou API externa do resto do código." },
+      { "key": "decorator", "text": "Já implementei um Decorator (ex.: cache, log ou retry em volta de um repositório ou cliente HTTP) sem alterar a classe original." },
+      { "key": "strategy", "text": "Já substituí condicionais extensas por Strategy e sei trocar a implementação em tempo de execução." },
+      { "key": "observer-eventos", "text": "Consigo explicar como o Observer se relaciona com eventos e listeners e já o usei em código meu." },
+      { "key": "chain-middleware", "text": "Sei explicar como o Chain of Responsibility aparece em pipelines de middleware (Laravel, Express, PSR-15) e já escrevi um middleware próprio." },
+      { "key": "command-jobs", "text": "Consigo relacionar o padrão Command a jobs em fila ou a ações com desfazer (undo)." }
+    ]
+  },
+  {
+    "slug": "arq-arquitetura-em-camadas",
+    "title": "Arquitetura em camadas",
+    "description": "Organização do sistema em camadas (apresentação, aplicação, domínio e infraestrutura) com regras claras sobre quem pode depender de quem. Cobre onde cada responsabilidade deve ficar, os problemas de controllers e models inchados e como DTOs e serviços de aplicação mantêm as regras de negócio fora do framework.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["arq-principios-solid"],
+    "resources": [
+      { "name": "Martin Fowler — Presentation Domain Data Layering", "url": "https://martinfowler.com/bliki/PresentationDomainDataLayering.html" },
+      { "name": "Martin Fowler — Anemic Domain Model", "url": "https://martinfowler.com/bliki/AnemicDomainModel.html" },
+      { "name": "Martin Fowler — Catálogo de padrões de arquitetura corporativa (PoEAA)", "url": "https://martinfowler.com/eaaCatalog/" },
+      { "name": "Livro: Clean Architecture — Robert C. Martin" }
+    ],
+    "checklist": [
+      { "key": "desenhar-camadas", "text": "Consigo desenhar as camadas de um projeto meu e dizer quais dependências entre elas são permitidas e quais são proibidas." },
+      { "key": "regra-fora-do-controller", "text": "Já movi regra de negócio de um controller ou model para uma camada de aplicação (ex.: Action, Service ou caso de uso)." },
+      { "key": "dto-na-fronteira", "text": "Sei explicar por que não devo expor models ou entidades diretamente na API e já usei DTOs ou API Resources na fronteira." },
+      { "key": "active-record-gordo", "text": "Consigo explicar o problema de um Active Record com regra demais e citar alternativas (serviços, objetos de valor, repositórios)." },
+      { "key": "limites-das-camadas", "text": "Sei apontar limitações do modelo em camadas, como camadas que só repassam chamadas e domínio acoplado ao banco." }
+    ]
+  },
+  {
+    "slug": "arq-ddd-basico",
+    "title": "DDD básico",
+    "description": "Domain-Driven Design em nível introdutório: linguagem ubíqua, contextos delimitados (bounded contexts), entidades, objetos de valor, agregados, repositórios e eventos de domínio. O foco é modelar regras de negócio complexas junto com quem entende do negócio, sem cair em modelo anêmico nem aplicar DDD onde um CRUD simples basta.",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": ["arq-principios-solid", "arq-arquitetura-em-camadas"],
+    "resources": [
+      { "name": "Livro: Domain-Driven Design: Tackling Complexity in the Heart of Software — Eric Evans" },
+      { "name": "Livro: Domain-Driven Design Distilled — Vaughn Vernon" },
+      { "name": "Martin Fowler — Bounded Context", "url": "https://martinfowler.com/bliki/BoundedContext.html" },
+      { "name": "Martin Fowler — DDD Aggregate", "url": "https://martinfowler.com/bliki/DDD_Aggregate.html" }
+    ],
+    "checklist": [
+      { "key": "linguagem-ubiqua", "text": "Consigo montar um glossário de linguagem ubíqua para um domínio que conheço e usá-lo nos nomes de classes e métodos." },
+      { "key": "entidade-vs-value-object", "text": "Sei diferenciar entidade de objeto de valor e já modelei um Value Object imutável (ex.: Dinheiro, E-mail ou CPF)." },
+      { "key": "agregado-e-invariantes", "text": "Consigo explicar o que é um agregado, sua raiz e suas invariantes, e já desenhei um (ex.: Pedido com seus itens)." },
+      { "key": "bounded-context", "text": "Sei identificar contextos delimitados em um sistema e desenhar um mapa de contextos simples com os relacionamentos entre eles." },
+      { "key": "repositorio-e-evento", "text": "Sei a função de um repositório de agregado e de um evento de domínio, e já publiquei um evento de domínio em código meu." },
+      { "key": "quando-nao-usar-ddd", "text": "Consigo dizer quando DDD é exagero (ex.: CRUD simples) e quando o investimento compensa." }
+    ]
+  },
+  {
+    "slug": "arq-hexagonal-clean-architecture",
+    "title": "Hexagonal/Clean Architecture",
+    "description": "Arquiteturas que invertem a direção das dependências para proteger o domínio: portas e adaptadores (Hexagonal), Clean Architecture e Onion. Mostra como isolar regras de negócio de framework, banco e I/O para testá-las sem infraestrutura e trocar detalhes técnicos sem reescrever o núcleo.",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": ["arq-principios-solid", "arq-arquitetura-em-camadas", "arq-ddd-basico"],
+    "resources": [
+      { "name": "Alistair Cockburn — Hexagonal Architecture", "url": "https://alistair.cockburn.us/hexagonal-architecture" },
+      { "name": "Robert C. Martin — The Clean Architecture", "url": "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html" },
+      { "name": "Livro: Clean Architecture — Robert C. Martin" },
+      { "name": "Livro: Get Your Hands Dirty on Clean Architecture — Tom Hombergs" }
+    ],
+    "checklist": [
+      { "key": "regra-de-dependencia", "text": "Consigo explicar a regra de dependência (as dependências apontam para dentro) e desenhar o diagrama com entidades, casos de uso e adaptadores." },
+      { "key": "porta-e-adaptadores", "text": "Já implementei uma porta (interface) com pelo menos dois adaptadores (ex.: repositório em memória e repositório em banco)." },
+      { "key": "caso-de-uso-testavel", "text": "Já escrevi um caso de uso independente de framework e o testei sem subir banco de dados nem servidor HTTP." },
+      { "key": "mapeamento-nas-fronteiras", "text": "Sei mapear dados entre as fronteiras (request, DTO, entidade, resource) e justificar o custo desse mapeamento." },
+      { "key": "aplicar-em-laravel", "text": "Sei aplicar a ideia em um projeto Laravel (ex.: controller fino que chama um caso de uso e repositório definido por interface)." },
+      { "key": "custo-beneficio", "text": "Consigo argumentar quando a arquitetura hexagonal compensa e quando vira cerimônia desnecessária." }
+    ]
+  },
+  {
+    "slug": "arq-monolito-modular",
+    "title": "Monólito modular",
+    "description": "Estruturar um único deployável em módulos com fronteiras explícitas, orientados a contextos de negócio e com API pública, dados e dependências controlados. É o passo intermediário entre o 'big ball of mud' e os microsserviços e transforma a extração de serviços em uma decisão futura, não em uma urgência.",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": ["arq-ddd-basico", "arq-hexagonal-clean-architecture"],
+    "resources": [
+      { "name": "Martin Fowler — Monolith First", "url": "https://martinfowler.com/bliki/MonolithFirst.html" },
+      { "name": "Shopify Engineering — Under Deconstruction: The State of Shopify's Monolith", "url": "https://shopify.engineering/shopify-monolith" },
+      { "name": "Deptrac — verificação de dependências entre camadas e módulos em PHP", "url": "https://github.com/deptrac/deptrac" },
+      { "name": "Livro: Monolith to Microservices — Sam Newman" }
+    ],
+    "checklist": [
+      { "key": "dividir-por-contexto", "text": "Consigo dividir um sistema em módulos por contexto de negócio (e não por camada técnica) e justificar as fronteiras." },
+      { "key": "api-publica-do-modulo", "text": "Já defini uma API pública para um módulo (interface ou facade) e impedi o acesso direto às suas classes internas." },
+      { "key": "dados-por-modulo", "text": "Sei explicar por que evitar joins e chaves estrangeiras entre módulos e como eles trocam dados (API pública ou eventos)." },
+      { "key": "verificar-fronteiras", "text": "Já usei uma ferramenta ou teste de arquitetura (ex.: Deptrac, PHPat ou dependency-cruiser) para barrar dependências proibidas." },
+      { "key": "eventos-entre-modulos", "text": "Já implementei a comunicação entre módulos por eventos internos, sem acoplamento direto." },
+      { "key": "sinais-de-extracao", "text": "Sei listar os sinais de que um módulo deve virar um serviço separado e o que precisa estar pronto antes da extração." }
+    ]
+  },
+  {
+    "slug": "arq-apis-rest-maduras",
+    "title": "APIs REST maduras (versionamento, idempotência)",
+    "description": "Desenho de APIs HTTP que evoluem sem quebrar clientes: semântica correta de métodos e status, versionamento e depreciação, paginação, erros padronizados (Problem Details), idempotência com Idempotency-Key e concorrência otimista com ETag. O foco é manter contratos estáveis e operações que podem ser repetidas com segurança.",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": ["arq-arquitetura-em-camadas"],
+    "resources": [
+      { "name": "Martin Fowler — Richardson Maturity Model", "url": "https://martinfowler.com/articles/richardsonMaturityModel.html" },
+      { "name": "RFC 9110 — HTTP Semantics (métodos, status e requisições condicionais)", "url": "https://www.rfc-editor.org/rfc/rfc9110.html" },
+      { "name": "RFC 9457 — Problem Details for HTTP APIs", "url": "https://www.rfc-editor.org/rfc/rfc9457.html" },
+      { "name": "Stripe — Idempotent requests", "url": "https://docs.stripe.com/api/idempotent_requests" }
+    ],
+    "checklist": [
+      { "key": "semantica-http", "text": "Consigo escolher corretamente métodos e códigos de status (201, 204, 409, 422, 429...) e explicar quais métodos são seguros e quais são idempotentes." },
+      { "key": "versionamento", "text": "Sei comparar versionamento por URL, por header e por media type e já defini uma política de depreciação para uma API." },
+      { "key": "idempotency-key", "text": "Já implementei idempotência em um POST (ex.: Idempotency-Key com a resposta guardada) e sei explicar o que acontece com repetições simultâneas." },
+      { "key": "erros-padronizados", "text": "Já padronizei as respostas de erro de uma API (ex.: RFC 9457) com código estável e detalhes de validação por campo." },
+      { "key": "paginacao", "text": "Sei explicar a diferença entre paginação por offset e por cursor e quando cada uma é a melhor escolha." },
+      { "key": "etag-concorrencia", "text": "Sei usar ETag com If-Match ou If-None-Match para controle de concorrência otimista ou cache condicional." }
+    ]
+  },
+  {
+    "slug": "arq-filas-e-mensageria",
+    "title": "Filas e mensageria",
+    "description": "Comunicação assíncrona entre componentes com filas e brokers (RabbitMQ, SQS, Kafka, Redis): fila ponto a ponto versus publish/subscribe, entrega at-least-once, consumidores idempotentes, retentativas com backoff, dead-letter queues e o padrão Outbox. O objetivo é saber quando a assincronia resolve o problema e quando só acrescenta complexidade.",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": ["arq-padroes-estruturais-comportamentais", "arq-apis-rest-maduras"],
+    "resources": [
+      { "name": "Enterprise Integration Patterns — Gregor Hohpe e Bobby Woolf", "url": "https://www.enterpriseintegrationpatterns.com/" },
+      { "name": "RabbitMQ — Tutoriais", "url": "https://www.rabbitmq.com/tutorials" },
+      { "name": "Apache Kafka — Introdução", "url": "https://kafka.apache.org/intro/" },
+      { "name": "Chris Richardson — Pattern: Transactional outbox", "url": "https://microservices.io/patterns/data/transactional-outbox.html" }
+    ],
+    "checklist": [
+      { "key": "fila-vs-pubsub", "text": "Consigo explicar a diferença entre fila (consumidores concorrentes) e publish/subscribe (fan-out por tópico) e escolher entre elas em um cenário real." },
+      { "key": "at-least-once", "text": "Sei explicar por que 'exactly-once' é raro na prática e como a entrega at-least-once exige consumidores idempotentes." },
+      { "key": "consumidor-idempotente", "text": "Já implementei um consumidor idempotente (ex.: tabela de mensagens processadas ou chave de deduplicação)." },
+      { "key": "retry-e-dlq", "text": "Já configurei retentativas com backoff e uma dead-letter queue e sei reprocessar mensagens que falharam." },
+      { "key": "transactional-outbox", "text": "Consigo explicar o padrão Transactional Outbox e o problema de 'dual write' (gravar no banco e publicar na fila) que ele resolve." },
+      { "key": "ordem-e-backpressure", "text": "Sei explicar ordenação por partição ou chave e o que acontece quando a fila cresce mais rápido do que é consumida (backpressure)." }
+    ]
+  },
+  {
+    "slug": "arq-cache-e-cdn",
+    "title": "Cache e CDN",
+    "description": "Estratégias para reduzir latência e carga em várias camadas (navegador, CDN, aplicação e banco): cache-aside, write-through, TTL, invalidação, cache stampede e headers HTTP como Cache-Control e ETag. Inclui projetar chaves de cache seguras e medir a taxa de acerto para saber se o cache está de fato ajudando.",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": ["arq-apis-rest-maduras"],
+    "resources": [
+      { "name": "MDN — Cache HTTP", "url": "https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Guides/Caching" },
+      { "name": "RFC 9111 — HTTP Caching", "url": "https://www.rfc-editor.org/rfc/rfc9111.html" },
+      { "name": "Redis — Documentação oficial", "url": "https://redis.io/docs/latest/" },
+      { "name": "Cloudflare — Cache (CDN) docs", "url": "https://developers.cloudflare.com/cache/" }
+    ],
+    "checklist": [
+      { "key": "camadas-de-cache", "text": "Consigo listar as camadas de cache por onde uma requisição web passa (navegador, CDN, proxy, aplicação, banco) e o que cada uma guarda." },
+      { "key": "cache-aside", "text": "Já implementei cache-aside com TTL e invalidação em um projeto e sei compará-lo com write-through e write-behind." },
+      { "key": "cache-control-etag", "text": "Sei configurar Cache-Control (max-age, s-maxage, no-store, stale-while-revalidate) e ETag de acordo com o tipo de recurso." },
+      { "key": "cache-stampede", "text": "Consigo explicar cache stampede e já usei uma mitigação (lock, jitter no TTL ou renovação antecipada)." },
+      { "key": "estrategias-de-invalidacao", "text": "Sei comparar estratégias de invalidação (por tempo, por evento e por versão ou tag na chave) e seus riscos de dado desatualizado." },
+      { "key": "medir-hit-ratio", "text": "Já medi a taxa de acerto (hit ratio) de um cache e usei o resultado para ajustar TTL ou chaves." }
+    ]
+  },
+  {
+    "slug": "arq-escalabilidade-horizontal",
+    "title": "Escalabilidade horizontal",
+    "description": "Como fazer o sistema crescer adicionando instâncias em vez de máquinas maiores: aplicações stateless, balanceamento de carga, sessões e arquivos fora do servidor, réplicas de leitura e particionamento (sharding) do banco. Inclui estimar capacidade, achar gargalos com testes de carga e saber quando escalar verticalmente ainda é a melhor decisão.",
+    "level": "senior",
+    "difficulty": 5,
+    "prerequisites": ["arq-cache-e-cdn", "arq-filas-e-mensageria"],
+    "resources": [
+      { "name": "Livro: Designing Data-Intensive Applications — Martin Kleppmann (capítulos sobre replicação e particionamento)" },
+      { "name": "Livro: System Design Interview — Alex Xu" },
+      { "name": "Google SRE Book — Load Balancing in the Datacenter", "url": "https://sre.google/sre-book/load-balancing-datacenter/" },
+      { "name": "k6 — Documentação oficial", "url": "https://grafana.com/docs/k6/latest/" }
+    ],
+    "checklist": [
+      { "key": "aplicacao-stateless", "text": "Consigo explicar por que a aplicação precisa ser stateless e já movi sessão, cache e uploads para fora do servidor local." },
+      { "key": "balanceamento-de-carga", "text": "Sei descrever algoritmos de balanceamento (round robin, least connections, hash consistente) e o papel dos health checks." },
+      { "key": "escala-do-banco", "text": "Consigo explicar réplicas de leitura, lag de replicação e sharding, e os gargalos que cada um resolve ou cria." },
+      { "key": "estimativa-de-capacidade", "text": "Já fiz uma estimativa de capacidade (requisições por segundo, armazenamento, banda) para um sistema e apontei o gargalo provável." },
+      { "key": "teste-de-carga", "text": "Já executei um teste de carga (k6, Locust ou similar), li a latência em p95 e p99 e identifiquei o primeiro gargalo." },
+      { "key": "vertical-vs-horizontal", "text": "Sei argumentar quando escalar verticalmente ainda é a melhor decisão." }
+    ]
+  },
+  {
+    "slug": "arq-cap-consistencia-eventual",
+    "title": "CAP e consistência eventual",
+    "description": "Fundamentos de sistemas distribuídos para escolher e usar bancos e filas conhecendo os trade-offs: teorema CAP e PACELC, consistência forte versus eventual, quorum e padrões para conviver com inconsistência, como Saga e compensação. O objetivo é raciocinar sobre disponibilidade, latência e consistência ao desenhar fluxos que cruzam serviços.",
+    "level": "senior",
+    "difficulty": 5,
+    "prerequisites": ["arq-escalabilidade-horizontal", "arq-filas-e-mensageria"],
+    "resources": [
+      { "name": "Livro: Designing Data-Intensive Applications — Martin Kleppmann (capítulos sobre replicação, transações e consistência)" },
+      { "name": "Martin Kleppmann — Please stop calling databases CP or AP", "url": "https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html" },
+      { "name": "Werner Vogels — Eventually Consistent", "url": "https://www.allthingsdistributed.com/2008/12/eventually_consistent.html" },
+      { "name": "Chris Richardson — Pattern: Saga", "url": "https://microservices.io/patterns/data/saga.html" }
+    ],
+    "checklist": [
+      { "key": "explicar-cap", "text": "Consigo explicar o teorema CAP sem os mitos comuns e dizer o que acontece com disponibilidade e consistência durante uma partição de rede." },
+      { "key": "pacelc", "text": "Sei o que o PACELC acrescenta ao CAP (o trade-off entre latência e consistência quando não há partição)." },
+      { "key": "niveis-de-consistencia", "text": "Consigo diferenciar consistência forte, eventual, read-your-writes e monotonic reads com exemplos de produto." },
+      { "key": "regra-de-quorum", "text": "Sei aplicar a regra de quorum (R + W > N) e explicar como ela afeta leituras e escritas." },
+      { "key": "saga-e-compensacao", "text": "Sei explicar a Saga (coreografada e orquestrada) e já desenhei as ações de compensação de um fluxo (ex.: pedido, pagamento e estoque)." },
+      { "key": "escolher-banco-por-garantias", "text": "Consigo justificar a escolha de um banco (ex.: PostgreSQL, Redis, DynamoDB ou Cassandra) para um caso de uso a partir de suas garantias de consistência." }
+    ]
+  },
+  {
+    "slug": "arq-microsservicos-e-trade-offs",
+    "title": "Microsserviços e trade-offs",
+    "description": "Arquitetura de serviços independentes por contexto de negócio: ganhos (deploy e escala independentes, autonomia de times) e custos (consistência distribuída, observabilidade, latência de rede e complexidade operacional). Cobre critérios para escolher entre monólito e microsserviços, comunicação síncrona e assíncrona, dados por serviço e migração gradual com Strangler Fig.",
+    "level": "senior",
+    "difficulty": 5,
+    "prerequisites": ["arq-monolito-modular", "arq-filas-e-mensageria", "arq-cap-consistencia-eventual"],
+    "resources": [
+      { "name": "Martin Fowler e James Lewis — Microservices", "url": "https://martinfowler.com/articles/microservices.html" },
+      { "name": "Martin Fowler — Microservice Prerequisites", "url": "https://martinfowler.com/bliki/MicroservicePrerequisites.html" },
+      { "name": "Martin Fowler — Strangler Fig Application", "url": "https://martinfowler.com/bliki/StranglerFigApplication.html" },
+      { "name": "Livro: Building Microservices — Sam Newman" }
+    ],
+    "checklist": [
+      { "key": "decidir-monolito-ou-servicos", "text": "Consigo listar os critérios (tamanho do time, necessidade de escala, ritmo de deploy, maturidade operacional) para escolher entre monólito modular e microsserviços e defender a decisão." },
+      { "key": "banco-por-servico", "text": "Sei explicar o padrão 'banco por serviço' e as consequências para consultas, relatórios e transações." },
+      { "key": "sincrono-vs-assincrono", "text": "Consigo comparar comunicação síncrona (REST ou gRPC) com assíncrona (eventos) quanto a acoplamento temporal e falhas em cascata." },
+      { "key": "resiliencia-entre-servicos", "text": "Já configurei timeout, retry com backoff e circuit breaker em chamadas entre serviços." },
+      { "key": "strangler-fig", "text": "Sei descrever o padrão Strangler Fig e como migrar uma funcionalidade de um monólito sem reescrita total." },
+      { "key": "anti-padroes", "text": "Reconheço anti-padrões como 'monólito distribuído' e serviços excessivamente granulares e sei como evitá-los." }
+    ]
+  },
+  {
+    "slug": "arq-adrs-documentacao-decisoes",
+    "title": "ADRs e documentação de decisões",
+    "description": "Registrar decisões arquiteturais em ADRs (Architecture Decision Records) curtos e versionados junto do código, com contexto, alternativas consideradas, decisão e consequências. Inclui o fluxo de proposta e revisão, o ciclo de vida (proposto, aceito, substituído) e diagramas leves, como o modelo C4, para comunicar a arquitetura.",
+    "level": "senior",
+    "difficulty": 3,
+    "prerequisites": ["arq-arquitetura-em-camadas"],
+    "resources": [
+      { "name": "Michael Nygard — Documenting Architecture Decisions", "url": "https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions" },
+      { "name": "adr.github.io — Architectural Decision Records", "url": "https://adr.github.io/" },
+      { "name": "MADR — Markdown Architectural Decision Records", "url": "https://adr.github.io/madr/" },
+      { "name": "C4 model — Simon Brown", "url": "https://c4model.com/" }
+    ],
+    "checklist": [
+      { "key": "escrever-adr", "text": "Já escrevi um ADR com contexto, alternativas, decisão e consequências para uma escolha técnica real." },
+      { "key": "adrs-versionados", "text": "Mantenho ADRs versionados junto do código (ex.: docs/adr), com numeração e status." },
+      { "key": "substituir-adr", "text": "Sei por que um ADR é substituído por outro (superseded) em vez de apagado e como registrar essa ligação." },
+      { "key": "revisar-adr-em-time", "text": "Já submeti um ADR à revisão do time (PR ou RFC) e incorporei as objeções antes de aceitá-lo." },
+      { "key": "explicitar-trade-offs", "text": "Consigo explicitar trade-offs e critérios (custo, risco, reversibilidade) em vez de apenas descrever a solução escolhida." },
+      { "key": "diagrama-c4", "text": "Consigo desenhar um diagrama de contexto e outro de contêineres (modelo C4) de um sistema meu." }
+    ]
+  }
+]

@@ -1,0 +1,264 @@
+[
+  {
+    "slug": "car-comunicacao-escrita",
+    "title": "Comunicação escrita",
+    "description": "Escrever mensagens, tickets, descrições de pull request e commits que outras pessoas entendem sem precisar de reunião: começar pelo ponto principal, dar contexto suficiente, ser objetivo e revisar antes de enviar. É uma das habilidades que mais diferenciam quem trabalha bem em times remotos e assíncronos.",
+    "level": "beginner",
+    "difficulty": 2,
+    "prerequisites": [],
+    "resources": [
+      { "name": "Google — Technical Writing One", "url": "https://developers.google.com/tech-writing/one" },
+      { "name": "Chris Beams — How to Write a Git Commit Message", "url": "https://cbea.ms/git-commit/" },
+      { "name": "Conventional Commits (pt-BR)", "url": "https://www.conventionalcommits.org/pt-br/v1.0.0/" },
+      { "name": "Livro: On Writing Well — William Zinsser" }
+    ],
+    "checklist": [
+      { "key": "mensagem-direta", "text": "Já reescrevi uma mensagem minha de chat ou e-mail para começar pelo ponto principal e pedir uma ação clara (decisão, revisão ou resposta) com prazo." },
+      { "key": "commits-explicativos", "text": "Já escrevi mensagens de commit que explicam o porquê da mudança (assunto curto no imperativo e corpo quando necessário) e as usei depois para entender o histórico." },
+      { "key": "descricao-de-pr", "text": "Já escrevi uma descrição de pull request com contexto, o que mudou, como testar e riscos, e recebi menos perguntas na revisão." },
+      { "key": "relato-de-bug", "text": "Já abri um relato de bug com passos para reproduzir, resultado esperado e resultado obtido, e a pessoa conseguiu reproduzi-lo sem me pedir mais informações." },
+      { "key": "revisar-antes-de-enviar", "text": "Já reli e cortei o que não era necessário em um texto importante antes de enviá-lo e pedi a alguém que o revisasse." },
+      { "key": "texto-no-lugar-de-reuniao", "text": "Já escrevi um resumo ou uma proposta que dispensou uma reunião e sei quando um texto assíncrono funciona melhor que uma chamada." }
+    ]
+  },
+  {
+    "slug": "car-pedir-ajuda-debugar-voz-alta",
+    "title": "Pedir ajuda e debugar em voz alta",
+    "description": "Saber quando e como pedir ajuda sem travar nem incomodar: tentar por um tempo definido, montar um exemplo mínimo reproduzível e formular uma pergunta específica. Inclui o 'rubber duck debugging' (explicar o problema em voz alta ou por escrito), que muitas vezes revela a causa antes de alguém responder.",
+    "level": "beginner",
+    "difficulty": 1,
+    "prerequisites": [],
+    "resources": [
+      { "name": "Julia Evans — How to ask good questions", "url": "https://jvns.ca/blog/good-questions/" },
+      { "name": "Stack Overflow — How to create a Minimal, Reproducible Example (Central de Ajuda)" },
+      { "name": "No Hello — por que não mandar só 'oi' no chat", "url": "https://nohello.net/pt/" },
+      { "name": "Livro: The Pragmatic Programmer — Andrew Hunt e David Thomas (rubber duck debugging)" }
+    ],
+    "checklist": [
+      { "key": "timebox-antes-de-pedir", "text": "Já defini um limite de tempo para tentar sozinho (ex.: 30 a 60 minutos) antes de pedir ajuda e cumpri esse limite em uma tarefa real." },
+      { "key": "pergunta-completa", "text": "Já fiz uma pergunta a um colega ou em um fórum com contexto, o que tentei, o que esperava e o que aconteceu, incluindo a mensagem de erro e as versões usadas." },
+      { "key": "exemplo-minimo", "text": "Já reduzi um problema a um exemplo mínimo reproduzível e, nesse processo, encontrei a causa ou facilitei a ajuda." },
+      { "key": "rubber-duck", "text": "Já usei rubber duck debugging (explicar o problema em voz alta ou por escrito) e cheguei à causa sozinho." },
+      { "key": "fechar-o-ciclo", "text": "Depois de resolver um problema, já voltei à pessoa ou ao tópico com a solução e anotei o que aprendi." }
+    ]
+  },
+  {
+    "slug": "car-gestao-tempo-foco",
+    "title": "Gestão de tempo e foco",
+    "description": "Organizar o dia para ter blocos de trabalho profundo, lidar com interrupções e reuniões e planejar o que cabe na semana. Cobre time-boxing, Pomodoro, priorização diária, o custo da troca de contexto e como manter um backlog pessoal sem se perder em tarefas urgentes e pouco importantes.",
+    "level": "junior",
+    "difficulty": 2,
+    "prerequisites": [],
+    "resources": [
+      { "name": "Paul Graham — Maker's Schedule, Manager's Schedule", "url": "https://www.paulgraham.com/makersschedule.html" },
+      { "name": "Livro: Deep Work — Cal Newport" },
+      { "name": "Livro: Peopleware — Tom DeMarco e Timothy Lister" },
+      { "name": "Livro: Getting Things Done — David Allen" }
+    ],
+    "checklist": [
+      { "key": "prioridades-do-dia", "text": "Já planejei meus dias com no máximo 3 prioridades por pelo menos duas semanas seguidas e revisei o resultado no fim de cada dia." },
+      { "key": "bloco-de-foco", "text": "Já reservei blocos de foco na agenda (ex.: 2 horas sem notificações) e medi quanto consegui entregar neles." },
+      { "key": "timebox-pomodoro", "text": "Já testei time-boxing ou Pomodoro em tarefas reais e sei dizer o que funcionou para mim e o que não funcionou." },
+      { "key": "troca-de-contexto", "text": "Consigo explicar o custo da troca de contexto e já adotei uma prática para reduzi-lo (ex.: limitar tarefas em andamento e agrupar respostas de chat)." },
+      { "key": "dizer-nao-ou-negociar", "text": "Já negociei um prazo ou adiei um pedido, explicando o impacto nas minhas prioridades atuais." },
+      { "key": "backlog-pessoal", "text": "Mantenho um backlog pessoal (lista priorizada, por exemplo com a matriz urgente/importante) e já o usei para decidir o que fazer primeiro." }
+    ]
+  },
+  {
+    "slug": "car-documentacao-tecnica",
+    "title": "Documentação técnica",
+    "description": "Documentar código, APIs e decisões para que o próximo desenvolvedor (ou você daqui a seis meses) consiga usar e manter o sistema: README, guias de instalação, documentação de API, diagramas e runbooks. Cobre o modelo Diátaxis (tutorial, guia prático, referência e explicação) e como manter a documentação viva e perto do código.",
+    "level": "junior",
+    "difficulty": 2,
+    "prerequisites": ["car-comunicacao-escrita"],
+    "resources": [
+      { "name": "Diátaxis — framework de documentação", "url": "https://diataxis.fr/" },
+      { "name": "Write the Docs — Documentation Guide", "url": "https://www.writethedocs.org/guide/" },
+      { "name": "Google — Technical Writing Two", "url": "https://developers.google.com/tech-writing/two" },
+      { "name": "Make a README", "url": "https://www.makeareadme.com/" }
+    ],
+    "checklist": [
+      { "key": "readme-completo", "text": "Já escrevi um README que permite a alguém instalar, rodar e testar o projeto sem precisar me perguntar nada." },
+      { "key": "teste-com-outra-pessoa", "text": "Já pedi a alguém para seguir minha documentação do zero e corrigi os pontos em que a pessoa travou." },
+      { "key": "tipos-diataxis", "text": "Sei diferenciar tutorial, guia prático, referência e explicação (Diátaxis) e já separei esses tipos em uma documentação minha." },
+      { "key": "documentar-api-ou-modulo", "text": "Já documentei uma API ou módulo (ex.: com OpenAPI, PHPDoc ou TSDoc) incluindo exemplos de uso e de erro." },
+      { "key": "runbook", "text": "Já escrevi um runbook ou guia de resolução de problemas para uma tarefa operacional recorrente." },
+      { "key": "doc-junto-do-codigo", "text": "Mantenho a documentação no repositório e a atualizo junto com as mudanças de código, revisando-a no pull request." }
+    ]
+  },
+  {
+    "slug": "car-estimativas",
+    "title": "Estimativas",
+    "description": "Estimar esforço e prazo com honestidade: decompor o trabalho, usar referências históricas, comunicar incerteza com faixas em vez de datas exatas e revisar a estimativa quando a informação muda. Cobre o viés do planejamento (planning fallacy), story points versus tempo e o que fazer quando cobram prazo sem escopo definido.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["car-gestao-tempo-foco", "car-comunicacao-escrita"],
+    "resources": [
+      { "name": "Livro: Software Estimation: Demystifying the Black Art — Steve McConnell" },
+      { "name": "Joel Spolsky — Evidence Based Scheduling", "url": "https://www.joelonsoftware.com/2007/10/26/evidence-based-scheduling/" },
+      { "name": "Livro: The Mythical Man-Month — Frederick P. Brooks Jr." },
+      { "name": "Atlassian — What are story points and how do you estimate them?", "url": "https://www.atlassian.com/agile/project-management/estimation" }
+    ],
+    "checklist": [
+      { "key": "decompor-antes-de-estimar", "text": "Já decompus uma funcionalidade em tarefas de no máximo 1 a 2 dias antes de estimar." },
+      { "key": "faixa-e-premissas", "text": "Já apresentei uma estimativa como faixa (otimista, provável e pessimista), explicitando premissas e riscos." },
+      { "key": "comparar-com-realizado", "text": "Já comparei minhas estimativas com o tempo realmente gasto em pelo menos 5 tarefas e ajustei meu método a partir disso." },
+      { "key": "pontos-vs-tempo", "text": "Sei explicar a diferença entre story points e horas e quando cada um faz sentido." },
+      { "key": "avisar-do-risco-cedo", "text": "Já avisei com antecedência que um prazo estava em risco, levando a nova previsão e opções (escopo, prazo ou apoio)." },
+      { "key": "vies-do-planejamento", "text": "Consigo explicar o viés do planejamento (planning fallacy) e a lei de Hofstadter e dar um exemplo de quando caí neles." }
+    ]
+  },
+  {
+    "slug": "car-feedback-dar-receber",
+    "title": "Feedback (dar e receber)",
+    "description": "Dar feedback específico, oportuno e acionável (modelo Situação-Comportamento-Impacto) e receber feedback sem defensividade, transformando-o em ações. Aplica-se a code review, 1:1s, avaliações de desempenho e conversas difíceis, e é a base para mentoria e liderança.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["car-comunicacao-escrita", "car-pedir-ajuda-debugar-voz-alta"],
+    "resources": [
+      { "name": "Google Engineering Practices — How to write code review comments", "url": "https://google.github.io/eng-practices/review/reviewer/comments.html" },
+      { "name": "Livro: Radical Candor — Kim Scott" },
+      { "name": "Livro: Thanks for the Feedback — Douglas Stone e Sheila Heen" },
+      { "name": "Livro: Crucial Conversations — Patterson, Grenny, McMillan e Switzler" }
+    ],
+    "checklist": [
+      { "key": "feedback-sbi", "text": "Já dei um feedback no modelo Situação-Comportamento-Impacto, com um exemplo concreto e observável (e não um julgamento sobre a pessoa)." },
+      { "key": "feedback-positivo", "text": "Já dei um feedback positivo específico a um colega, dizendo o que foi bom e qual foi o efeito." },
+      { "key": "review-construtivo", "text": "Já escrevi comentários de code review que explicam o porquê, fazem perguntas e separam o que é bloqueante do que é sugestão." },
+      { "key": "pedir-feedback", "text": "Já pedi feedback a alguém (colega, líder ou pessoa de outro time) com uma pergunta específica, como 'o que eu poderia ter feito melhor nessa entrega?'." },
+      { "key": "receber-sem-defesa", "text": "Já recebi um feedback difícil sem me justificar de imediato: agradeci, pedi exemplos e registrei ações." },
+      { "key": "agir-e-voltar", "text": "Já agi sobre um feedback recebido e voltei à pessoa para mostrar o resultado." }
+    ]
+  },
+  {
+    "slug": "car-metodologias-ageis",
+    "title": "Metodologias ágeis",
+    "description": "Os princípios do Manifesto Ágil e como eles aparecem na prática em Scrum (sprints, papéis e eventos), Kanban (fluxo e limite de trabalho em progresso) e XP (integração contínua, testes e programação em par). O foco é entender o propósito de cada cerimônia e adaptar a prática ao contexto do time, em vez de seguir um ritual vazio.",
+    "level": "mid",
+    "difficulty": 2,
+    "prerequisites": ["car-comunicacao-escrita", "car-gestao-tempo-foco"],
+    "resources": [
+      { "name": "Manifesto Ágil — Princípios por trás do Manifesto", "url": "https://agilemanifesto.org/iso/ptbr/principles.html" },
+      { "name": "The Scrum Guide", "url": "https://scrumguides.org/scrum-guide.html" },
+      { "name": "The Kanban Guide", "url": "https://kanbanguides.org/" },
+      { "name": "Martin Fowler — Flaccid Scrum", "url": "https://martinfowler.com/bliki/FlaccidScrum.html" }
+    ],
+    "checklist": [
+      { "key": "valores-e-principios", "text": "Consigo explicar os 4 valores e alguns dos 12 princípios do Manifesto Ágil com exemplos do meu dia a dia." },
+      { "key": "eventos-do-scrum", "text": "Sei descrever os eventos do Scrum (planejamento, daily, revisão e retrospectiva) e o objetivo de cada um, e já participei de todos." },
+      { "key": "kanban-com-wip", "text": "Já usei um quadro Kanban com limite de trabalho em progresso (WIP) e observei o efeito no fluxo." },
+      { "key": "retrospectiva-com-acao", "text": "Já contribuí em uma retrospectiva com uma observação específica e acompanhei uma ação de melhoria até o fim." },
+      { "key": "historia-com-criterios", "text": "Já escrevi uma história de usuário com critérios de aceite claros e verificáveis." },
+      { "key": "adaptar-ao-contexto", "text": "Consigo apontar o que um ritual ágil tem de útil e de excessivo no meu time e já propus um ajuste." }
+    ]
+  },
+  {
+    "slug": "car-mentoria",
+    "title": "Mentoria",
+    "description": "Aprender com quem tem mais experiência (mentoria recebida) e, com o tempo, ajudar quem está começando (mentoria dada): combinar objetivos, preparar as conversas, fazer boas perguntas e dar autonomia em vez de respostas prontas. Também cobre pareamento, onboarding de novos colegas e como saber se a mentoria está funcionando.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["car-feedback-dar-receber", "car-pedir-ajuda-debugar-voz-alta"],
+    "resources": [
+      { "name": "Livro: The Manager's Path — Camille Fournier (capítulo sobre mentoria)" },
+      { "name": "Livro: The Coaching Habit — Michael Bungay Stanier" },
+      { "name": "Livro: Pragmatic Thinking and Learning — Andy Hunt" },
+      { "name": "John Allspaw — On Being A Senior Engineer (inclui mentoria e patrocínio)", "url": "https://www.kitchensoap.com/2012/10/25/on-being-a-senior-engineer/" }
+    ],
+    "checklist": [
+      { "key": "mentoria-recebida", "text": "Já tive (ou busquei) um mentor e combinamos objetivos, frequência e formato dos encontros." },
+      { "key": "pauta-de-mentoria", "text": "Já preparei uma pauta para um encontro de mentoria, com temas, dúvidas e o que eu já tinha tentado." },
+      { "key": "pair-programming", "text": "Já fiz pair programming como quem aprende e como quem ensina, alternando as funções." },
+      { "key": "ajudar-iniciante", "text": "Já ajudei uma pessoa menos experiente em uma tarefa real (ex.: onboarding ou revisão de código didática)." },
+      { "key": "perguntas-em-vez-de-respostas", "text": "Já conduzi uma ajuda com perguntas que levaram a pessoa a achar a solução, em vez de entregar a resposta pronta." },
+      { "key": "ajustar-a-mentoria", "text": "Já pedi feedback à pessoa mentorada ou ao meu mentor sobre o que está funcionando e ajustei a forma de trabalharmos." }
+    ]
+  },
+  {
+    "slug": "car-priorizacao-negociacao",
+    "title": "Priorização e negociação",
+    "description": "Decidir o que fazer primeiro quando tudo parece urgente: critérios de valor, esforço e risco (RICE, MoSCoW e custo do atraso) e negociação de escopo, prazo e qualidade com produto e outras áreas. Cobre dizer 'não' com alternativas, expor trade-offs com dados e chegar a acordos em que todos saem comprometidos.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["car-estimativas", "car-metodologias-ageis"],
+    "resources": [
+      { "name": "Intercom — RICE: Simple prioritization for product managers", "url": "https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers" },
+      { "name": "Livro: Getting to Yes — Roger Fisher, William Ury e Bruce Patton" },
+      { "name": "Livro: Never Split the Difference — Chris Voss" }
+    ],
+    "checklist": [
+      { "key": "criterio-explicito", "text": "Já usei um critério explícito (ex.: RICE, MoSCoW ou valor versus esforço) para ordenar um backlog ou uma lista de pedidos." },
+      { "key": "nao-com-alternativa", "text": "Já respondi a um pedido urgente com um 'não, mas' (alternativa de escopo, prazo ou ajuda) em vez de aceitar tudo." },
+      { "key": "cortar-escopo", "text": "Já negociei o corte de escopo de uma entrega para cumprir um prazo, deixando claro o que ficou de fora e o risco." },
+      { "key": "expor-tradeoffs", "text": "Já apresentei a uma pessoa de negócio os trade-offs (prazo, escopo, qualidade e custo) de uma decisão, usando dados e não opiniões." },
+      { "key": "interesses-vs-posicoes", "text": "Sei diferenciar interesses de posições em uma negociação e já usei isso para chegar a um acordo." },
+      { "key": "custo-do-atraso", "text": "Consigo explicar custo do atraso e dívida técnica em termos que uma pessoa de negócio entende." }
+    ]
+  },
+  {
+    "slug": "car-apresentacoes-tecnicas",
+    "title": "Apresentações técnicas",
+    "description": "Explicar um tema técnico para públicos diferentes (time, gestores, pessoas de outras áreas) de forma clara: definir a mensagem principal, estruturar a fala, usar slides e diagramas com economia e conduzir demonstrações ao vivo sem tropeços. Cobre também responder perguntas difíceis, controlar o tempo e coletar feedback depois.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["car-comunicacao-escrita", "car-documentacao-tecnica"],
+    "resources": [
+      { "name": "Zach Holman — Tips for Public Speaking (speaking.io)", "url": "https://speaking.io/" },
+      { "name": "Livro: Presentation Zen — Garr Reynolds" },
+      { "name": "Livro: Slide:ology — Nancy Duarte" },
+      { "name": "Livro: Storytelling com Dados — Cole Nussbaumer Knaflic" }
+    ],
+    "checklist": [
+      { "key": "mensagem-central", "text": "Já apresentei um tema técnico a partir de uma mensagem central (uma frase) e adaptei o nível de detalhe ao público." },
+      { "key": "estrutura-da-fala", "text": "Já estruturei uma apresentação com início (problema), meio (solução e trade-offs) e fim (próximos passos ou pedido)." },
+      { "key": "slides-enxutos", "text": "Já preparei slides com pouco texto e um diagrama claro e cortei conteúdo para caber no tempo." },
+      { "key": "demo-com-plano-b", "text": "Já fiz uma demonstração ao vivo com ensaio prévio e um plano B (ex.: vídeo ou captura de tela) para o caso de algo falhar." },
+      { "key": "perguntas-dificeis", "text": "Já respondi a perguntas difíceis na hora, inclusive com 'não sei, vou verificar e retorno', e voltei com a resposta." },
+      { "key": "feedback-da-apresentacao", "text": "Já pedi feedback sobre uma apresentação minha a pelo menos duas pessoas e apliquei algo na vez seguinte." }
+    ]
+  },
+  {
+    "slug": "car-lideranca-tecnica",
+    "title": "Liderança técnica",
+    "description": "Conduzir tecnicamente um time ou projeto sem necessariamente ser gestor: definir direção técnica, desbloquear pessoas, delegar, revisar com critério e garantir qualidade e entrega. Cobre os papéis de tech lead e de engenheiro staff, o equilíbrio entre codar e liderar e como fazer o time crescer em vez de virar um gargalo.",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": ["car-mentoria", "car-feedback-dar-receber", "car-priorizacao-negociacao"],
+    "resources": [
+      { "name": "StaffEng — guias e histórias de engenheiros staff", "url": "https://staffeng.com/" },
+      { "name": "John Allspaw — On Being A Senior Engineer", "url": "https://www.kitchensoap.com/2012/10/25/on-being-a-senior-engineer/" },
+      { "name": "Livro: The Staff Engineer's Path — Tanya Reilly" },
+      { "name": "Livro: The Manager's Path — Camille Fournier" }
+    ],
+    "checklist": [
+      { "key": "liderar-iniciativa", "text": "Já liderei uma iniciativa técnica de ponta a ponta (proposta, divisão do trabalho, acompanhamento e entrega) envolvendo mais de uma pessoa." },
+      { "key": "delegar-com-contexto", "text": "Já deleguei uma tarefa relevante com contexto, critério de sucesso e prazo e acompanhei sem microgerenciar." },
+      { "key": "desbloquear-outros", "text": "Já identifiquei e removi um bloqueio de outra pessoa ou de outro time (ex.: decisão pendente, acesso ou dependência)." },
+      { "key": "alinhar-expectativas", "text": "Já alinhei expectativas com produto e outros stakeholders sobre escopo, riscos e prazo de uma entrega." },
+      { "key": "equilibrar-codar-e-liderar", "text": "Já abri mão de uma tarefa técnica interessante para dar espaço a outra pessoa crescer e sei explicar como divido meu tempo entre codar e liderar." },
+      { "key": "padrao-do-time", "text": "Já ajudei o time a adotar uma prática ou padrão (ex.: checklist de code review, ADRs ou convenções) e verifiquei que ela passou a ser seguida." }
+    ]
+  },
+  {
+    "slug": "car-tomada-decisao-influencia",
+    "title": "Tomada de decisão e influência",
+    "description": "Decidir sob incerteza e conseguir adesão sem depender de cargo: separar decisões reversíveis das irreversíveis, usar dados e pré-mortem, registrar o raciocínio e construir apoio com argumentos, relacionamento e confiança. Inclui discordar e se comprometer (disagree and commit) e comunicar decisões e seus trade-offs de forma transparente.",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": ["car-lideranca-tecnica", "car-priorizacao-negociacao", "car-apresentacoes-tecnicas"],
+    "resources": [
+      { "name": "Gary Klein — Performing a Project Premortem (Harvard Business Review)", "url": "https://hbr.org/2007/09/performing-a-project-premortem" },
+      { "name": "Livro: Influence: The Psychology of Persuasion — Robert Cialdini" },
+      { "name": "Livro: Thinking, Fast and Slow — Daniel Kahneman" },
+      { "name": "Livro: Decisive — Chip Heath e Dan Heath" }
+    ],
+    "checklist": [
+      { "key": "reversivel-ou-irreversivel", "text": "Consigo diferenciar decisões reversíveis de irreversíveis e já decidi rapidamente nas reversíveis para não gastar tempo demais com análise." },
+      { "key": "registrar-decisao", "text": "Já registrei uma decisão relevante (ex.: em um ADR) com contexto, alternativas e critérios e a compartilhei com o time." },
+      { "key": "premortem", "text": "Já conduzi ou participei de um pré-mortem antes de um projeto e usei os riscos levantados para mudar o plano." },
+      { "key": "influenciar-sem-cargo", "text": "Já convenci outras pessoas, sem ser quem decide, a adotar uma mudança técnica usando dados, exemplos e escuta das objeções." },
+      { "key": "discordar-e-comprometer", "text": "Já discordei de uma decisão com argumentos, aceitei o resultado e me comprometi com a execução (disagree and commit)." },
+      { "key": "revisitar-decisao-ruim", "text": "Já revisitei uma decisão minha que se mostrou ruim, assumi o erro abertamente e ajustei o rumo." }
+    ]
+  }
+]

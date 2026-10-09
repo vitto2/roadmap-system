@@ -1,0 +1,680 @@
+[
+  {
+    "slug": "sql-modelo-relacional",
+    "title": "Modelo relacional",
+    "description": "O modelo relacional organiza os dados em tabelas (relações) de linhas e colunas ligadas por chaves primárias e estrangeiras, com constraints que mantêm a integridade. É a base conceitual de PostgreSQL, MySQL e SQLite e o ponto de partida para modelar, consultar e otimizar qualquer banco SQL.",
+    "level": "beginner",
+    "difficulty": 2,
+    "prerequisites": [],
+    "resources": [
+      {
+        "name": "PostgreSQL — Tutorial: Conceitos de bancos de dados relacionais",
+        "url": "https://www.postgresql.org/docs/current/tutorial-concepts.html"
+      },
+      {
+        "name": "SQLite — Documentação (banco local para praticar)",
+        "url": "https://sqlite.org/docs.html"
+      },
+      {
+        "name": "Artigo: A Relational Model of Data for Large Shared Data Banks (E. F. Codd, 1970)"
+      },
+      {
+        "name": "Livro: Database System Concepts (Silberschatz, Korth e Sudarshan)"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "explicar-relacao-tupla-atributo",
+        "text": "Consigo explicar a diferença entre tabela, linha e coluna usando os termos relação, tupla e atributo."
+      },
+      {
+        "key": "diferenciar-tipos-de-chave",
+        "text": "Sei diferenciar chave primária, chave candidata, chave natural e chave substituta (surrogate key) e escolher entre elas em um exemplo."
+      },
+      {
+        "key": "criar-tabelas-com-constraints",
+        "text": "Já criei, em um banco local (por exemplo SQLite ou PostgreSQL), tabelas relacionadas usando PRIMARY KEY, FOREIGN KEY, NOT NULL, UNIQUE e CHECK."
+      },
+      {
+        "key": "explicar-integridade-referencial",
+        "text": "Consigo explicar o que é integridade referencial e o que acontece em ON DELETE CASCADE, SET NULL e RESTRICT."
+      },
+      {
+        "key": "entender-null",
+        "text": "Sei explicar o que NULL representa e por que NULL = NULL não resulta em verdadeiro (lógica de três valores)."
+      }
+    ]
+  },
+  {
+    "slug": "sql-select-e-join",
+    "title": "SELECT/JOIN",
+    "description": "Consultar dados com SELECT, WHERE, ORDER BY e LIMIT e combinar tabelas com INNER, LEFT, RIGHT, FULL e CROSS JOIN, incluindo subconsultas com IN e EXISTS. É a habilidade mais usada no dia a dia com SQL, e erros aqui (linhas duplicadas, NULLs em junções) geram relatórios silenciosamente incorretos.",
+    "level": "beginner",
+    "difficulty": 2,
+    "prerequisites": [
+      "sql-modelo-relacional"
+    ],
+    "resources": [
+      {
+        "name": "PostgreSQL — Tutorial: Joins Between Tables",
+        "url": "https://www.postgresql.org/docs/current/tutorial-join.html"
+      },
+      {
+        "name": "PostgreSQL — Documentação: Queries",
+        "url": "https://www.postgresql.org/docs/current/queries.html"
+      },
+      {
+        "name": "SQLite — SELECT",
+        "url": "https://www.sqlite.org/lang_select.html"
+      },
+      {
+        "name": "Livro: Learning SQL (Alan Beaulieu)"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "escrever-consultas-basicas",
+        "text": "Consigo escrever consultas com SELECT, WHERE, ORDER BY, LIMIT e DISTINCT sem consultar a documentação."
+      },
+      {
+        "key": "diferenciar-inner-left-join",
+        "text": "Consigo explicar, com um exemplo, quais linhas INNER JOIN e LEFT JOIN retornam e quando cada um é o correto."
+      },
+      {
+        "key": "ordem-logica-da-consulta",
+        "text": "Sei a ordem lógica de avaliação de uma consulta (FROM, WHERE, SELECT, ORDER BY) e por que um alias do SELECT geralmente não funciona no WHERE."
+      },
+      {
+        "key": "evitar-duplicacao-em-joins",
+        "text": "Sei identificar quando um JOIN multiplica linhas (relações 1:N e N:N) e como evitar duplicações indesejadas."
+      },
+      {
+        "key": "reescrever-subconsultas",
+        "text": "Consigo reescrever uma subconsulta usando IN, EXISTS ou JOIN e explicar por que NOT IN se comporta mal quando há NULLs."
+      },
+      {
+        "key": "emular-full-join",
+        "text": "Sei que nem todo SGBD suporta FULL JOIN (como o MySQL) e consigo emulá-lo com LEFT JOIN, RIGHT JOIN e UNION."
+      }
+    ]
+  },
+  {
+    "slug": "sql-agregacoes-e-group-by",
+    "title": "Agregações e GROUP BY",
+    "description": "Resumir dados com COUNT, SUM, AVG, MIN e MAX, agrupar com GROUP BY e filtrar grupos com HAVING, tratando corretamente NULLs e COUNT(DISTINCT). É essencial para relatórios e métricas e prepara o terreno para window functions. Inclui noções de ROLLUP e GROUPING SETS para subtotais, cujo suporte varia entre SGBDs.",
+    "level": "junior",
+    "difficulty": 2,
+    "prerequisites": [
+      "sql-select-e-join"
+    ],
+    "resources": [
+      {
+        "name": "PostgreSQL — Tutorial: Aggregate Functions",
+        "url": "https://www.postgresql.org/docs/current/tutorial-agg.html"
+      },
+      {
+        "name": "PostgreSQL — Documentação: Aggregate Functions",
+        "url": "https://www.postgresql.org/docs/current/functions-aggregate.html"
+      },
+      {
+        "name": "SQLite — Aggregate Functions",
+        "url": "https://www.sqlite.org/lang_aggfunc.html"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "usar-funcoes-de-agregacao",
+        "text": "Consigo calcular totais, médias, mínimos, máximos e contagens com SUM, AVG, MIN, MAX e COUNT em consultas reais."
+      },
+      {
+        "key": "diferenciar-where-having",
+        "text": "Sei explicar a diferença entre WHERE e HAVING e em que etapa da consulta cada um filtra."
+      },
+      {
+        "key": "nulls-em-agregacoes",
+        "text": "Sei como NULL afeta COUNT(*), COUNT(coluna), SUM e AVG e uso COALESCE quando preciso de um valor padrão."
+      },
+      {
+        "key": "regra-do-group-by",
+        "text": "Consigo explicar por que toda coluna não agregada do SELECT precisa constar no GROUP BY e corrigir o erro quando isso falta."
+      },
+      {
+        "key": "agregar-apos-join",
+        "text": "Já montei um relatório que agrega dados de duas ou mais tabelas com JOIN e sei evitar contagens infladas pela multiplicação de linhas."
+      },
+      {
+        "key": "subtotais-com-rollup",
+        "text": "Conheço ROLLUP e GROUPING SETS, sei quando usá-los para gerar subtotais e como suprir sua falta no meu SGBD."
+      }
+    ]
+  },
+  {
+    "slug": "sql-modelagem-e-er",
+    "title": "Modelagem e ER",
+    "description": "Traduzir requisitos de negócio em um diagrama entidade-relacionamento (entidades, atributos, cardinalidades) e depois em tabelas, chaves e constraints, com relações 1:1, 1:N e N:N via tabelas associativas. Um bom modelo evita retrabalho caro e dados inconsistentes; o escopo inclui escolha de tipos de dados e antipadrões como EAV e associações polimórficas.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": [
+      "sql-modelo-relacional"
+    ],
+    "resources": [
+      {
+        "name": "PostgreSQL — Documentação: Constraints",
+        "url": "https://www.postgresql.org/docs/current/ddl-constraints.html"
+      },
+      {
+        "name": "PostgreSQL — Tutorial: Foreign Keys",
+        "url": "https://www.postgresql.org/docs/current/tutorial-fk.html"
+      },
+      {
+        "name": "Livro: SQL Antipatterns (Bill Karwin)"
+      },
+      {
+        "name": "Livro: Projeto de Banco de Dados (Carlos Alberto Heuser)"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "desenhar-diagrama-er",
+        "text": "Consigo desenhar um diagrama ER (entidades, atributos, relacionamentos e cardinalidades) a partir de uma descrição de negócio."
+      },
+      {
+        "key": "modelar-relacao-n-para-n",
+        "text": "Sei modelar relacionamentos N:N com tabela associativa e colocar nela os atributos do relacionamento (como quantidade ou data)."
+      },
+      {
+        "key": "escolher-chaves-e-tipos",
+        "text": "Sei escolher chaves primárias (identity/serial ou UUID) e tipos de dados adequados (NUMERIC/DECIMAL para dinheiro, timestamps com fuso, texto) justificando a escolha."
+      },
+      {
+        "key": "aplicar-constraints-de-negocio",
+        "text": "Já usei constraints (NOT NULL, UNIQUE, CHECK, FOREIGN KEY) para impor regras de negócio no próprio banco, e não só na aplicação."
+      },
+      {
+        "key": "evitar-antipadroes",
+        "text": "Consigo reconhecer e evitar antipadrões de modelagem, como EAV (entity-attribute-value), colunas multivaloradas e associações polimórficas sem integridade referencial."
+      },
+      {
+        "key": "modelar-historico-e-soft-delete",
+        "text": "Sei modelar histórico de alterações e exclusão lógica (soft delete) e explicar os custos de cada abordagem."
+      }
+    ]
+  },
+  {
+    "slug": "sql-normalizacao",
+    "title": "Normalização",
+    "description": "Aplicar as formas normais (1FN, 2FN, 3FN e BCNF) a partir de dependências funcionais para eliminar redundância e as anomalias de inserção, atualização e exclusão. Inclui saber quando desnormalizar de forma consciente, por desempenho de leitura ou relatórios, e quais riscos de consistência isso traz.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": [
+      "sql-modelo-relacional",
+      "sql-modelagem-e-er"
+    ],
+    "resources": [
+      {
+        "name": "Wikipedia — Database normalization",
+        "url": "https://en.wikipedia.org/wiki/Database_normalization"
+      },
+      {
+        "name": "Artigo: A Simple Guide to Five Normal Forms in Relational Database Theory (Kent, 1983)"
+      },
+      {
+        "name": "Livro: Database System Concepts (Silberschatz, Korth e Sudarshan)"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "identificar-dependencias-funcionais",
+        "text": "Consigo identificar dependências funcionais (parciais e transitivas) em uma tabela e apontar quais colunas dependem de quais."
+      },
+      {
+        "key": "levar-tabela-ate-3fn",
+        "text": "Consigo levar uma tabela desnormalizada até a 3FN, explicando cada passo e a forma normal atingida."
+      },
+      {
+        "key": "explicar-anomalias",
+        "text": "Sei dar exemplos de anomalias de inserção, atualização e exclusão causadas por redundância."
+      },
+      {
+        "key": "diferenciar-3fn-bcnf",
+        "text": "Sei explicar a diferença entre 3FN e BCNF e em que situação elas divergem."
+      },
+      {
+        "key": "desnormalizar-com-criterio",
+        "text": "Consigo justificar quando desnormalizar (por exemplo, coluna calculada, contador ou tabela de relatório) e quais riscos de consistência isso traz."
+      }
+    ]
+  },
+  {
+    "slug": "sql-indices",
+    "title": "Índices",
+    "description": "Entender como índices B-tree aceleram buscas, ordenações e junções ao custo de escritas mais lentas e mais espaço em disco, e como projetar índices compostos, parciais e de cobertura. É a ferramenta que mais impacta o desempenho de um banco, e escolhas ruins (ordem das colunas, baixa seletividade) levam o otimizador a ignorar o índice.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": [
+      "sql-select-e-join"
+    ],
+    "resources": [
+      {
+        "name": "PostgreSQL — Documentação: Indexes",
+        "url": "https://www.postgresql.org/docs/current/indexes.html"
+      },
+      {
+        "name": "Use The Index, Luke (guia online gratuito)",
+        "url": "https://use-the-index-luke.com/"
+      },
+      {
+        "name": "PostgreSQL — Documentação: Multicolumn Indexes",
+        "url": "https://www.postgresql.org/docs/current/indexes-multicolumn.html"
+      },
+      {
+        "name": "SQLite — Query Planning",
+        "url": "https://www.sqlite.org/queryplanner.html"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "explicar-btree",
+        "text": "Consigo explicar como um índice B-tree acelera uma consulta e qual o custo nas escritas."
+      },
+      {
+        "key": "ordem-colunas-indice-composto",
+        "text": "Sei definir a ordem das colunas em um índice composto e explicar a regra do prefixo mais à esquerda."
+      },
+      {
+        "key": "diagnosticar-indice-ignorado",
+        "text": "Consigo identificar por que uma consulta não usa um índice (função aplicada à coluna, tipos incompatíveis, LIKE '%texto', baixa seletividade)."
+      },
+      {
+        "key": "indices-parciais-e-cobertura",
+        "text": "Sei quando usar índice parcial (filtrado), índice de cobertura (covering) e índice UNIQUE, e o que cada um resolve."
+      },
+      {
+        "key": "medir-ganho-do-indice",
+        "text": "Já criei um índice para uma consulta lenta (incluindo colunas de chave estrangeira) e medi o ganho antes e depois."
+      },
+      {
+        "key": "custo-de-indices-em-excesso",
+        "text": "Sei listar os custos de indexar demais (escrita mais lenta, espaço em disco, manutenção) e como encontrar índices não utilizados."
+      }
+    ]
+  },
+  {
+    "slug": "sql-transacoes-e-acid",
+    "title": "Transações e ACID",
+    "description": "Entender o que é uma transação e como atomicidade, consistência, isolamento e durabilidade protegem os dados contra falhas e concorrência. Cobre BEGIN/COMMIT/ROLLBACK, savepoints, o papel do WAL (write-ahead log) na durabilidade e por que manter as transações curtas.",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": [
+      "sql-modelo-relacional",
+      "sql-select-e-join"
+    ],
+    "resources": [
+      {
+        "name": "PostgreSQL — Tutorial: Transactions",
+        "url": "https://www.postgresql.org/docs/current/tutorial-transactions.html"
+      },
+      {
+        "name": "PostgreSQL — Documentação: Concurrency Control (MVCC)",
+        "url": "https://www.postgresql.org/docs/current/mvcc.html"
+      },
+      {
+        "name": "SQLite — Atomic Commit In SQLite",
+        "url": "https://www.sqlite.org/atomiccommit.html"
+      },
+      {
+        "name": "Livro: Designing Data-Intensive Applications (Kleppmann) — Transações"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "explicar-acid",
+        "text": "Consigo explicar cada propriedade do ACID com um exemplo prático, como a transferência entre duas contas bancárias."
+      },
+      {
+        "key": "usar-begin-commit-rollback",
+        "text": "Já usei BEGIN, COMMIT, ROLLBACK e SAVEPOINT e sei o que acontece com a transação quando um erro ocorre no meio dela."
+      },
+      {
+        "key": "explicar-wal",
+        "text": "Sei explicar como o write-ahead log (WAL/redo log) garante a durabilidade e permite a recuperação após uma falha."
+      },
+      {
+        "key": "autocommit-e-ddl",
+        "text": "Sei como o autocommit funciona no meu SGBD e se comandos DDL são transacionais (no PostgreSQL e no SQLite o DDL pode ser revertido; no MySQL ele confirma a transação implicitamente)."
+      },
+      {
+        "key": "transacoes-curtas",
+        "text": "Consigo explicar por que transações longas, ou com chamadas externas (HTTP, filas) dentro delas, causam problemas de locks e de desempenho."
+      }
+    ]
+  },
+  {
+    "slug": "sql-isolamento-e-locks",
+    "title": "Isolamento e locks",
+    "description": "Estudar os níveis de isolamento (READ COMMITTED, REPEATABLE READ, SERIALIZABLE), as anomalias que cada um previne e como MVCC e locks de linha implementam isso. Inclui SELECT ... FOR UPDATE, SKIP LOCKED, deadlocks e controle de concorrência otimista versus pessimista, essenciais para evitar condições de corrida em sistemas com muitos acessos simultâneos.",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": [
+      "sql-transacoes-e-acid",
+      "sql-indices"
+    ],
+    "resources": [
+      {
+        "name": "PostgreSQL — Documentação: Transaction Isolation",
+        "url": "https://www.postgresql.org/docs/current/transaction-iso.html"
+      },
+      {
+        "name": "PostgreSQL — Documentação: Explicit Locking",
+        "url": "https://www.postgresql.org/docs/current/explicit-locking.html"
+      },
+      {
+        "name": "MySQL — Documentação oficial (InnoDB Locking e níveis de isolamento)",
+        "url": "https://dev.mysql.com/doc/"
+      },
+      {
+        "name": "Jepsen — Consistency Models",
+        "url": "https://jepsen.io/consistency"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "descrever-anomalias",
+        "text": "Consigo descrever dirty read, non-repeatable read, phantom read e write skew, com um exemplo de cada."
+      },
+      {
+        "key": "nivel-de-isolamento-padrao",
+        "text": "Sei qual é o nível de isolamento padrão do meu SGBD (por exemplo, READ COMMITTED no PostgreSQL e REPEATABLE READ no MySQL/InnoDB) e o que ele garante."
+      },
+      {
+        "key": "explicar-mvcc",
+        "text": "Consigo explicar como o MVCC permite que leituras não bloqueiem escritas e o que são versões de linha."
+      },
+      {
+        "key": "usar-for-update",
+        "text": "Já usei SELECT ... FOR UPDATE (e SKIP LOCKED em filas de trabalho) para evitar uma condição de corrida em um fluxo real."
+      },
+      {
+        "key": "diagnosticar-deadlock",
+        "text": "Consigo reproduzir e diagnosticar um deadlock lendo o log ou as views de locks do banco, e sei reduzir sua ocorrência (por exemplo, acessando linhas sempre na mesma ordem)."
+      },
+      {
+        "key": "otimista-vs-pessimista",
+        "text": "Sei comparar controle de concorrência otimista (coluna de versão) e pessimista (locks) e escolher entre eles para um caso concreto."
+      }
+    ]
+  },
+  {
+    "slug": "sql-explain-e-otimizacao",
+    "title": "EXPLAIN e otimização",
+    "description": "Ler planos de execução com EXPLAIN e EXPLAIN ANALYZE para descobrir por que uma consulta é lenta (varreduras sequenciais, estimativas erradas, ordenações e junções custosas). Cobre estatísticas do otimizador, reescrita de consultas e o ciclo medir, alterar e medir de novo, para otimizar com evidências em vez de palpites.",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": [
+      "sql-select-e-join",
+      "sql-indices"
+    ],
+    "resources": [
+      {
+        "name": "PostgreSQL — Documentação: Using EXPLAIN",
+        "url": "https://www.postgresql.org/docs/current/using-explain.html"
+      },
+      {
+        "name": "PostgreSQL — Documentação: Performance Tips",
+        "url": "https://www.postgresql.org/docs/current/performance-tips.html"
+      },
+      {
+        "name": "explain.depesz.com — visualizador de planos do PostgreSQL",
+        "url": "https://explain.depesz.com/"
+      },
+      {
+        "name": "Livro: High Performance MySQL (Schwartz, Zaitsev e Tkachenko)"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "ler-plano-de-execucao",
+        "text": "Consigo ler a saída de EXPLAIN e identificar os principais tipos de nó do plano (varredura sequencial, varredura por índice, nested loop, hash join, sort)."
+      },
+      {
+        "key": "usar-explain-analyze",
+        "text": "Sei usar EXPLAIN ANALYZE com cuidado (ele executa a consulta) e comparar linhas estimadas e reais para encontrar estatísticas desatualizadas."
+      },
+      {
+        "key": "otimizar-consulta-lenta",
+        "text": "Já otimizei uma consulta lenta medindo o tempo antes e depois (índice, reescrita ou ajuste de JOIN) e registrei o ganho."
+      },
+      {
+        "key": "atualizar-estatisticas",
+        "text": "Sei qual o papel das estatísticas do otimizador e quando executar ANALYZE (ou o equivalente no meu SGBD)."
+      },
+      {
+        "key": "paginacao-e-n-mais-um",
+        "text": "Consigo identificar o problema N+1 e a paginação ineficiente com OFFSET grande, e propor alternativas (consulta em lote, paginação por keyset)."
+      },
+      {
+        "key": "encontrar-consultas-custosas",
+        "text": "Sei encontrar as consultas mais custosas usando o slow query log, o pg_stat_statements ou o Performance Schema do MySQL."
+      }
+    ]
+  },
+  {
+    "slug": "sql-migracoes-seguras",
+    "title": "Migrações seguras",
+    "description": "Evoluir o esquema do banco sem derrubar a aplicação, usando migrações versionadas e o padrão expandir/contrair (expand-contract). Cobre operações que travam tabelas grandes, criação de índices online, backfills em lotes e planos de rollback, que evitam indisponibilidade durante os deploys.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": [
+      "sql-modelagem-e-er",
+      "sql-indices"
+    ],
+    "resources": [
+      {
+        "name": "PostgreSQL — Documentação: ALTER TABLE",
+        "url": "https://www.postgresql.org/docs/current/sql-altertable.html"
+      },
+      {
+        "name": "PostgreSQL — Documentação: CREATE INDEX (opção CONCURRENTLY)",
+        "url": "https://www.postgresql.org/docs/current/sql-createindex.html"
+      },
+      {
+        "name": "Martin Fowler — Evolutionary Database Design",
+        "url": "https://martinfowler.com/articles/evodb.html"
+      },
+      {
+        "name": "Strong Migrations — operações perigosas e alternativas seguras (README)",
+        "url": "https://github.com/ankane/strong_migrations"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "versionar-esquema",
+        "text": "Já versionei o esquema com uma ferramenta de migrações (Flyway, Liquibase, Alembic ou similar) e sei por que não se altera uma migração já aplicada."
+      },
+      {
+        "key": "aplicar-expandir-contrair",
+        "text": "Consigo executar uma mudança incompatível (como renomear uma coluna) em etapas de expandir e contrair, mantendo as versões antiga e nova do código funcionando."
+      },
+      {
+        "key": "identificar-ddl-bloqueante",
+        "text": "Sei identificar quais comandos ALTER TABLE reescrevem a tabela ou seguram locks longos no meu SGBD e como contorná-los."
+      },
+      {
+        "key": "criar-indice-sem-bloqueio",
+        "text": "Sei criar índices sem bloquear escritas (CREATE INDEX CONCURRENTLY no PostgreSQL, DDL online no MySQL)."
+      },
+      {
+        "key": "backfill-em-lotes",
+        "text": "Já fiz um backfill de dados em lotes pequenos, sem manter uma transação gigante aberta, acompanhando o progresso."
+      },
+      {
+        "key": "plano-de-rollback",
+        "text": "Sei escrever um plano de rollback e de validação para cada migração e reconhecer quando a reversão não é possível (como ao descartar uma coluna)."
+      }
+    ]
+  },
+  {
+    "slug": "sql-window-functions-e-ctes",
+    "title": "Window functions e CTEs",
+    "description": "Usar funções de janela (ROW_NUMBER, RANK, LAG/LEAD, SUM OVER) para rankings, totais acumulados e comparações entre linhas sem colapsar o resultado, e CTEs (WITH) para organizar consultas complexas. Inclui CTEs recursivas para hierarquias e a disponibilidade de window functions em MySQL (8.0+) e SQLite (3.25+).",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": [
+      "sql-select-e-join",
+      "sql-agregacoes-e-group-by"
+    ],
+    "resources": [
+      {
+        "name": "PostgreSQL — Tutorial: Window Functions",
+        "url": "https://www.postgresql.org/docs/current/tutorial-window.html"
+      },
+      {
+        "name": "PostgreSQL — Documentação: Window Functions (referência)",
+        "url": "https://www.postgresql.org/docs/current/functions-window.html"
+      },
+      {
+        "name": "PostgreSQL — Documentação: WITH Queries (CTEs)",
+        "url": "https://www.postgresql.org/docs/current/queries-with.html"
+      },
+      {
+        "name": "SQLite — Window Functions",
+        "url": "https://www.sqlite.org/windowfunctions.html"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "diferenciar-janela-de-group-by",
+        "text": "Consigo explicar a diferença entre agregar com GROUP BY e usar uma função de janela com OVER."
+      },
+      {
+        "key": "top-n-por-grupo",
+        "text": "Já resolvi um problema de top N por grupo usando ROW_NUMBER() ou RANK() com PARTITION BY."
+      },
+      {
+        "key": "lag-lead-e-acumulados",
+        "text": "Sei usar LAG, LEAD e somas acumuladas (SUM OVER com ORDER BY) para comparar períodos e calcular totais correntes."
+      },
+      {
+        "key": "frames-de-janela",
+        "text": "Sei explicar como o frame (ROWS ou RANGE, UNBOUNDED PRECEDING) altera o resultado de uma função de janela."
+      },
+      {
+        "key": "refatorar-com-ctes",
+        "text": "Consigo refatorar uma consulta aninhada em CTEs legíveis e sei que a materialização de CTEs varia entre SGBDs e versões."
+      },
+      {
+        "key": "cte-recursiva",
+        "text": "Já escrevi uma CTE recursiva (por exemplo, árvore de categorias ou organograma) com condição de parada."
+      }
+    ]
+  },
+  {
+    "slug": "sql-nosql-e-redis",
+    "title": "NoSQL e Redis (quando usar)",
+    "description": "Conhecer as famílias de bancos NoSQL (chave-valor, documento, colunar e grafo) e seus trade-offs frente ao relacional em esquema, escala, consistência e consultas. O foco prático é Redis (cache, sessões, rate limit e filas leves) e saber decidir quando o banco relacional ainda é a melhor escolha.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": [
+      "sql-modelagem-e-er",
+      "sql-normalizacao"
+    ],
+    "resources": [
+      {
+        "name": "Redis — Documentação oficial",
+        "url": "https://redis.io/docs/"
+      },
+      {
+        "name": "MongoDB — Documentação oficial",
+        "url": "https://www.mongodb.com/docs/"
+      },
+      {
+        "name": "PostgreSQL — Documentação: JSON Types",
+        "url": "https://www.postgresql.org/docs/current/datatype-json.html"
+      },
+      {
+        "name": "Livro: Designing Data-Intensive Applications (Kleppmann) — Modelos de dados"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "classificar-familias-nosql",
+        "text": "Consigo citar as famílias de bancos NoSQL (chave-valor, documento, colunar e grafo) e um caso de uso típico de cada uma."
+      },
+      {
+        "key": "justificar-escolha-sql-vs-nosql",
+        "text": "Consigo justificar a escolha entre banco relacional e NoSQL usando critérios como padrão de acesso, consistência, volume e necessidade de JOINs e transações."
+      },
+      {
+        "key": "cache-aside-com-redis",
+        "text": "Já implementei cache com Redis (cache-aside) definindo TTL e estratégia de invalidação, e sei descrever o risco de cache stampede."
+      },
+      {
+        "key": "estruturas-de-dados-redis",
+        "text": "Sei quando usar as estruturas do Redis (string, hash, list, set, sorted set) e dou um exemplo de uso para cada uma."
+      },
+      {
+        "key": "limites-do-redis-como-fonte-de-verdade",
+        "text": "Sei os limites do Redis como fonte de verdade: dados em memória, opções de persistência (RDB e AOF) e o que pode ser perdido em uma falha."
+      },
+      {
+        "key": "json-no-relacional",
+        "text": "Sei que colunas JSON/JSONB em um banco relacional podem atender parte dos casos de esquema flexível sem adotar outro banco."
+      }
+    ]
+  },
+  {
+    "slug": "sql-replicacao-particionamento",
+    "title": "Replicação, particionamento",
+    "description": "Escalar e tornar o banco resiliente com replicação síncrona e assíncrona, réplicas de leitura e failover, além de particionamento de tabelas e noções de sharding. O foco está nos trade-offs de consistência (replication lag), no impacto sobre as consultas e na operação em produção.",
+    "level": "senior",
+    "difficulty": 5,
+    "prerequisites": [
+      "sql-transacoes-e-acid",
+      "sql-indices",
+      "sql-explain-e-otimizacao"
+    ],
+    "resources": [
+      {
+        "name": "PostgreSQL — Documentação: High Availability, Load Balancing, and Replication",
+        "url": "https://www.postgresql.org/docs/current/high-availability.html"
+      },
+      {
+        "name": "PostgreSQL — Documentação: Table Partitioning",
+        "url": "https://www.postgresql.org/docs/current/ddl-partitioning.html"
+      },
+      {
+        "name": "MySQL — Documentação oficial (capítulo Replication)",
+        "url": "https://dev.mysql.com/doc/"
+      },
+      {
+        "name": "Livro: Designing Data-Intensive Applications (Kleppmann) — Replicação e Particionamento"
+      }
+    ],
+    "checklist": [
+      {
+        "key": "comparar-replicacao-sincrona-assincrona",
+        "text": "Consigo comparar replicação síncrona e assíncrona quanto a durabilidade, latência de escrita e risco de perda de dados em um failover."
+      },
+      {
+        "key": "explicar-replication-lag",
+        "text": "Sei explicar o replication lag e suas consequências (ler dados desatualizados, não enxergar a própria escrita) e como mitigá-las na aplicação."
+      },
+      {
+        "key": "operar-replica-e-failover",
+        "text": "Já configurei (ao menos em ambiente de teste) uma réplica de leitura e executei um failover, manual ou automático."
+      },
+      {
+        "key": "escolher-estrategia-de-particionamento",
+        "text": "Sei diferenciar particionamento por faixa, lista e hash e escolher uma chave de partição adequada ao padrão de acesso (lembrando que ela costuma precisar fazer parte das chaves únicas)."
+      },
+      {
+        "key": "verificar-partition-pruning",
+        "text": "Consigo verificar com EXPLAIN que uma consulta aproveita a poda de partições (partition pruning) e sei quais consultas não a aproveitam."
+      },
+      {
+        "key": "particionamento-vs-sharding",
+        "text": "Sei explicar a diferença entre particionamento em um único servidor e sharding entre servidores, e os custos do sharding (JOINs entre shards, transações distribuídas, rebalanceamento)."
+      }
+    ]
+  }
+]

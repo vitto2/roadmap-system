@@ -1,0 +1,288 @@
+[
+  {
+    "slug": "ops-linux-essencial",
+    "title": "Linux essencial",
+    "description": "Operar um servidor Linux pela linha de comando: sistema de arquivos, permissões e usuários, processos, serviços com systemd, SSH e diagnóstico básico de disco, memória e CPU. É a base de tudo o que roda em produção, de contêineres a pipelines de deploy.",
+    "level": "junior",
+    "difficulty": 2,
+    "prerequisites": [],
+    "resources": [
+      { "name": "Livro: The Linux Command Line — William Shotts", "url": "https://linuxcommand.org/tlcl.php" },
+      { "name": "Linux man pages — man7.org", "url": "https://man7.org/linux/man-pages/" },
+      { "name": "ArchWiki — File permissions and attributes", "url": "https://wiki.archlinux.org/title/File_permissions_and_attributes" },
+      { "name": "ArchWiki — systemd", "url": "https://wiki.archlinux.org/title/Systemd" }
+    ],
+    "checklist": [
+      { "key": "navegar-e-buscar", "text": "Consigo navegar pelo sistema de arquivos, localizar arquivos e trechos (find, grep) e ler logs (tail -f, less, journalctl) só com a linha de comando." },
+      { "key": "permissoes-e-usuarios", "text": "Sei interpretar e alterar permissões (chmod, chown, umask) e explicar por que uma aplicação não deve rodar como root." },
+      { "key": "processos-e-sinais", "text": "Consigo listar, inspecionar e encerrar processos (ps, top ou htop, kill) e explicar a diferença entre SIGTERM e SIGKILL." },
+      { "key": "servico-systemd", "text": "Já criei e gerenciei um serviço com systemd (unit file, systemctl e journalctl) para uma aplicação minha." },
+      { "key": "ssh-com-chaves", "text": "Já configurei acesso SSH por chave (sem senha) e sei explicar o papel do arquivo authorized_keys." },
+      { "key": "diagnostico-de-recursos", "text": "Sei diagnosticar disco cheio, falta de memória e uso alto de CPU com df, du, free e top." }
+    ]
+  },
+  {
+    "slug": "ops-redes-basicas",
+    "title": "Redes básicas",
+    "description": "Os conceitos de rede que todo desenvolvedor precisa para depurar problemas em produção: IP, CIDR e sub-redes, portas e TCP/UDP, DNS, HTTP e TLS, NAT e firewall. O foco é ler o que está acontecendo com ferramentas como curl, dig, ss e traceroute e entender por que uma conexão falha.",
+    "level": "junior",
+    "difficulty": 2,
+    "prerequisites": [],
+    "resources": [
+      { "name": "MDN — Uma visão geral do HTTP", "url": "https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Guides/Overview" },
+      { "name": "How DNS Works — quadrinho explicativo", "url": "https://howdns.works/" },
+      { "name": "High Performance Browser Networking — Ilya Grigorik", "url": "https://hpbn.co/" },
+      { "name": "Livro: Computer Networking: A Top-Down Approach — Kurose e Ross" }
+    ],
+    "checklist": [
+      { "key": "ip-e-cidr", "text": "Consigo explicar endereço IP, máscara e notação CIDR e calcular quantos hosts úteis cabem em uma sub-rede /24." },
+      { "key": "tcp-e-portas", "text": "Sei explicar o handshake TCP, a diferença entre TCP e UDP e o que é uma porta, e já descobri com ss ou lsof qual processo escuta em uma porta." },
+      { "key": "resolucao-dns", "text": "Consigo explicar como uma consulta DNS é resolvida (resolver, registros A, CNAME e MX, TTL) e já depurei um problema de DNS com dig ou nslookup." },
+      { "key": "url-ate-pagina", "text": "Sei descrever o que acontece desde digitar uma URL até receber a página, passando por DNS, TCP, TLS e HTTP." },
+      { "key": "depurar-conexao", "text": "Já diagnosticei uma conexão que falhava (porta fechada, firewall, DNS ou certificado) usando curl -v, ping, traceroute ou nc." },
+      { "key": "nat-e-firewall", "text": "Consigo explicar NAT, IP privado versus público e como um firewall ou security group libera ou bloqueia tráfego." }
+    ]
+  },
+  {
+    "slug": "ops-docker",
+    "title": "Docker",
+    "description": "Empacotar e executar aplicações em contêineres: imagens, camadas, Dockerfile, volumes, redes, variáveis de ambiente e registries. Cobre builds multi-stage, cache de build, imagens enxutas e seguras (usuário não root) e como depurar um contêiner que não sobe.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": ["ops-linux-essencial", "ops-redes-basicas"],
+    "resources": [
+      { "name": "Docker — Documentação oficial", "url": "https://docs.docker.com/" },
+      { "name": "Docker — Get started", "url": "https://docs.docker.com/get-started/" },
+      { "name": "Docker — Building best practices (Dockerfile)", "url": "https://docs.docker.com/build/building/best-practices/" },
+      { "name": "Docker — Multi-stage builds", "url": "https://docs.docker.com/build/building/multi-stage/" }
+    ],
+    "checklist": [
+      { "key": "imagem-vs-conteiner", "text": "Consigo explicar a diferença entre imagem, contêiner, camada e registry, e o que muda entre um contêiner e uma máquina virtual." },
+      { "key": "escrever-dockerfile", "text": "Já escrevi um Dockerfile para uma aplicação minha (PHP ou Node) e entendo cada instrução usada (FROM, COPY, RUN, CMD, ENTRYPOINT)." },
+      { "key": "multi-stage-e-cache", "text": "Já usei build multi-stage e ordenei as instruções para aproveitar o cache de camadas, reduzindo o tamanho da imagem e o tempo de build." },
+      { "key": "volumes-e-redes", "text": "Sei usar volumes (bind e nomeados) e redes e consigo explicar por que dados sem volume somem quando o contêiner é recriado." },
+      { "key": "usuario-nao-root", "text": "Já configurei um contêiner para rodar como usuário não root e usei .dockerignore para não enviar segredos nem lixo ao build." },
+      { "key": "depurar-conteiner", "text": "Sei depurar um contêiner que não sobe (docker logs, exec e inspect) e identificar causas comuns, como porta, variável de ambiente ou permissão." }
+    ]
+  },
+  {
+    "slug": "ops-docker-compose",
+    "title": "Docker Compose",
+    "description": "Descrever um ambiente com vários serviços (app, banco, cache e fila) em um único arquivo compose.yaml: redes, volumes, dependências com healthcheck, variáveis de ambiente, perfis e múltiplos arquivos para desenvolvimento e produção. Garante um ambiente local reproduzível com um só comando e prepara o terreno para orquestradores como o Kubernetes.",
+    "level": "junior",
+    "difficulty": 3,
+    "prerequisites": ["ops-docker"],
+    "resources": [
+      { "name": "Docker Compose — Documentação oficial", "url": "https://docs.docker.com/compose/" },
+      { "name": "Compose file reference", "url": "https://docs.docker.com/reference/compose-file/" },
+      { "name": "Compose — Networking", "url": "https://docs.docker.com/compose/how-tos/networking/" },
+      { "name": "Compose — Control startup and shutdown order (healthcheck e depends_on)", "url": "https://docs.docker.com/compose/how-tos/startup-order/" }
+    ],
+    "checklist": [
+      { "key": "stack-completa", "text": "Já montei um compose.yaml com aplicação, banco de dados e cache (ex.: PHP-FPM, Nginx, PostgreSQL ou MySQL e Redis) que sobe com um único comando." },
+      { "key": "rede-por-nome", "text": "Sei explicar como os serviços se encontram pelo nome na rede do Compose e por que o host do banco não é localhost dentro do contêiner da aplicação." },
+      { "key": "healthcheck-e-depends-on", "text": "Já usei healthcheck com depends_on (condition: service_healthy) para a aplicação só iniciar quando o banco estiver pronto." },
+      { "key": "env-e-segredos", "text": "Sei separar a configuração por ambiente com arquivos .env e variáveis de ambiente, sem versionar segredos." },
+      { "key": "override-e-profiles", "text": "Já usei múltiplos arquivos (override) ou profiles para diferenciar desenvolvimento e produção ou para ativar serviços opcionais." },
+      { "key": "persistencia-de-dados", "text": "Consigo explicar como persistir os dados do banco com volumes nomeados e como recriar o ambiente do zero." }
+    ]
+  },
+  {
+    "slug": "ops-deploy-php-node",
+    "title": "Deploy de apps PHP/Node",
+    "description": "Levar uma aplicação PHP (Laravel) ou Node do repositório para produção de forma repetível: variáveis de ambiente, migrações, processos supervisionados (PHP-FPM, systemd, PM2 e workers), release atômica com rollback e health checks. Inclui estratégias de deploy sem downtime, como blue/green e canary, e a ligação com o pipeline de CI/CD.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["ops-linux-essencial", "ops-docker-compose"],
+    "resources": [
+      { "name": "The Twelve-Factor App (pt-BR)", "url": "https://12factor.net/pt_br/" },
+      { "name": "Laravel — Deployment", "url": "https://laravel.com/framework/docs/deployment" },
+      { "name": "Deployer — ferramenta de deploy para PHP", "url": "https://deployer.org/" },
+      { "name": "Martin Fowler — Blue Green Deployment", "url": "https://martinfowler.com/bliki/BlueGreenDeployment.html" }
+    ],
+    "checklist": [
+      { "key": "config-por-ambiente", "text": "Sei configurar a aplicação por variáveis de ambiente (configuração fora do código) e mantenho os segredos fora do repositório." },
+      { "key": "release-atomica-rollback", "text": "Já fiz um deploy com release atômica (ex.: troca do symlink 'current' ou de imagem) e executei um rollback para a versão anterior." },
+      { "key": "processos-supervisionados", "text": "Já coloquei processos de longa duração (PHP-FPM, workers de fila ou Node) sob supervisão (systemd, Supervisor ou PM2) com reinício automático." },
+      { "key": "migracoes-no-deploy", "text": "Sei executar migrações de banco durante o deploy sem derrubar a aplicação, mantendo o esquema compatível com a versão anterior do código." },
+      { "key": "healthcheck-e-smoke-test", "text": "Já configurei um health check e um smoke test pós-deploy que interrompem ou desfazem o deploy quando falham." },
+      { "key": "otimizacoes-de-producao", "text": "Conheço as otimizações de produção do meu stack (ex.: cache de config e rotas, OPcache e composer install --no-dev em Laravel, ou build com NODE_ENV=production em Node)." }
+    ]
+  },
+  {
+    "slug": "ops-nginx-proxy-reverso",
+    "title": "Nginx e proxy reverso",
+    "description": "Usar o Nginx na frente da aplicação: server blocks, proxy_pass e upstreams, FastCGI para PHP-FPM, terminação TLS com Let's Encrypt, cabeçalhos de proxy, compressão e limitação de requisições. Também cobre balanceamento entre instâncias e o diagnóstico de erros comuns como 502, 504 e 413.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["ops-redes-basicas", "ops-linux-essencial"],
+    "resources": [
+      { "name": "Nginx — Beginner's Guide", "url": "https://nginx.org/en/docs/beginners_guide.html" },
+      { "name": "NGINX Docs — Reverse Proxy", "url": "https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/" },
+      { "name": "Let's Encrypt — Documentação", "url": "https://letsencrypt.org/docs/" },
+      { "name": "Mozilla SSL Configuration Generator", "url": "https://ssl-config.mozilla.org/" }
+    ],
+    "checklist": [
+      { "key": "server-block", "text": "Já configurei um server block do zero (server_name, root e location) e validei com nginx -t antes de recarregar." },
+      { "key": "proxy-pass-e-cabecalhos", "text": "Já usei proxy_pass para uma aplicação Node ou um contêiner, repassando cabeçalhos como Host, X-Real-IP e X-Forwarded-For/Proto." },
+      { "key": "php-fpm-laravel", "text": "Sei configurar o Nginx com PHP-FPM (fastcgi_pass) para uma aplicação Laravel, incluindo a regra try_files do front controller." },
+      { "key": "tls-letsencrypt", "text": "Já emiti e renovei um certificado TLS com Let's Encrypt e configurei o redirecionamento de HTTP para HTTPS." },
+      { "key": "upstream-e-limites", "text": "Sei configurar um upstream com mais de uma instância e aplicar limite de requisições (limit_req) e de tamanho de upload (client_max_body_size)." },
+      { "key": "diagnosticar-502-504", "text": "Consigo diagnosticar um 502, 504 ou 413 lendo os logs de acesso e de erro do Nginx." }
+    ]
+  },
+  {
+    "slug": "ops-logs-estruturados",
+    "title": "Logs estruturados",
+    "description": "Gerar logs em formato estruturado (JSON) com nível, contexto e identificador de correlação, em vez de texto solto, para que possam ser buscados e agregados. Cobre níveis de log, o que nunca registrar (dados sensíveis), saída em stdout em contêineres e coleta centralizada com ferramentas como Loki ou Elastic.",
+    "level": "mid",
+    "difficulty": 3,
+    "prerequisites": ["ops-linux-essencial", "ops-docker"],
+    "resources": [
+      { "name": "The Twelve-Factor App — Logs (pt-BR)", "url": "https://12factor.net/pt_br/logs" },
+      { "name": "PHP-FIG — PSR-3: Logger Interface", "url": "https://www.php-fig.org/psr/psr-3/" },
+      { "name": "Stripe — Fast and flexible observability with canonical log lines", "url": "https://stripe.com/blog/canonical-log-lines" },
+      { "name": "Grafana Loki — Documentação oficial", "url": "https://grafana.com/docs/loki/latest/" }
+    ],
+    "checklist": [
+      { "key": "logs-json-com-contexto", "text": "Já configurei uma aplicação minha para emitir logs em JSON com nível, mensagem, timestamp e contexto (ex.: user_id e rota)." },
+      { "key": "correlation-id", "text": "Já implementei um identificador de correlação (request ID) propagado entre middleware, logs e chamadas a outros serviços." },
+      { "key": "niveis-de-log", "text": "Sei escolher o nível de log (debug, info, warning e error) e evitar tanto o silêncio quanto o ruído que esconde problemas." },
+      { "key": "dados-sensiveis", "text": "Sei quais dados nunca devem aparecer em logs (senhas, tokens, dados pessoais e de pagamento) e já apliquei mascaramento." },
+      { "key": "stdout-em-conteineres", "text": "Consigo explicar por que contêineres devem escrever logs em stdout/stderr e como funcionam a coleta e a rotação." },
+      { "key": "busca-centralizada", "text": "Já consultei logs centralizados (ex.: Loki, Elastic ou CloudWatch) para investigar um erro real, filtrando por campos." }
+    ]
+  },
+  {
+    "slug": "ops-metricas-e-alertas",
+    "title": "Métricas e alertas",
+    "description": "Instrumentar aplicações e servidores com métricas (contadores, gauges e histogramas) coletadas pelo Prometheus e visualizadas no Grafana, usando métodos como RED e USE. Cobre cardinalidade de labels, consultas em PromQL e a criação de alertas acionáveis no Alertmanager, evitando a fadiga de alertas.",
+    "level": "mid",
+    "difficulty": 4,
+    "prerequisites": ["ops-logs-estruturados", "ops-docker-compose"],
+    "resources": [
+      { "name": "Prometheus — Documentação oficial (visão geral)", "url": "https://prometheus.io/docs/introduction/overview/" },
+      { "name": "Prometheus — Alerting best practices", "url": "https://prometheus.io/docs/practices/alerting/" },
+      { "name": "Google SRE Book — Monitoring Distributed Systems", "url": "https://sre.google/sre-book/monitoring-distributed-systems/" },
+      { "name": "Brendan Gregg — The USE Method", "url": "https://www.brendangregg.com/usemethod.html" }
+    ],
+    "checklist": [
+      { "key": "tipos-de-metrica", "text": "Sei diferenciar counter, gauge e histogram e escolher o tipo certo para contagem de requisições, uso de memória e latência." },
+      { "key": "instrumentar-aplicacao", "text": "Já instrumentei uma aplicação minha para expor métricas (requisições, erros e duração) em um endpoint /metrics e coletei com o Prometheus." },
+      { "key": "promql-basico", "text": "Consigo escrever consultas PromQL básicas (rate, sum by e histogram_quantile) para taxa de requisições, taxa de erros e latência p95." },
+      { "key": "golden-signals-red-use", "text": "Sei explicar os quatro sinais dourados (latência, tráfego, erros e saturação) e os métodos RED e USE, e montei um painel no Grafana com eles." },
+      { "key": "cardinalidade", "text": "Sei explicar por que labels com valores ilimitados (ex.: user_id ou URL completa) causam explosão de cardinalidade e como evitá-la." },
+      { "key": "alerta-acionavel", "text": "Já criei um alerta no Alertmanager que avisa sobre um sintoma percebido pelo usuário, com severidade, descrição e link para um runbook." }
+    ]
+  },
+  {
+    "slug": "ops-tracing-distribuido",
+    "title": "Tracing distribuído",
+    "description": "Acompanhar uma requisição que atravessa vários serviços, filas e bancos usando traces e spans, com propagação de contexto (W3C Trace Context) e instrumentação via OpenTelemetry. Mostra como achar gargalos de latência, correlacionar traces com logs e métricas e escolher uma estratégia de amostragem (sampling).",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": ["ops-logs-estruturados", "ops-metricas-e-alertas"],
+    "resources": [
+      { "name": "OpenTelemetry — Documentação oficial", "url": "https://opentelemetry.io/docs/" },
+      { "name": "OpenTelemetry — Traces (conceitos)", "url": "https://opentelemetry.io/docs/concepts/signals/traces/" },
+      { "name": "OpenTelemetry — Context propagation (inclui W3C Trace Context)", "url": "https://opentelemetry.io/docs/concepts/context-propagation/" },
+      { "name": "Jaeger — Documentação oficial", "url": "https://www.jaegertracing.io/docs/" }
+    ],
+    "checklist": [
+      { "key": "trace-e-spans", "text": "Consigo explicar trace, span, atributos e a relação pai-filho entre spans, e ler a cascata (waterfall) de um trace." },
+      { "key": "instrumentar-otel", "text": "Já instrumentei uma aplicação (automática ou manualmente) com OpenTelemetry e enviei traces a um backend como Jaeger ou Tempo." },
+      { "key": "propagacao-de-contexto", "text": "Sei explicar como o cabeçalho traceparent (W3C Trace Context) propaga o contexto entre serviços e filas e já verifiquei isso em um fluxo real." },
+      { "key": "achar-gargalo", "text": "Já usei um trace para localizar o gargalo de uma requisição lenta (ex.: consultas N+1 ou chamada externa) e corrigi o problema." },
+      { "key": "correlacionar-logs", "text": "Já correlacionei logs e traces incluindo o trace_id nos logs estruturados." },
+      { "key": "estrategia-de-sampling", "text": "Sei comparar amostragem na origem (head) e na cauda (tail) e escolher uma estratégia considerando custo e perda de traces raros." }
+    ]
+  },
+  {
+    "slug": "ops-infra-como-codigo",
+    "title": "Infra como código",
+    "description": "Definir e versionar infraestrutura (redes, servidores, bancos, DNS e permissões) em código declarativo, com Terraform ou OpenTofu, e configurar servidores com Ansible. Cobre state remoto, módulos, plan antes de apply, detecção de drift, gestão de segredos e revisão de mudanças de infraestrutura por pull request.",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": ["ops-redes-basicas", "ops-deploy-php-node"],
+    "resources": [
+      { "name": "Terraform — Documentação oficial", "url": "https://developer.hashicorp.com/terraform/docs" },
+      { "name": "OpenTofu — Documentação oficial", "url": "https://opentofu.org/docs/" },
+      { "name": "Ansible — Documentação oficial", "url": "https://docs.ansible.com/" },
+      { "name": "Martin Fowler — Infrastructure As Code", "url": "https://martinfowler.com/bliki/InfrastructureAsCode.html" }
+    ],
+    "checklist": [
+      { "key": "declarativo-vs-imperativo", "text": "Consigo explicar a diferença entre abordagem declarativa e imperativa e entre provisionamento (Terraform) e configuração (Ansible)." },
+      { "key": "provisionar-e-destruir", "text": "Já provisionei recursos reais (ex.: uma VM ou contêiner, rede e DNS) com Terraform ou OpenTofu e os destruí em seguida." },
+      { "key": "state-remoto", "text": "Sei explicar o que é o state, por que ele deve ser remoto e com lock, e o que acontece se for perdido ou editado à mão." },
+      { "key": "plan-no-pull-request", "text": "Já usei a saída do terraform plan na revisão de um pull request antes de aplicar uma mudança de infraestrutura." },
+      { "key": "modulos-e-variaveis", "text": "Já criei um módulo reutilizável com variáveis e outputs e o usei em mais de um ambiente." },
+      { "key": "drift-e-segredos", "text": "Sei explicar o que é drift de configuração e como manter segredos fora do código e protegidos no state (cofre de segredos, state criptografado)." }
+    ]
+  },
+  {
+    "slug": "ops-kubernetes-nocoes",
+    "title": "Kubernetes (noções)",
+    "description": "Noções do Kubernetes para quem desenvolve e opera aplicações: arquitetura do cluster, Pods, Deployments, Services, Ingress, ConfigMaps e Secrets, probes de liveness e readiness, limites de recursos e rolling updates. O objetivo é ler e escrever manifestos, depurar com kubectl e entender o que a plataforma resolve, sem precisar administrar o cluster.",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": ["ops-docker-compose", "ops-nginx-proxy-reverso"],
+    "resources": [
+      { "name": "Kubernetes — Documentação oficial", "url": "https://kubernetes.io/docs/home/" },
+      { "name": "Kubernetes — Tutorial: Learn Kubernetes Basics", "url": "https://kubernetes.io/docs/tutorials/kubernetes-basics/" },
+      { "name": "Kubernetes — Configure Liveness, Readiness and Startup Probes", "url": "https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/" },
+      { "name": "kind — Kubernetes in Docker (cluster local)", "url": "https://kind.sigs.k8s.io/" }
+    ],
+    "checklist": [
+      { "key": "arquitetura-do-cluster", "text": "Consigo explicar os componentes do cluster (control plane, nós e kubelet) e o papel do API server e do etcd." },
+      { "key": "pod-deployment-service", "text": "Já criei um Deployment e um Service para uma aplicação minha e sei explicar a diferença entre Pod, ReplicaSet e Deployment." },
+      { "key": "ingress-vs-proxy", "text": "Sei explicar como um Ingress expõe um Service ao tráfego externo e compará-lo com um proxy reverso Nginx." },
+      { "key": "configmap-e-secret", "text": "Já separei a configuração do contêiner com ConfigMap e Secret e sei por que um Secret não é criptografia por si só." },
+      { "key": "probes-e-recursos", "text": "Sei configurar liveness e readiness probes e requests/limits de CPU e memória, e explicar o efeito de cada um." },
+      { "key": "rollout-e-depuracao", "text": "Já executei um rolling update com rollback (kubectl rollout) e sei depurar um Pod em CrashLoopBackOff ou ImagePullBackOff com describe, logs e events." }
+    ]
+  },
+  {
+    "slug": "ops-sli-slo-incidentes",
+    "title": "SLI/SLO e incidentes",
+    "description": "Definir o que significa 'funcionar bem' com indicadores (SLI), objetivos (SLO) e orçamento de erro (error budget) e usá-los para equilibrar confiabilidade e entrega de funcionalidades. Cobre alertas baseados em burn rate, o ciclo de resposta a incidentes (papéis, comunicação e mitigação) e postmortems sem culpados.",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": ["ops-metricas-e-alertas"],
+    "resources": [
+      { "name": "Google SRE Book — Service Level Objectives", "url": "https://sre.google/sre-book/service-level-objectives/" },
+      { "name": "Google SRE Workbook — Implementing SLOs", "url": "https://sre.google/workbook/implementing-slos/" },
+      { "name": "Google SRE Book — Managing Incidents", "url": "https://sre.google/sre-book/managing-incidents/" },
+      { "name": "Google SRE Book — Postmortem Culture: Learning from Failure", "url": "https://sre.google/sre-book/postmortem-culture/" }
+    ],
+    "checklist": [
+      { "key": "sli-slo-sla", "text": "Consigo diferenciar SLI, SLO e SLA e escolher SLIs de disponibilidade e latência a partir da perspectiva do usuário." },
+      { "key": "definir-slo", "text": "Já defini um SLO com janela de tempo (ex.: 99,9% em 30 dias) para um serviço e calculei quanto de erro ele permite." },
+      { "key": "error-budget", "text": "Sei explicar o orçamento de erro e como usá-lo para decidir entre entregar funcionalidades e investir em confiabilidade." },
+      { "key": "alertas-burn-rate", "text": "Sei explicar alertas por burn rate (janelas curta e longa) e por que eles são melhores que alertar por um limite fixo de erros." },
+      { "key": "papeis-no-incidente", "text": "Consigo descrever os papéis de um incidente (comandante, comunicação e operações) e já participei de um, real ou simulado." },
+      { "key": "postmortem-sem-culpa", "text": "Já escrevi ou revisei um postmortem sem culpados, com linha do tempo, causas contribuintes e ações de acompanhamento com responsáveis." }
+    ]
+  },
+  {
+    "slug": "ops-backup-disaster-recovery",
+    "title": "Backup e disaster recovery",
+    "description": "Proteger dados e serviço contra perdas e desastres: estratégia de backup (regra 3-2-1, completo, incremental e ponto no tempo), RPO e RTO, replicação entre zonas ou regiões e planos de recuperação. O ponto central é restaurar de verdade: backup que nunca foi testado não conta, e a recuperação deve ser ensaiada e documentada em runbooks.",
+    "level": "senior",
+    "difficulty": 4,
+    "prerequisites": ["ops-infra-como-codigo", "ops-sli-slo-incidentes"],
+    "resources": [
+      { "name": "AWS Whitepaper — Disaster Recovery of Workloads on AWS", "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-workloads-on-aws.html" },
+      { "name": "PostgreSQL — Backup and Restore", "url": "https://www.postgresql.org/docs/current/backup.html" },
+      { "name": "Google SRE Book — Data Integrity: What You Read Is What You Wrote", "url": "https://sre.google/sre-book/data-integrity/" },
+      { "name": "restic — Documentação oficial", "url": "https://restic.readthedocs.io/en/stable/" }
+    ],
+    "checklist": [
+      { "key": "rpo-e-rto", "text": "Consigo explicar RPO e RTO e definir valores para um serviço meu a partir do impacto no negócio." },
+      { "key": "regra-3-2-1", "text": "Sei explicar a regra 3-2-1 e já configurei backups automáticos com uma cópia fora do ambiente principal (outra região ou provedor)." },
+      { "key": "backup-de-banco", "text": "Já fiz backup lógico e físico de um banco (ex.: pg_dump e arquivamento de WAL, ou mysqldump) e entendo a restauração até um ponto no tempo (PITR)." },
+      { "key": "testar-restauracao", "text": "Já testei a restauração completa de um backup em um ambiente limpo e medi o tempo real de recuperação." },
+      { "key": "runbook-e-simulacao", "text": "Já escrevi um runbook de recuperação e o ensaiei em uma simulação (game day) ou em um ambiente de teste." },
+      { "key": "estrategias-de-dr", "text": "Sei comparar as estratégias de DR (backup e restauração, pilot light, warm standby e multi-site ativo-ativo) em custo e tempo de recuperação." }
+    ]
+  }
+]
