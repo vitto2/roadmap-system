@@ -82,19 +82,32 @@ export interface TestEnv {
     method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE',
     url: string,
     payload?: unknown,
+    headers?: Record<string, string>,
   ) => Promise<{ status: number; body: Json }>
   close: () => Promise<void>
 }
 
 export function createTestEnv(
-  options: { now?: string; content?: SeedContent; seed?: boolean; timezone?: string } = {},
+  options: {
+    now?: string
+    content?: SeedContent
+    seed?: boolean
+    timezone?: string
+    authPassword?: string
+  } = {},
 ): TestEnv {
   const handle = createDb(':memory:')
   runMigrations(handle.db)
   let current = new Date(options.now ?? '2026-03-10T15:00:00Z')
   const ctx: AppContext = {
     db: handle.db,
-    config: { ...config, timezone: options.timezone ?? 'America/Sao_Paulo', weeklyGoal: 5 },
+    config: {
+      ...config,
+      timezone: options.timezone ?? 'America/Sao_Paulo',
+      weeklyGoal: 5,
+      authPassword: options.authPassword ?? null,
+      authSecret: null,
+    },
     now: () => current,
   }
   if (options.seed !== false) seedDatabase(handle.db, options.content ?? sampleContent(), current)
@@ -106,9 +119,15 @@ export function createTestEnv(
     setNow: (iso) => {
       current = new Date(iso)
     },
-    call: async (method, url, payload) => {
-      const res = await app.inject({ method, url: `/api/v1${url}`, payload: payload as object })
-      return { status: res.statusCode, body: res.body ? res.json() : null }
+    call: async (method, url, payload, headers) => {
+      const res = await app.inject({
+        method,
+        url: `/api/v1${url}`,
+        payload: payload as object,
+        headers,
+      })
+      const isJson = String(res.headers['content-type'] ?? '').includes('json')
+      return { status: res.statusCode, body: res.body && isJson ? res.json() : res.body }
     },
     close: async () => {
       await app.close()

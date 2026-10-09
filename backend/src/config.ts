@@ -15,6 +15,7 @@ export const config = {
   weeklyGoal: Number(env.WEEKLY_GOAL ?? 5),
   corsOrigin: env.CORS_ORIGIN ?? 'http://localhost:5173',
   authPassword: env.AUTH_PASSWORD || null,
+  authSecret: env.AUTH_SECRET || null,
 }
 
 export type AppConfig = typeof config

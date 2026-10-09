@@ -217,3 +217,25 @@ export type ProjectDetail = z.infer<typeof projectDetailSchema>
 export type ReviewDto = z.infer<typeof reviewSchema>
 export type StudySessionDto = z.infer<typeof studySessionSchema>
 export type DashboardDto = z.infer<typeof dashboardSchema>
+
+// ── Grafo de pré-requisitos ──
+
+export const graphSchema = z.object({
+  nodes: z.array(
+    z.object({
+      slug: z.string(),
+      title: z.string(),
+      trackSlug: z.string(),
+      trackTitle: z.string(),
+      careerLevel: careerLevelSchema,
+      difficulty: z.number().int(),
+      status: topicStatusSchema,
+      /** Todos os pré-requisitos concluídos (ou nenhum). Não bloqueia a marcação do tópico. */
+      unlocked: z.boolean(),
+      blockedBy: z.array(z.string()),
+    }),
+  ),
+  edges: z.array(z.object({ source: z.string(), target: z.string() })),
+})
+
+export type GraphDto = z.infer<typeof graphSchema>
