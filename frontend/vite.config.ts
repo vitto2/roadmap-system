@@ -8,6 +8,9 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue(), tailwindcss(), vueDevTools()],
+  // Tailwind v4 roda pelo plugin do Vite. Declarar `postcss` aqui evita que o Vite procure (e quebre
+  // com) algum postcss.config.* esquecido em pastas acima do projeto.
+  css: { postcss: { plugins: [] } },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
