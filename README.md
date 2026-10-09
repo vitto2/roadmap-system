@@ -40,6 +40,11 @@ npm run dev
 O Vite encaminha `/api` para `127.0.0.1:8000` (proxy), então não precisa configurar CORS no desenvolvimento.
 Em outros domínios, defina `CORS_ORIGIN` no back-end e `VITE_API_URL` no front-end.
 
+- **Documentação da API (OpenAPI):** http://127.0.0.1:8000/api/docs (JSON em `/api/docs/openapi.json`).
+- **Login opcional:** defina `AUTH_PASSWORD` no `backend/.env` para exigir senha (o front mostra a tela de login sozinho).
+- **Backup/portfólio:** em *Configurações* você baixa o backup do progresso (JSON), restaura em outro banco e exporta o
+  portfólio de projetos concluídos em markdown.
+
 ## Conteúdo (seed)
 
 O conteúdo vive em `backend/database/seed-data/` e **nunca sobrescreve seu progresso**:

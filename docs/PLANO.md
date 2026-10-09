@@ -1,5 +1,25 @@
 # Plano — Trilha Sênior (monorepo Laravel + Vue)
 
+> **Atualização (implementação final):** o roadmap continua ensinando PHP/Laravel e Vue, mas o **app** foi
+> construído em TypeScript de ponta a ponta, por decisão do dono do projeto (não precisa de PHP/Composer instalados).
+> Equivalências usadas no lugar da stack Laravel descrita abaixo:
+>
+> | Plano original | Implementado |
+> | --- | --- |
+> | Laravel + Eloquent + migrations | Fastify 5 + Drizzle ORM + SQLite (`backend/drizzle/`) |
+> | Form Requests / API Resources | Schemas Zod por rota e DTOs em `backend/src/dto.ts` |
+> | Actions/Services | `backend/src/actions` e `backend/src/services` |
+> | `app/Domain/Scoring` (Pest) | `backend/src/domain/scoring` (Vitest) |
+> | Pint / Larastan | ESLint + Prettier + `tsc --noEmit` |
+> | Sanctum (opcional) | Login opcional por senha (`AUTH_PASSWORD`) com token HMAC |
+> | Scramble (OpenAPI) | `@fastify/swagger` + Scalar em `/api/docs` |
+>
+> Fases 1–4 concluídas. Veja o `README.md` (como rodar) e o `CLAUDE.md` (convenções e decisões). Decisões de domínio:
+> nível de gamificação começa em 1 e custa `100 × N^1,5` XP por nível (cumulativo); nível de carreira = 40/60/80% dos
+> tópicos das trilhas obrigatórias (Carreira é opcional); "projeto finalizado" = todas as etapas ativas concluídas.
+> O conteúdo final tem 10 trilhas, 138 tópicos e 11 projetos; os rótulos de rota no front são em português
+> (`/trilhas/:slug`, `/topicos/:slug`, `/projetos`, `/revisoes`, `/diario`, `/dashboard`, `/grafo`, `/configuracoes`, `/entrar`).
+
 ## Contexto
 App pessoal (single-user) de roadmap gamificado para chegar a dev sênior. Diretório atual (`Documents/roadmap`) está vazio e não é repositório git. Esta rodada entrega **apenas o plano**; nada de código até aprovação.
 Pedido adicional: commit/push automático em https://github.com/vitto2/roadmap-system.git — após aprovação, `git init`, `remote add origin`, branch `main`, e um commit Conventional Commits + `git push` ao final de cada etapa (autenticação via credenciais git já configuradas na máquina; nunca gravar token no repo). Primeiro push: confirmar se o remoto está vazio (senão, pergunto antes de qualquer force/merge).

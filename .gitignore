@@ -1,9 +1,10 @@
-﻿backend/vendor/
-backend/.env
-backend/database/*.sqlite
 node_modules/
-frontend/dist/
+dist/
 .env
+.env.*
+!.env.example
+backend/data/*.sqlite*
+*.tsbuildinfo
+.eslintcache
 .DS_Store
-
 .claude/
