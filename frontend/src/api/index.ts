@@ -1,6 +1,7 @@
 import { http } from './client'
 import type {
   Dashboard,
+  ImportSummary,
   Envelope,
   Mutation,
   Paginated,
@@ -13,6 +14,7 @@ import type {
   StudySession,
   StudySessionInput,
   TopicDetail,
+  TopicGraph,
   TopicFilters,
   TopicSummary,
   TrackDetail,
@@ -29,6 +31,10 @@ function query(params: Record<string, string | number | undefined>): string {
 }
 
 export const api = {
+  authStatus: () => http.get<{ required: boolean }>('/auth/status'),
+  login: (password: string) =>
+    http.post<{ token: string; expiresAt: string }>('/auth/login', { password }),
+
   profile: () => http.get<Envelope<Profile>>('/profile').then((r) => r.data),
   dashboard: () => http.get<Envelope<Dashboard>>('/dashboard').then((r) => r.data),
   settings: () => http.get<Envelope<Settings>>('/settings').then((r) => r.data),
@@ -52,6 +58,12 @@ export const api = {
     http.post<Mutation<TopicDetail>>(`/topics/${enc(slug)}/complete`),
   masterTopic: (slug: string) => http.post<Mutation<TopicDetail>>(`/topics/${enc(slug)}/master`),
   reopenTopic: (slug: string) => http.post<Mutation<TopicDetail>>(`/topics/${enc(slug)}/reopen`),
+
+  graph: () => http.get<Envelope<TopicGraph>>('/graph').then((r) => r.data),
+
+  exportPortfolio: () => http.download('/export/portfolio.md'),
+  exportBackup: () => http.download('/export/backup'),
+  importBackup: (backup: unknown) => http.post<Mutation<ImportSummary>>('/import/backup', backup),
 
   projects: () => http.get<Envelope<ProjectSummary[]>>('/projects').then((r) => r.data),
   project: (slug: string) =>

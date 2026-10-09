@@ -202,3 +202,38 @@ export interface TopicFilters {
   level?: CareerLevel
   status?: TopicStatus
 }
+
+export interface GraphNode {
+  slug: string
+  title: string
+  trackSlug: string
+  trackTitle: string
+  careerLevel: CareerLevel
+  difficulty: number
+  status: TopicStatus
+  /** Todos os pré-requisitos concluídos. Bloqueado é só recomendação; nunca impede marcar. */
+  unlocked: boolean
+  blockedBy: string[]
+}
+
+export interface GraphEdge {
+  source: string
+  target: string
+}
+
+export interface TopicGraph {
+  nodes: GraphNode[]
+  edges: GraphEdge[]
+}
+
+export interface ImportSummary {
+  imported: {
+    topics: number
+    checklistItems: number
+    reviews: number
+    projects: number
+    milestones: number
+    sessions: number
+  }
+  skipped: string[]
+}

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import RoadmapPage from '@/pages/RoadmapPage.vue'
+import { useAuthStore } from '@/stores/auth'
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -36,12 +37,72 @@ const router = createRouter({
       meta: { title: 'Tópico' },
     },
     {
+      path: '/projetos',
+      name: 'projects',
+      component: () => import('@/pages/ProjectsPage.vue'),
+      meta: { title: 'Projetos', nav: 'Projetos', order: 2 },
+    },
+    {
+      path: '/projetos/:slug',
+      name: 'project',
+      component: () => import('@/pages/ProjectPage.vue'),
+      props: true,
+      meta: { title: 'Projeto' },
+    },
+    {
+      path: '/revisoes',
+      name: 'reviews',
+      component: () => import('@/pages/ReviewsPage.vue'),
+      meta: { title: 'Revisões', nav: 'Revisões', order: 3 },
+    },
+    {
+      path: '/diario',
+      name: 'journal',
+      component: () => import('@/pages/JournalPage.vue'),
+      meta: { title: 'Diário de estudo', nav: 'Diário', order: 4 },
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: () => import('@/pages/DashboardPage.vue'),
+      meta: { title: 'Dashboard', nav: 'Dashboard', order: 5 },
+    },
+    {
+      path: '/grafo',
+      name: 'graph',
+      component: () => import('@/pages/GraphPage.vue'),
+      meta: { title: 'Grafo de pré-requisitos', nav: 'Grafo', order: 6 },
+    },
+    {
+      path: '/configuracoes',
+      name: 'settings',
+      component: () => import('@/pages/SettingsPage.vue'),
+      meta: { title: 'Configurações', nav: 'Configurações', order: 9 },
+    },
+    {
+      path: '/entrar',
+      name: 'login',
+      component: () => import('@/pages/LoginPage.vue'),
+      meta: { title: 'Entrar' },
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: () => import('@/pages/NotFoundPage.vue'),
       meta: { title: 'Página não encontrada' },
     },
   ],
+})
+
+// Login opcional: só redireciona se o back-end exigir senha (AUTH_PASSWORD).
+router.beforeEach(async (to) => {
+  const auth = useAuthStore()
+  await auth.init()
+  if (auth.required && !auth.token && to.name !== 'login') {
+    return { name: 'login', query: { redirect: to.fullPath } }
+  }
+  if (to.name === 'login' && (!auth.required || auth.token)) return { name: 'roadmap' }
+  return true
 })
 
 router.afterEach((to) => {

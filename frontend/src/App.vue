@@ -1,18 +1,38 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { RouterView } from 'vue-router'
+import { onBeforeUnmount, onMounted } from 'vue'
+import { RouterView, useRoute, useRouter } from 'vue-router'
+import { AUTH_REQUIRED_EVENT } from '@/api/client'
 import ToastHost from '@/components/common/ToastHost.vue'
 import TopBar from '@/components/layout/TopBar.vue'
+import { useAuthStore } from '@/stores/auth'
 import { useProfileStore } from '@/stores/profile'
+import { useReviewsStore } from '@/stores/reviews'
 import { useUiStore } from '@/stores/ui'
 
 const ui = useUiStore()
+const auth = useAuthStore()
 const profile = useProfileStore()
+const reviews = useReviewsStore()
+const route = useRoute()
+const router = useRouter()
 
-onMounted(() => {
+// A API recusou o token (expirou ou a senha mudou): volta para o login.
+function onAuthRequired() {
+  auth.expire()
+  if (route.name !== 'login') router.push({ name: 'login', query: { redirect: route.fullPath } })
+}
+
+onMounted(async () => {
   ui.applyTheme()
-  profile.load()
+  window.addEventListener(AUTH_REQUIRED_EVENT, onAuthRequired)
+  await auth.init()
+  if (auth.authenticated) {
+    profile.load()
+    reviews.refreshDueCount()
+  }
 })
+
+onBeforeUnmount(() => window.removeEventListener(AUTH_REQUIRED_EVENT, onAuthRequired))
 </script>
 
 <template>

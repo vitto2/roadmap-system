@@ -3,12 +3,21 @@ import { computed } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import ProgressBar from '@/components/common/ProgressBar.vue'
 import { careerLabels, formatNumber } from '@/lib/labels'
+import { useAuthStore } from '@/stores/auth'
 import { useProfileStore } from '@/stores/profile'
+import { useReviewsStore } from '@/stores/reviews'
 import { useUiStore } from '@/stores/ui'
 
 const router = useRouter()
 const profileStore = useProfileStore()
 const ui = useUiStore()
+const reviews = useReviewsStore()
+const auth = useAuthStore()
+
+function logout() {
+  auth.logout()
+  router.push({ name: 'login' })
+}
 
 const navItems = computed(() =>
   router
@@ -73,15 +82,25 @@ const profile = computed(() => profileStore.profile)
         API indisponível
       </p>
 
-      <button
-        type="button"
-        class="btn btn-ghost ml-auto !px-2.5"
-        :aria-label="ui.theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro'"
-        :title="ui.theme === 'dark' ? 'Tema claro' : 'Tema escuro'"
-        @click="ui.toggleTheme()"
-      >
-        <span aria-hidden="true">{{ ui.theme === 'dark' ? '☀️' : '🌙' }}</span>
-      </button>
+      <div class="ml-auto flex items-center gap-1">
+        <button
+          v-if="auth.required && auth.token"
+          type="button"
+          class="btn btn-ghost"
+          @click="logout"
+        >
+          Sair
+        </button>
+        <button
+          type="button"
+          class="btn btn-ghost !px-2.5"
+          :aria-label="ui.theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro'"
+          :title="ui.theme === 'dark' ? 'Tema claro' : 'Tema escuro'"
+          @click="ui.toggleTheme()"
+        >
+          <span aria-hidden="true">{{ ui.theme === 'dark' ? '☀️' : '🌙' }}</span>
+        </button>
+      </div>
     </div>
 
     <nav aria-label="Principal" class="mx-auto max-w-6xl overflow-x-auto px-4">
@@ -93,6 +112,13 @@ const profile = computed(() => profileStore.profile)
             active-class="!bg-indigo-100 !text-indigo-900 dark:!bg-indigo-950 dark:!text-indigo-200"
           >
             {{ item.label }}
+            <span
+              v-if="item.name === 'reviews' && reviews.dueCount > 0"
+              class="ml-1 rounded-full bg-amber-500 px-1.5 py-0.5 text-xs font-bold tabular-nums text-slate-950"
+              :aria-label="`${reviews.dueCount} revisões para hoje`"
+            >
+              {{ reviews.dueCount }}
+            </span>
           </RouterLink>
         </li>
       </ul>
