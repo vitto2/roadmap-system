@@ -1,8 +1,8 @@
-import { http } from './client'
+import { rpc } from './client'
 import type {
   Dashboard,
   ImportSummary,
-  Envelope,
+  MilestoneStatus,
   Mutation,
   Paginated,
   Profile,
@@ -14,79 +14,74 @@ import type {
   StudySession,
   StudySessionInput,
   TopicDetail,
-  TopicGraph,
   TopicFilters,
+  TopicGraph,
   TopicSummary,
-  TrackDetail,
   TrackSummary,
-  MilestoneStatus,
 } from './types'
 
-const enc = encodeURIComponent
-
-function query(params: Record<string, string | number | undefined>): string {
-  const entries = Object.entries(params).filter(([, v]) => v !== undefined && v !== '')
-  if (entries.length === 0) return ''
-  return `?${entries.map(([k, v]) => `${k}=${enc(String(v))}`).join('&')}`
-}
+// Cada função chama uma função SQL do Supabase (schema public). Nomes de argumentos = parâmetros p_* do SQL.
+// O servidor calcula tudo (XP, níveis, streak): o front-end só exibe.
 
 export const api = {
-  authStatus: () => http.get<{ required: boolean }>('/auth/status'),
-  login: (password: string) =>
-    http.post<{ token: string; expiresAt: string }>('/auth/login', { password }),
-
-  profile: () => http.get<Envelope<Profile>>('/profile').then((r) => r.data),
-  dashboard: () => http.get<Envelope<Dashboard>>('/dashboard').then((r) => r.data),
-  settings: () => http.get<Envelope<Settings>>('/settings').then((r) => r.data),
+  profile: () => rpc<Profile>('get_profile'),
+  dashboard: () => rpc<Dashboard>('get_dashboard'),
+  settings: () => rpc<Settings>('get_settings'),
   updateSettings: (patch: Partial<Settings>) =>
-    http.put<Envelope<Settings>>('/settings', patch).then((r) => r.data),
+    rpc<Settings>('update_settings', { p_patch: patch }),
 
-  tracks: () => http.get<Envelope<TrackSummary[]>>('/tracks').then((r) => r.data),
-  track: (slug: string) =>
-    http.get<Envelope<TrackDetail>>(`/tracks/${enc(slug)}`).then((r) => r.data),
+  tracks: () => rpc<TrackSummary[]>('list_tracks'),
   topics: (filters: TopicFilters = {}) =>
-    http.get<Envelope<TopicSummary[]>>(`/topics${query({ ...filters })}`).then((r) => r.data),
-  topic: (slug: string) =>
-    http.get<Envelope<TopicDetail>>(`/topics/${enc(slug)}`).then((r) => r.data),
+    rpc<TopicSummary[]>('list_topics', {
+      p_track: filters.track ?? null,
+      p_level: filters.level ?? null,
+      p_status: filters.status ?? null,
+    }),
+  topic: (slug: string) => rpc<TopicDetail>('get_topic', { p_slug: slug }),
   updateTopicProgress: (
     slug: string,
     patch: { status?: 'not_started' | 'studying'; notes?: string; evidenceUrl?: string | null },
-  ) => http.patch<Mutation<TopicDetail>>(`/topics/${enc(slug)}/progress`, patch),
+  ) => rpc<Mutation<TopicDetail>>('update_topic_progress', { p_slug: slug, p_patch: patch }),
   setChecklistItem: (slug: string, key: string, checked: boolean) =>
-    http.put<Mutation<TopicDetail>>(`/topics/${enc(slug)}/checklist/${enc(key)}`, { checked }),
-  completeTopic: (slug: string) =>
-    http.post<Mutation<TopicDetail>>(`/topics/${enc(slug)}/complete`),
-  masterTopic: (slug: string) => http.post<Mutation<TopicDetail>>(`/topics/${enc(slug)}/master`),
-  reopenTopic: (slug: string) => http.post<Mutation<TopicDetail>>(`/topics/${enc(slug)}/reopen`),
+    rpc<Mutation<TopicDetail>>('set_checklist_item', {
+      p_slug: slug,
+      p_key: key,
+      p_checked: checked,
+    }),
+  completeTopic: (slug: string) => rpc<Mutation<TopicDetail>>('complete_topic', { p_slug: slug }),
+  masterTopic: (slug: string) => rpc<Mutation<TopicDetail>>('master_topic', { p_slug: slug }),
+  reopenTopic: (slug: string) => rpc<Mutation<TopicDetail>>('reopen_topic', { p_slug: slug }),
 
-  graph: () => http.get<Envelope<TopicGraph>>('/graph').then((r) => r.data),
-
-  exportPortfolio: () => http.download('/export/portfolio.md'),
-  exportBackup: () => http.download('/export/backup'),
-  importBackup: (backup: unknown) => http.post<Mutation<ImportSummary>>('/import/backup', backup),
-
-  projects: () => http.get<Envelope<ProjectSummary[]>>('/projects').then((r) => r.data),
-  project: (slug: string) =>
-    http.get<Envelope<ProjectDetail>>(`/projects/${enc(slug)}`).then((r) => r.data),
+  projects: () => rpc<ProjectSummary[]>('list_projects'),
+  project: (slug: string) => rpc<ProjectDetail>('get_project', { p_slug: slug }),
   updateProjectLinks: (
     slug: string,
     links: { repositoryUrl?: string | null; deployUrl?: string | null },
-  ) => http.patch<Mutation<ProjectDetail>>(`/projects/${enc(slug)}/progress`, links),
+  ) => rpc<Mutation<ProjectDetail>>('update_project_links', { p_slug: slug, p_patch: links }),
   setMilestoneStatus: (slug: string, key: string, status: MilestoneStatus) =>
-    http.put<Mutation<ProjectDetail>>(`/projects/${enc(slug)}/milestones/${enc(key)}`, { status }),
+    rpc<Mutation<ProjectDetail>>('set_milestone_status', {
+      p_slug: slug,
+      p_key: key,
+      p_status: status,
+    }),
 
-  reviews: (scope: ReviewScope = 'today') =>
-    http.get<Envelope<Review[]>>(`/reviews${query({ scope })}`).then((r) => r.data),
-  completeReview: (id: number) => http.post<Mutation<Review>>(`/reviews/${id}/complete`),
-  undoReview: (id: number) => http.post<Mutation<Review>>(`/reviews/${id}/undo`),
+  reviews: (scope: ReviewScope = 'today') => rpc<Review[]>('list_reviews', { p_scope: scope }),
+  completeReview: (id: number) => rpc<Mutation<Review>>('complete_review', { p_id: id }),
+  undoReview: (id: number) => rpc<Mutation<Review>>('undo_review', { p_id: id }),
 
   sessions: (page = 1, perPage = 20) =>
-    http.get<Paginated<StudySession>>(`/study-sessions${query({ page, perPage })}`),
+    rpc<Paginated<StudySession>>('list_study_sessions', { p_page: page, p_per_page: perPage }),
   createSession: (input: StudySessionInput) =>
-    http.post<Mutation<StudySession>>('/study-sessions', input),
+    rpc<Mutation<StudySession>>('create_study_session', { p_input: input }),
   updateSession: (id: number, input: StudySessionInput) =>
-    http.put<Mutation<StudySession>>(`/study-sessions/${id}`, input),
-  deleteSession: (id: number) => http.delete<{ profile: Profile }>(`/study-sessions/${id}`),
+    rpc<Mutation<StudySession>>('update_study_session', { p_id: id, p_input: input }),
+  deleteSession: (id: number) => rpc<{ profile: Profile }>('delete_study_session', { p_id: id }),
+
+  graph: () => rpc<TopicGraph>('get_graph'),
+
+  exportBackup: () => rpc<unknown>('export_backup'),
+  importBackup: (backup: unknown) =>
+    rpc<Mutation<ImportSummary>>('import_backup', { p_backup: backup }),
 }
 
 export type Api = typeof api

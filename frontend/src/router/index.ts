@@ -94,14 +94,14 @@ const router = createRouter({
   ],
 })
 
-// Login opcional: só redireciona se o back-end exigir senha (AUTH_PASSWORD).
+// Tudo exige login (Supabase Auth); sem sessão, vai para a tela de entrada e volta depois.
 router.beforeEach(async (to) => {
   const auth = useAuthStore()
   await auth.init()
-  if (auth.required && !auth.token && to.name !== 'login') {
+  if (!auth.authenticated && to.name !== 'login') {
     return { name: 'login', query: { redirect: to.fullPath } }
   }
-  if (to.name === 'login' && (!auth.required || auth.token)) return { name: 'roadmap' }
+  if (auth.authenticated && to.name === 'login') return { name: 'roadmap' }
   return true
 })
 

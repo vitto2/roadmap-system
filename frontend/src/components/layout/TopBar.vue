@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import ProgressBar from '@/components/common/ProgressBar.vue'
+import { isDemoMode } from '@/lib/backend'
 import { careerLabels, formatNumber } from '@/lib/labels'
 import { useAuthStore } from '@/stores/auth'
 import { useProfileStore } from '@/stores/profile'
@@ -9,13 +10,14 @@ import { useReviewsStore } from '@/stores/reviews'
 import { useUiStore } from '@/stores/ui'
 
 const router = useRouter()
+const baseUrl = import.meta.env.BASE_URL
 const profileStore = useProfileStore()
 const ui = useUiStore()
 const reviews = useReviewsStore()
 const auth = useAuthStore()
 
-function logout() {
-  auth.logout()
+async function logout() {
+  await auth.signOut()
   router.push({ name: 'login' })
 }
 
@@ -28,8 +30,8 @@ const navItems = computed(() =>
 )
 
 const profile = computed(() => profileStore.profile)
-// Antes do login (quando exigido) não há menu nem estatísticas para mostrar.
-const locked = computed(() => auth.required === true && !auth.token)
+// Antes do login não há menu nem estatísticas para mostrar.
+const locked = computed(() => !auth.authenticated)
 </script>
 
 <template>
@@ -38,7 +40,7 @@ const locked = computed(() => auth.required === true && !auth.token)
   >
     <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
       <RouterLink to="/" class="flex items-center gap-2 text-base font-bold tracking-tight">
-        <img src="/favicon.svg" alt="" class="h-7 w-7" width="28" height="28" />
+        <img :src="`${baseUrl}favicon.svg`" alt="" class="h-7 w-7" width="28" height="28" />
         Trilha Sênior
       </RouterLink>
 
@@ -81,16 +83,25 @@ const locked = computed(() => auth.required === true && !auth.token)
         </dl>
       </div>
       <p v-else-if="profileStore.error" class="text-xs text-red-700 dark:text-red-300" role="alert">
-        API indisponível
+        {{ profileStore.error }}
       </p>
 
       <div class="ml-auto flex items-center gap-1">
-        <button
-          v-if="auth.required && auth.token"
-          type="button"
-          class="btn btn-ghost"
-          @click="logout"
+        <span
+          v-if="isDemoMode"
+          class="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-950 dark:bg-amber-950 dark:text-amber-100"
+          title="Os dados ficam só neste navegador (sem Supabase)"
         >
+          Modo demo
+        </span>
+        <span
+          v-if="auth.user?.email && !isDemoMode"
+          class="muted hidden max-w-40 truncate text-xs sm:inline"
+          :title="auth.user.email"
+        >
+          {{ auth.user.email }}
+        </span>
+        <button v-if="auth.authenticated" type="button" class="btn btn-ghost" @click="logout">
           Sair
         </button>
         <button

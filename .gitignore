@@ -1,9 +1,10 @@
 node_modules/
 dist/
+# variáveis locais (podem ter chaves/URLs do seu projeto): nunca vão para o repositório
 .env
 .env.*
 !.env.example
-backend/data/*.sqlite*
+!.env.demo
 *.tsbuildinfo
 .eslintcache
 .DS_Store

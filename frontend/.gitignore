@@ -37,3 +37,8 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+
+# variáveis locais (podem ter chaves do projeto)
+.env
+.env.local
+.env.*.local

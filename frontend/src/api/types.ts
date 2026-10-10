@@ -1,25 +1,15 @@
-// Tipos espelhando os contratos (API Resources) do back-end: backend/src/dto.ts.
-// O front-end apenas EXIBE os valores calculados pela API; nunca recalcula XP.
+// Tipos espelhando o JSON devolvido pelas funções SQL (supabase/migrations): contrato testado em tools/tests/db/contract.test.ts.
+// O front-end apenas EXIBE os valores calculados no servidor (funções SQL no Supabase); nunca recalcula XP.
 
 export type CareerLevel = 'beginner' | 'junior' | 'mid' | 'senior'
 export type TopicStatus = 'not_started' | 'studying' | 'completed'
 export type MilestoneStatus = 'pending' | 'in_progress' | 'completed'
 export type ProjectStatus = 'not_started' | 'in_progress' | 'finished'
 
-export interface Envelope<T> {
-  data: T
-}
-
 /** Mutações devolvem o recurso atualizado + o perfil recalculado pelo servidor. */
 export interface Mutation<T> {
   data: T
   profile: Profile
-}
-
-export interface ApiErrorBody {
-  message: string
-  code: string
-  errors?: Record<string, string[]>
 }
 
 export interface Xp {
@@ -116,10 +106,6 @@ export interface TopicDetail extends TopicSummary {
   masteredDirectly: boolean
   reviews: TopicReview[]
   projects: { slug: string; title: string }[]
-}
-
-export interface TrackDetail extends TrackSummary {
-  topics: TopicSummary[]
 }
 
 export interface ProjectSummary {

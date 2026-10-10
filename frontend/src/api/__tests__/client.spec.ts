@@ -1,84 +1,79 @@
-import { afterEach, describe, expect, it, vi } from 'vitest'
-import { ApiError, errorMessage, http } from '../client'
+import { describe, expect, it } from 'vitest'
+import { ApiError, errorMessage, toApiError } from '../client'
 
-function jsonResponse(body: unknown, status = 200) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: { 'Content-Type': 'application/json' },
-  })
-}
-
-afterEach(() => {
-  vi.unstubAllGlobals()
-})
-
-describe('http client', () => {
-  it('chama /api/v1 e devolve o JSON', async () => {
-    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(jsonResponse({ data: [1, 2] }))
-    vi.stubGlobal('fetch', fetchMock)
-
-    await expect(http.get('/tracks')).resolves.toEqual({ data: [1, 2] })
-    expect(fetchMock).toHaveBeenCalledWith(
-      '/api/v1/tracks',
-      expect.objectContaining({ method: 'GET' }),
-    )
-  })
-
-  it('envia o corpo como JSON', async () => {
-    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(jsonResponse({ ok: true }))
-    vi.stubGlobal('fetch', fetchMock)
-
-    await http.put('/topics/a/checklist/x', { checked: true })
-
-    const [, init] = fetchMock.mock.calls[0] as [string, RequestInit]
-    expect(init.method).toBe('PUT')
-    expect(init.body).toBe(JSON.stringify({ checked: true }))
-    expect(init.headers).toMatchObject({ 'Content-Type': 'application/json' })
-  })
-
-  it('converte erros padronizados da API em ApiError', async () => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn<typeof fetch>().mockResolvedValue(
-        jsonResponse(
-          {
-            message: 'Dados inválidos.',
-            code: 'validation_failed',
-            errors: { notes: ['Muito longo'] },
-          },
-          422,
-        ),
-      ),
-    )
-
-    const error = await http.patch('/topics/a/progress', {}).catch((e: unknown) => e)
+describe('toApiError', () => {
+  it('converte erros das funções SQL (SQLSTATE PTnnn) com código de máquina e erros por campo', () => {
+    const error = toApiError({
+      code: 'PT422',
+      message: 'Os dados enviados são inválidos.',
+      hint: 'validation_failed',
+      details: JSON.stringify({ notes: ['Muito longo'], evidenceUrl: ['Link inválido'] }),
+    })
     expect(error).toBeInstanceOf(ApiError)
     expect(error).toMatchObject({
       status: 422,
       code: 'validation_failed',
-      message: 'Dados inválidos.',
+      message: 'Os dados enviados são inválidos.',
     })
-    expect((error as ApiError).fieldError('notes')).toBe('Muito longo')
+    expect(error.fieldError('notes')).toBe('Muito longo')
+    expect(error.fieldError('evidenceUrl')).toBe('Link inválido')
+    expect(error.fieldError('outro')).toBeUndefined()
   })
 
-  it('trata resposta de erro sem JSON', async () => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn<typeof fetch>().mockResolvedValue(new Response('Bad gateway', { status: 502 })),
+  it('mantém 404 e 409 das regras de negócio', () => {
+    expect(
+      toApiError({ code: 'PT404', message: 'Tópico não encontrado(a).', hint: 'not_found' }),
+    ).toMatchObject({ status: 404, code: 'not_found' })
+    expect(
+      toApiError({
+        code: 'PT409',
+        message: 'Marque todos os itens.',
+        hint: 'checklist_incomplete',
+      }),
+    ).toMatchObject({ status: 409, code: 'checklist_incomplete' })
+  })
+
+  it('ignora detalhes que não são JSON de erros por campo', () => {
+    expect(
+      toApiError({ code: 'PT422', message: 'x', hint: 'validation_failed', details: 'texto' })
+        .errors,
+    ).toBe(undefined)
+    expect(toApiError({ code: 'PT422', message: 'x', hint: 'y', details: '[1,2]' }).errors).toBe(
+      undefined,
     )
-    await expect(http.get('/profile')).rejects.toMatchObject({
-      status: 502,
-      code: 'http_error',
-      message: 'Erro 502 ao falar com a API.',
+  })
+
+  it('trata sessão expirada, permissão negada e banco não preparado', () => {
+    expect(toApiError({ code: 'PGRST301', message: 'JWT expired', status: 401 })).toMatchObject({
+      status: 401,
+      code: 'unauthenticated',
+    })
+    expect(toApiError({ code: '42501', message: 'permission denied', status: 403 })).toMatchObject({
+      status: 403,
+      code: 'forbidden',
+    })
+    const notReady = toApiError({
+      code: 'PGRST202',
+      message: 'Could not find the function public.get_profile',
+      status: 404,
+    })
+    expect(notReady).toMatchObject({ status: 404, code: 'database_not_ready' })
+    expect(notReady.message).toContain('migrations')
+  })
+
+  it('trata falha de rede com mensagem amigável', () => {
+    expect(toApiError({ message: 'TypeError: Failed to fetch', status: 0 })).toMatchObject({
+      status: 0,
+      code: 'network_error',
     })
   })
 
-  it('trata falha de rede com mensagem amigável', async () => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn<typeof fetch>().mockRejectedValue(new TypeError('Failed to fetch')),
-    )
-    await expect(http.get('/profile')).rejects.toMatchObject({ status: 0, code: 'network_error' })
+  it('erros desconhecidos viram erro de servidor', () => {
+    expect(toApiError({ message: 'algo quebrou', status: 500 })).toMatchObject({
+      status: 500,
+      code: 'server_error',
+      message: 'algo quebrou',
+    })
   })
 
   it('errorMessage lida com qualquer valor', () => {

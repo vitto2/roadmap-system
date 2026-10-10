@@ -1,0 +1,14 @@
+# Netlify: aponte o site para este repositório; o resto é automático.
+[build]
+  base = "frontend"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+# SPA: qualquer rota cai no index.html (o Vue Router resolve).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

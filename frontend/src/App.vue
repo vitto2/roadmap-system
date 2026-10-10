@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'
-import { AUTH_REQUIRED_EVENT } from '@/api/client'
 import ToastHost from '@/components/common/ToastHost.vue'
 import TopBar from '@/components/layout/TopBar.vue'
 import { useAuthStore } from '@/stores/auth'
@@ -16,23 +15,28 @@ const reviews = useReviewsStore()
 const route = useRoute()
 const router = useRouter()
 
-// A API recusou o token (expirou ou a senha mudou): volta para o login.
-function onAuthRequired() {
-  auth.expire()
-  if (route.name !== 'login') router.push({ name: 'login', query: { redirect: route.fullPath } })
-}
-
-onMounted(async () => {
+onMounted(() => {
   ui.applyTheme()
-  window.addEventListener(AUTH_REQUIRED_EVENT, onAuthRequired)
-  await auth.init()
-  if (auth.authenticated) {
-    profile.load()
-    reviews.refreshDueCount()
-  }
+  auth.init()
 })
 
-onBeforeUnmount(() => window.removeEventListener(AUTH_REQUIRED_EVENT, onAuthRequired))
+// Reage ao estado da sessão: carrega os dados ao entrar e volta ao login se a sessão acabar (logout/expiração).
+watch(
+  [() => auth.ready, () => auth.authenticated],
+  ([ready, signedIn], previous) => {
+    if (!ready) return
+    if (!signedIn) {
+      if (route.name !== 'login')
+        router.push({ name: 'login', query: { redirect: route.fullPath } })
+      return
+    }
+    if (!previous?.[0] || !previous[1]) {
+      profile.load()
+      reviews.refreshDueCount()
+    }
+  },
+  { immediate: true },
+)
 </script>
 
 <template>

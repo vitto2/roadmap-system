@@ -6,23 +6,27 @@ on:
   pull_request:
 
 jobs:
-  backend:
+  tools:
+    name: Banco (SQL) e conteúdo
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: backend
+        working-directory: tools
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: backend/package-lock.json
+          cache-dependency-path: tools/package-lock.json
       - run: npm ci
       - run: npm run lint
       - run: npm run format:check
       - run: npm run typecheck
-      - run: npm run seed:validate
+      - run: npm run content:validate
+      - name: supabase/seed.sql está atualizado?
+        run: npm run content:build -- --check
+      # Roda migrations + RLS + funções SQL em PGlite (Postgres em WebAssembly): não precisa de Docker nem de conta.
       - run: npm test
 
   frontend:
@@ -43,3 +47,8 @@ jobs:
       - run: npm run type-check
       - run: npm test
       - run: npm run build-only
+      - name: O build de produção não pode levar o modo demo (PGlite, ~16 MB)
+        run: |
+          if ls dist/assets | grep -qi pglite; then
+            echo "PGlite foi parar no build de produção"; exit 1
+          fi

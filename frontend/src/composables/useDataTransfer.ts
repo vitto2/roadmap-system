@@ -3,6 +3,7 @@ import { api } from '@/api'
 import { errorMessage } from '@/api/client'
 import type { ImportSummary } from '@/api/types'
 import { saveBlob } from '@/lib/download'
+import { buildPortfolioMarkdown } from '@/lib/portfolio'
 import { useProfileStore } from '@/stores/profile'
 import { useProjectsStore } from '@/stores/projects'
 import { useReviewsStore } from '@/stores/reviews'
@@ -31,14 +32,26 @@ export function useDataTransfer() {
 
   const exportPortfolio = () =>
     run('portfolio', async () => {
-      const { blob, filename } = await api.exportPortfolio()
-      saveBlob(blob, filename)
+      const [summaries, profile] = await Promise.all([api.projects(), api.profile()])
+      const finished = summaries.filter((p) => p.status === 'finished')
+      const projects = await Promise.all(finished.map((p) => api.project(p.slug)))
+      const markdown = buildPortfolioMarkdown({
+        projects,
+        totalXp: profile.xp.total,
+        timeZone: profile.timezone,
+        generatedAt: new Date(),
+      })
+      saveBlob(new Blob([markdown], { type: 'text/markdown;charset=utf-8' }), 'portfolio.md')
     })
 
   const exportBackup = () =>
     run('backup', async () => {
-      const { blob, filename } = await api.exportBackup()
-      saveBlob(blob, filename)
+      const backup = await api.exportBackup()
+      const day = new Date().toLocaleDateString('en-CA') // AAAA-MM-DD
+      saveBlob(
+        new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json;charset=utf-8' }),
+        `trilha-senior-backup-${day}.json`,
+      )
       ui.pushToast('Backup baixado.', 'success')
     })
 

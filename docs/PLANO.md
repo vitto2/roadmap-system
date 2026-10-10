@@ -1,6 +1,14 @@
 # Plano — Trilha Sênior (monorepo Laravel + Vue)
 
-> **Atualização (implementação final):** o roadmap continua ensinando PHP/Laravel e Vue, mas o **app** foi
+> **Atualização 2 (Supabase — arquitetura atual):** o objetivo passou a ser um app que **roda na web e se conecta ao
+> Supabase**. O back-end Node/Fastify/SQLite (descrito na atualização 1, abaixo) foi substituído: as regras de negócio
+> (XP, níveis, carreira, revisões, streak, grafo, backup) agora são **funções SQL no Postgres do Supabase** (RPC), com
+> **RLS** por usuário e login pelo **Supabase Auth**; o front-end Vue virou um site estático que chama essas funções via
+> `supabase-js`. O conteúdo continua em JSON (`content/`) com carga idempotente (`app.sync_content`). Testes do SQL rodam em
+> PGlite (Postgres em WebAssembly). Veja o `README.md` (passo a passo) e o `CLAUDE.md` (decisões). O restante deste
+> documento é o plano original e a atualização 1, mantidos como histórico.
+
+> **Atualização 1 (implementação intermediária, substituída pela atualização 2):** o roadmap continua ensinando PHP/Laravel e Vue, mas o **app** foi
 > construído em TypeScript de ponta a ponta, por decisão do dono do projeto (não precisa de PHP/Composer instalados).
 > Equivalências usadas no lugar da stack Laravel descrita abaixo:
 >

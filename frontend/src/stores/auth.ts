@@ -1,53 +1,78 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
-import { api } from '@/api'
-import { ApiError, errorMessage, getToken, setToken } from '@/api/client'
+import { errorMessage } from '@/api/client'
+import { getBackend, type AuthUser } from '@/lib/backend'
 
-/** Login opcional: só é exigido se o back-end foi iniciado com AUTH_PASSWORD. */
+/** Sessão do Supabase Auth (e-mail + senha). Cada usuário só enxerga o próprio progresso (RLS no banco). */
 export const useAuthStore = defineStore('auth', () => {
-  /** `null` = ainda não consultado. */
-  const required = ref<boolean | null>(null)
-  const token = ref<string | null>(getToken())
-  const error = ref<string | null>(null)
+  const user = ref<AuthUser | null>(null)
+  /** `false` até a sessão salva (se houver) ser lida. */
+  const ready = ref(false)
   const loading = ref(false)
+  const error = ref<string | null>(null)
+  /** Aviso (ex.: "confirme seu e-mail") exibido na tela de login. */
+  const notice = ref<string | null>(null)
 
-  const authenticated = computed(() => required.value === false || token.value !== null)
+  const authenticated = computed(() => user.value !== null)
 
-  async function init() {
-    if (required.value !== null) return
-    try {
-      required.value = (await api.authStatus()).required
-    } catch {
-      // API fora do ar: as telas mostram o erro de conexão; não bloqueia a navegação
-      required.value = false
-    }
+  let initializing: Promise<void> | undefined
+
+  /** Lê a sessão existente e passa a acompanhar login/logout/expiração. Seguro chamar várias vezes. */
+  function init(): Promise<void> {
+    initializing ??= (async () => {
+      const backend = await getBackend()
+      user.value = await backend.auth.getUser()
+      backend.auth.onChange((next) => {
+        user.value = next
+      })
+      ready.value = true
+    })()
+    return initializing
   }
 
-  async function login(password: string): Promise<boolean> {
+  async function run(
+    action: (auth: Awaited<ReturnType<typeof getBackend>>['auth']) => Promise<boolean>,
+  ) {
     loading.value = true
     error.value = null
+    notice.value = null
     try {
-      const result = await api.login(password)
-      token.value = result.token
-      setToken(result.token)
-      return true
+      const backend = await getBackend()
+      return await action(backend.auth)
     } catch (e) {
-      error.value = e instanceof ApiError ? e.message : errorMessage(e)
+      error.value = errorMessage(e)
       return false
     } finally {
       loading.value = false
     }
   }
 
-  function logout() {
-    token.value = null
-    setToken(null)
+  const signIn = (email: string, password: string) =>
+    run(async (auth) => {
+      await auth.signIn(email.trim(), password)
+      user.value = await auth.getUser()
+      return true
+    })
+
+  const signUp = (email: string, password: string) =>
+    run(async (auth) => {
+      const { needsConfirmation } = await auth.signUp(email.trim(), password)
+      if (needsConfirmation) {
+        notice.value =
+          'Cadastro criado! Confirme seu e-mail (veja a caixa de entrada) e depois entre.'
+        return false
+      }
+      user.value = await auth.getUser()
+      return true
+    })
+
+  async function signOut() {
+    await run(async (auth) => {
+      await auth.signOut()
+      user.value = null
+      return true
+    })
   }
 
-  /** Chamado quando a API recusa o token (expirou ou senha trocada). */
-  function expire() {
-    token.value = null
-  }
-
-  return { required, token, error, loading, authenticated, init, login, logout, expire }
+  return { user, ready, loading, error, notice, authenticated, init, signIn, signUp, signOut }
 })
