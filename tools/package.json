@@ -1,0 +1,40 @@
+{
+  "name": "trilha-senior-tools",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Conteúdo do roadmap, banco (Supabase/Postgres) e testes SQL com PGlite",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "content:validate": "tsx src/content/validate.ts",
+    "content:build": "tsx src/content/build.ts",
+    "content:check-urls": "tsx src/content/check-urls.ts",
+    "db:migrate": "tsx src/db/cli.ts migrate",
+    "db:seed": "tsx src/db/cli.ts seed",
+    "db:setup": "tsx src/db/cli.ts setup",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "pg": "^8.23.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.4",
+    "eslint": "^10.12.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.9",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.1",
+    "vitest": "^5.0.3"
+  }
+}

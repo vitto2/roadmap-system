@@ -1,19 +1,20 @@
+import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
-import { careerRank } from '../../src/domain/scoring'
-import { createDb, runMigrations } from '../../src/db/client'
 import {
   allPrerequisites,
   checkSeedIntegrity,
   checkTrackSizes,
   readSeedContent,
-} from '../../src/seed/files'
-import { seedDatabase } from '../../src/seed/loader'
+} from '../src/content/files'
+import { buildPayload, renderSeedSql } from '../src/content/payload'
+import { SEED_FILE } from '../src/paths'
 
-// Testa o conteúdo REAL do roadmap (backend/database/seed-data).
+// Testa o conteúdo REAL do roadmap (content/).
 const content = readSeedContent()
 const topics = [...content.topics.values()].flat()
+const rank = { beginner: 0, junior: 1, mid: 2, senior: 3 } as const
 
-describe('conteúdo do roadmap (seed-data)', () => {
+describe('conteúdo do roadmap (content/)', () => {
   it('tem as 10 trilhas com 12 a 20 tópicos cada', () => {
     expect(content.tracks).toHaveLength(10)
     expect(checkTrackSizes(content)).toEqual([])
@@ -40,7 +41,7 @@ describe('conteúdo do roadmap (seed-data)', () => {
     const bySlug = new Map(topics.map((t) => [t.slug, t]))
     const violations = topics.flatMap((t) =>
       allPrerequisites(content, t)
-        .filter((p) => careerRank(bySlug.get(p)!.level) > careerRank(t.level))
+        .filter((p) => rank[bySlug.get(p)!.level] > rank[t.level])
         .map((p) => `${t.slug} (${t.level}) <- ${p} (${bySlug.get(p)!.level})`),
     )
     expect(violations).toEqual([])
@@ -65,24 +66,6 @@ describe('conteúdo do roadmap (seed-data)', () => {
         expect(text.length, `${topic.slug}: ${text}`).toBeLessThanOrEqual(320)
       }
     }
-  })
-
-  it('carrega no banco e o seed é idempotente', () => {
-    const { db, close } = createDb(':memory:')
-    runMigrations(db)
-    const first = seedDatabase(db, content)
-    const second = seedDatabase(db, content)
-    close()
-
-    expect(first.topics).toBe(topics.length)
-    expect(second).toEqual(first)
-    expect(second.archived).toEqual({
-      tracks: 0,
-      topics: 0,
-      checklistItems: 0,
-      projects: 0,
-      milestones: 0,
-    })
   })
 })
 
@@ -111,9 +94,26 @@ describe('catálogo de projetos', () => {
       expect(project.topics.length, project.slug).toBeGreaterThanOrEqual(3)
       expect(project.topics.length, project.slug).toBeLessThanOrEqual(8)
     }
-    const withPhp = content.projects.filter((p) => p.topics.some((t) => t.startsWith('php-')))
-    const withVue = content.projects.filter((p) => p.topics.some((t) => t.startsWith('vue-')))
-    expect(withPhp.length).toBeGreaterThanOrEqual(6)
-    expect(withVue.length).toBeGreaterThanOrEqual(4)
+    expect(
+      content.projects.filter((p) => p.topics.some((t) => t.startsWith('php-'))).length,
+    ).toBeGreaterThanOrEqual(6)
+    expect(
+      content.projects.filter((p) => p.topics.some((t) => t.startsWith('vue-'))).length,
+    ).toBeGreaterThanOrEqual(4)
+  })
+})
+
+describe('supabase/seed.sql', () => {
+  it('está atualizado em relação a content/ (rode `npm run content:build` se falhar)', () => {
+    expect(readFileSync(SEED_FILE, 'utf8')).toBe(renderSeedSql(buildPayload(content)))
+  })
+
+  it('posições seguem a ordem dos arquivos e pré-requisitos entre trilhas vêm mesclados', () => {
+    const payload = buildPayload(content)
+    expect(payload.tracks.map((t) => t.position)).toEqual(payload.tracks.map((_, i) => i))
+    const vue = payload.topics.find((t) => t.slug === 'vue-3-e-sfc')!
+    expect(vue.prerequisites).toEqual(
+      expect.arrayContaining(['web-html-semantico', 'web-javascript-essencial']),
+    )
   })
 })

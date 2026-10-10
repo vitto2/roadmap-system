@@ -1,5 +1,6 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { CONTENT_DIR } from '../paths'
 import { z } from 'zod'
 import {
   crossPrerequisitesSchema,
@@ -11,7 +12,7 @@ import {
   type TrackSeed,
 } from './schema'
 
-export const defaultSeedDir = join(process.cwd(), 'database', 'seed-data')
+export const defaultSeedDir = CONTENT_DIR
 
 export interface SeedContent {
   tracks: TrackSeed[]

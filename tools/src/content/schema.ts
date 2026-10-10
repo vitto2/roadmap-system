@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { CAREER_LEVELS } from '../domain/scoring/career'
+export const CAREER_LEVELS = ['beginner', 'junior', 'mid', 'senior'] as const
 
 const slug = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'use kebab-case sem acentos')
 

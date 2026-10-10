@@ -1,8 +1,10 @@
 import { z } from 'zod'
-import { CAREER_LEVELS } from './domain/scoring/career'
-import { MILESTONE_STATUSES, TOPIC_STATUSES } from './domain/status'
+const CAREER_LEVELS = ['beginner', 'junior', 'mid', 'senior'] as const
+const TOPIC_STATUSES = ['not_started', 'studying', 'completed'] as const
+const MILESTONE_STATUSES = ['pending', 'in_progress', 'completed'] as const
 
-// Contratos (API Resources) da API. O front-end espelha estes tipos em src/api/types.ts.
+// Contratos (formato do JSON devolvido pelas funções RPC). Usados nos testes de contrato (tests/db/contract.test.ts);
+// o front-end espelha estes tipos em frontend/src/api/types.ts.
 
 export const careerLevelSchema = z.enum(CAREER_LEVELS)
 export const topicStatusSchema = z.enum(TOPIC_STATUSES)
